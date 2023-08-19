@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.c                                            :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/19 07:55:44 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/08/19 08:06:09 by bel-idri         ###   ########.fr       */
+/*   Created: 2022/11/13 00:11:12 by bel-idri          #+#    #+#             */
+/*   Updated: 2022/11/16 22:40:41 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map_01snew.h"
+#include "get_next_line_bonus.h"
 
-int	ft_strlen(char *s)
+size_t	ft_strlen(char *s)
 {
 	size_t	x;
 
@@ -24,17 +24,33 @@ int	ft_strlen(char *s)
 	return (x);
 }
 
+int	is_newline(char *s)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i])
+	{
+		if (s[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
-	int		i;
-	int		j;
-	int		ls1;
-	int		ls2;
+	size_t	i;
+	size_t	j;
+	size_t	ls1;
+	size_t	ls2;
 
 	ls1 = ft_strlen(s1);
 	ls2 = ft_strlen(s2);
-	str = (char *)ft_calloc((ls1 + ls2 + 1) * sizeof(char));
+	str = (char *)malloc((ls1 + ls2 + 1) * sizeof(char));
 	if (!str)
 		return (free(s1), NULL);
 	i = -1;
@@ -46,7 +62,9 @@ char	*ft_strjoin(char *s1, char *s2)
 		str[i] = s2[j];
 		i++;
 	}
-	return (free(s1), str);
+	str[i] = '\0';
+	free(s1);
+	return (str);
 }
 
 char	*ft_strdup(char *s1)
@@ -57,7 +75,7 @@ char	*ft_strdup(char *s1)
 	i = 0;
 	if (!s1)
 		return (NULL);
-	s = (char *)ft_calloc((ft_strlen(s1) + 1) * sizeof(char));
+	s = (char *)malloc((ft_strlen(s1) + 1) * sizeof(char));
 	if (!s)
 		return (NULL);
 	while (s1[i])
@@ -65,31 +83,6 @@ char	*ft_strdup(char *s1)
 		s[i] = s1[i];
 		i++;
 	}
+	s[i] = '\0';
 	return (s);
-}
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	size_t	i;
-	unsigned char	*a;
-	void	*p;
-
-	i = -1;
-	if (count)
-	{
-		if (size >= i / count)
-			return (NULL);
-	}
-	if (size)
-	{
-		if (count >= i / size)
-			return (NULL);
-	}
-	p = malloc(count * size);
-	if (!p)
-		return (NULL);
-	a = (unsigned char *)p;
-	while (++i < count * size)
-		a[i] = 0;
-	return (p);
 }
