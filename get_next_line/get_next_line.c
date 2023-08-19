@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 00:10:55 by bel-idri          #+#    #+#             */
-/*   Updated: 2022/11/16 23:14:28 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/20 00:37:01 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*read_newline(int fd, char *my_backup)
 		if (nb == 0)
 			return (free(buff), my_backup);
 		buff[nb] = '\0';
-		my_backup = ft_strjoin(my_backup, buff);
+		my_backup = gl_strjoin(my_backup, buff);
 		free(buff);
 	}
 	return (my_backup);
@@ -74,7 +74,7 @@ char	*extract_after_newline(char *my_backup)
 		return (free(my_backup), NULL);
 	while (my_backup[i] != '\n' && my_backup[i])
 		i++;
-	res = (char *)malloc((ft_strlen(my_backup) - i) * sizeof(char));
+	res = (char *)malloc((gl_strlen(my_backup) - i) * sizeof(char));
 	if (!res)
 		return (free(my_backup), NULL);
 	i++;
