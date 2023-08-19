@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/19 23:35:42 by onouakch         ###   ########.fr       */
+/*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
+/*   Updated: 2023/08/19 23:13:27 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "includes/cub.h"
+# ifndef _CUB_H_
+# define _CUB_H_
 
-int main(int ac, char *av[])
-{
-    int map;
+# include <fcntl.h>
+# include <unistd.h>
 
-    if (ac != 2)
-        return (write(1, "Error\n", 6), 0);
-    map = open(av[1], O_RDONLY);
-    if (map == -1)
-        return (write(1, "Error\n", 6), 0);
-    return (0);
-}
+
+# endif
