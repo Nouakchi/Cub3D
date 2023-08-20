@@ -47,6 +47,8 @@ int main(int ac, char *av[])
     printf("%s\n", data.map_data.map_elements.south_text);
     printf("%d,%d,%d\n", data.map_data.map_elements.frgb.r,data.map_data.map_elements.frgb.g,data.map_data.map_elements.frgb.b);
     printf("%d,%d,%d\n", data.map_data.map_elements.crgb.r,data.map_data.map_elements.crgb.g,data.map_data.map_elements.crgb.b);
+
+    //you can continue from here parsing the map
     
     return (0);
 }
