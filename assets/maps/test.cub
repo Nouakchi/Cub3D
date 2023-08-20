@@ -2,11 +2,10 @@ NO ./assets/textures/test1.txt
 EA ./assets/textures/test1.txt
 
 
-SO      ./assets/textures/test3.txt
+SO      ./assets/textures/test1.txt
 
 
-
-        F      220,100,0        
+        F      220,100,255        
 C 225,30,0
 
 WE ./assets/textures/test2.txt
