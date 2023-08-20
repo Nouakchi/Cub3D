@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/20 00:30:19 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/20 04:06:13 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,29 @@ typedef struct s_rgb
     int b;
 }   t_rgb;
 
-typedef struct s_mapelements
+typedef struct s_map_elements
 {
     char *north_text;
-    char *south_test;
+    char *south_text;
     char *west_text;
     char *east_text;
-    t_rgb *rgb;
-} t_mapelements;
+    t_rgb frgb;
+    t_rgb crgb;
+} t_map_elements;
+
+typedef struct s_map
+{
+    t_map_elements  map_elements;
+    char            **map;
+}   t_map;
+
+typedef struct s_data
+{
+    t_map map_data;
+}   t_data;
 
 
-int check_element(int map);
-
+int     check_element(int map, t_data *data);
+void    fatal(char *mssg);
 
 # endif
