@@ -6,11 +6,11 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 14:57:36 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/08/19 17:03:51 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/20 08:56:49 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bilal_main.h"
+#include "../includes/cub.h"
 
 int	ft_strlen_height(char **map)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/20 04:26:45 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/20 09:00:10 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ int main(int ac, char *av[])
 
     if (ac != 2)
         return (fatal("Few arguments !!"), 0);
+    // check extension
     map_fd = open(av[1], O_RDONLY);
     if (map_fd == -1)
         return (fatal("Invalid file !!"), 0);
     data_init(&data);
-    check_element(map_fd, &data);
+    check_element(map_fd, &data); // add if to free in main
     printf("%s\n", data.map_data.map_elements.north_text);
     printf("%s\n", data.map_data.map_elements.west_text);
     printf("%s\n", data.map_data.map_elements.east_text);
@@ -48,7 +49,10 @@ int main(int ac, char *av[])
     printf("%d,%d,%d\n", data.map_data.map_elements.frgb.r,data.map_data.map_elements.frgb.g,data.map_data.map_elements.frgb.b);
     printf("%d,%d,%d\n", data.map_data.map_elements.crgb.r,data.map_data.map_elements.crgb.g,data.map_data.map_elements.crgb.b);
 
-    //you can continue from here parsing the map
-    
+    if (check_map_pars(map_fd, &data)) // add if to free in main
+        return (fatal("Invalid map !!"), 0);
+
+    // close files with if
+
     return (0);
 }

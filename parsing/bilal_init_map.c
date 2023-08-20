@@ -6,11 +6,11 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 07:55:56 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/08/20 06:38:49 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/20 08:56:49 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bilal_main.h"
+#include "../includes/cub.h"
 
 char	*ft_strjoin_free(char *s1, char *s2)
 {
@@ -19,9 +19,9 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	size_t	j;
 
 	if (!s1)
-		ft_error("Error\nMalloc Error", s2, NULL);
+		ft_error("Malloc Error", s2, NULL);
 	else if (!s2)
-		ft_error("Error\nMalloc Error", s1, NULL);
+		ft_error("Malloc Error", s1, NULL);
 	str = (char *)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
 	if (!str)
 		return (NULL);
@@ -55,13 +55,14 @@ char	*get_init_map(int fd)
 void	ft_error_open(int fd)
 {
 	if (fd < 0)
-		ft_error("Error\nOpen Error", NULL, NULL);
+		ft_error("Open Error", NULL, NULL);
 }
 
 void	ft_error(char *msg, char *free_str1, char *free_str2)
 {
 	free(free_str1);
 	free(free_str2);
+	write(2, "Error\n", 6);
 	write(2, msg, ft_strlen(msg));
 	write(2, "\n", 1);
 	exit(EXIT_FAILURE);

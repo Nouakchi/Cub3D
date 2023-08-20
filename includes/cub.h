@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/20 04:06:13 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/20 08:59:23 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,20 @@ typedef struct s_data
 
 int     check_element(int map, t_data *data);
 void    fatal(char *mssg);
+void	ft_error(char *msg, char *free_str1, char *free_str2);
+void	ft_error_open(int fd);
+char	*get_init_map(int fd);
+void	free_map(char **map);
+char	*ft_strjoin_free(char *s1, char *s2);
+int		check_map(char **map);
+int		check_init_map(char *map);
+int		check_chars(char *map);
+int		check_walls(char **map);
+int		ft_strlen_height(char **map);
+int		ft_strlen_width(char **map);
+int		check_walls_utils(char **map, int i, int j);
+int		check_chars_utils(char map);
+int		check_newline(char *map);
+int     check_map_pars(int map_fd, t_data *data);
 
 # endif

@@ -10,9 +10,12 @@ INCLUDES	=	includes/cub.h \
 
 SRCS		=	main.c \
 				parsing/othman_parsing_map.c \
+				parsing/bilal_check_map_utils.c \
+				parsing/bilal_check_map.c \
+				parsing/bilal_init_map.c \
 				get_next_line/get_next_line.c \
 				get_next_line/get_next_line_utils.c \
-				
+
 BINDIR		=	bin/
 LIB			=	libft/libft.a
 OBJS		=	$(SRCS:%.c=$(BINDIR)%.o)
@@ -32,7 +35,7 @@ $(BINDIR)%.o: %.c $(INCLUDES)
 	$(MAKEDIR) $(OBJSDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-clean:	
+clean:
 	$(RM) $(BINDIR)
 
 fclean: clean

@@ -6,16 +6,32 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 08:51:04 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/08/19 17:16:34 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/20 09:00:59 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bilal_main.h"
+#include "../includes/cub.h"
+
+int     check_map_pars(int map_fd, t_data *data)
+{
+	char   *init_map;
+
+	init_map = get_init_map(map_fd);
+	init_map = ft_strtrim(init_map, "\n");
+	if (check_init_map(init_map))
+		ft_error("Map Error", init_map, NULL);
+	data->map_data.map = ft_split(init_map, '\n');
+	if (!data->map_data.map)
+		ft_error("Malloc Error", init_map, NULL);
+	free(init_map);
+	if (check_map(data->map_data.map))
+		ft_error("Map Error", NULL, NULL);
+	return (0);
+}
 
 int	check_chars(char *map)
 {
 	int	i;
-	int	j;
 	int	c;
 
 	c = 0;
@@ -77,9 +93,9 @@ int	check_newline(char *map)
 int	check_init_map(char *map)
 {
 	if (check_newline(map))
-		ft_error("Error\nMap Error", map, NULL);
+		ft_error("Map Error", map, NULL);
 	if (check_chars(map))
-		ft_error("Error\nMap Error", map, NULL);
+		ft_error("Map Error", map, NULL);
 	return (0);
 }
 
