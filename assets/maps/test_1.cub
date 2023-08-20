@@ -1,13 +1,17 @@
-F      220,100,255
-C      225,30,0,
+NO ./assets/textures/test1.txt
+EA ./assets/textures/test1.txt
+
+
 SO      ./assets/textures/test1.txt
-NO                  ./assets/textures/test1.txt
-EA      ./assets/textures/test1.txt
-WE              ./assets/textures/test2.txt
-11111111111111111111111111
-                         1
-         111111111      101
-        1000000000111111111111111
+
+        F      220,100,255
+C 225,30,0
+
+WE ./assets/textures/test2.txt
+
+
+        1111111111111111111111111
+        1000000000110000000000001
 111111111011000001110000000000001
 10010000000000000000000011111111
 111111111011000001110000000000001

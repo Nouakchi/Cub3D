@@ -15,6 +15,7 @@ SRCS		=	main.c \
 				parsing/bilal_init_map.c \
 				get_next_line/get_next_line.c \
 				get_next_line/get_next_line_utils.c \
+				raycasting/bilal_gotomlx.c \
 
 BINDIR		=	bin/
 LIB			=	libft/libft.a
@@ -25,11 +26,13 @@ MAKEDIR		=	mkdir -p
 
 NAME		=	cub3D
 
+MLX			=	-L/usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
+
 all:	$(NAME)
 
 $(NAME):	$(OBJS)
 	$(MAKELIB) libft
-	$(CC) $(CFLAGS) $^ $(LIB) -o $@
+	$(CC) $(CFLAGS) $(MLX) $^ $(LIB) -o $@
 
 $(BINDIR)%.o: %.c $(INCLUDES)
 	$(MAKEDIR) $(OBJSDIR)

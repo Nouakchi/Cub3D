@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 08:51:04 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/08/20 09:00:59 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/20 11:09:37 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int     check_map_pars(int map_fd, t_data *data)
 	init_map = get_init_map(map_fd);
 	init_map = ft_strtrim(init_map, "\n");
 	if (check_init_map(init_map))
-		ft_error("Map Error", init_map, NULL);
+		return (free(init_map), 1);
 	data->map_data.map = ft_split(init_map, '\n');
 	if (!data->map_data.map)
-		ft_error("Malloc Error", init_map, NULL);
+		return (free(init_map), 1);
 	free(init_map);
 	if (check_map(data->map_data.map))
-		ft_error("Map Error", NULL, NULL);
+		return (1);
 	return (0);
 }
 
@@ -93,17 +93,17 @@ int	check_newline(char *map)
 int	check_init_map(char *map)
 {
 	if (check_newline(map))
-		ft_error("Map Error", map, NULL);
+		return (1);
 	if (check_chars(map))
-		ft_error("Map Error", map, NULL);
+		return (1);
 	return (0);
 }
 
 int	check_map(char **map)
 {
 	if (ft_strlen_height(map) < 3 || ft_strlen_width(map) < 3)
-		return (free_map(map), 1);
+		return (1);
 	if (check_walls(map))
-		return (free_map(map), 1);
+		return (1);
 	return (0);
 }

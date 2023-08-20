@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/20 08:59:23 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/20 11:15:09 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <mlx.h>
+# include <math.h>
 # include "../get_next_line/get_next_line.h"
 # include "../libft/libft.h"
 
@@ -65,5 +67,7 @@ int		check_walls_utils(char **map, int i, int j);
 int		check_chars_utils(char map);
 int		check_newline(char *map);
 int     check_map_pars(int map_fd, t_data *data);
+
+int go_to_mlx(t_data *data);
 
 # endif
