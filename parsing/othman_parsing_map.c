@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   othman_parsing_map.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:06:15 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/20 08:28:30 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/20 08:44:55 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void free_bins(char **bins)
 int is_numeric(char *str)
 {
     int i;
-    
+
     i = -1;
     if (ft_strlen(str) > 3)
         return (0);
@@ -54,7 +54,7 @@ int parse_rgb(char *rgb_str, t_rgb *rgb)
     rgb->b = ft_atoi(args[2]);
     if (rgb->r > 255 || rgb->g > 255 || rgb->b > 255)
         return (0);
-    return (free_bins(args, 3), 1);
+    return (free_bins(args), 1);
 }
 
 int parse_colors(char *identifier, char *path_rgb, t_data *data)
@@ -120,7 +120,7 @@ char *remove_newline(char *line)
 int read_line(int map, char **line)
 {
     int words;
-    
+
     free(*line);
     *line = get_next_line(map);
     if (!*line)

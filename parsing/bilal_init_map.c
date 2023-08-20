@@ -6,11 +6,11 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 07:55:56 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/08/19 11:15:12 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/20 06:38:49 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bilal_map_01snew.h"
+#include "bilal_main.h"
 
 char	*ft_strjoin_free(char *s1, char *s2)
 {
@@ -19,9 +19,9 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	size_t	j;
 
 	if (!s1)
-		ft_error("Error\nMalloc Error", s1, NULL);
+		ft_error("Error\nMalloc Error", s2, NULL);
 	else if (!s2)
-		ft_error("Error\nMalloc Error", s2, s2);
+		ft_error("Error\nMalloc Error", s1, NULL);
 	str = (char *)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
 	if (!str)
 		return (NULL);
@@ -37,33 +37,19 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	return (free(s1), free(s2), str);
 }
 
-char	**get_init_map(int fd)
+char	*get_init_map(int fd)
 {
-	char	*my_backup;
-	char	*buff;
-	int		nb;
-	char	**map;
+	char	*init_map;
+	char	*line;
 
-	my_backup = ft_strdup("");
-	nb = -1;
-	while (1)
+	init_map = ft_strdup("");
+	line = get_next_line(fd);
+	while (line)
 	{
-		buff = (char *)ft_calloc(2, sizeof(char));
-		if (!buff)
-			ft_error("Error\nMalloc Error", my_backup, NULL);
-		nb = read(fd, buff, 1);
-		if (nb == -1)
-			ft_error("Error\nRead Error", my_backup, buff);
-		if (nb == 0 && my_backup[0])
-			break ;
-		if (nb == 0)
-			ft_error("Error\nThe map is empty", my_backup, NULL);
-		my_backup = ft_strjoin_free(my_backup, buff);
+		init_map = ft_strjoin_free(init_map, line);
+		line = get_next_line(fd);
 	}
-	map = ft_split(my_backup, '\n');
-	if (!map)
-		ft_error("Error\nMalloc Error", my_backup, buff);
-	return (free(buff), free(my_backup), map);
+	return (init_map);
 }
 
 void	ft_error_open(int fd)

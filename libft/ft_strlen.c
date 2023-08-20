@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 15:30:33 by bel-idri          #+#    #+#             */
-/*   Updated: 2022/10/30 08:31:56 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/19 13:42:01 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	x;
 
+	if (!s)
+		return (0);
 	x = 0;
 	while (s[x])
 		x++;
