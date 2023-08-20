@@ -6,6 +6,7 @@ RMLIB		=	make fclean -C
 
 INCLUDES	=	includes/cub.h \
 				get_next_line/get_next_line.h \
+				libft/libft.h
 
 SRCS		=	main.c \
 				parsing/othman_parsing_map.c \
