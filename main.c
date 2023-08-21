@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/20 12:31:46 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/21 13:29:32 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,20 @@ int	main(int ac, char *av[])
 	if (check_map_pars(map_fd, &data))
 		return (fatal("Invalid map"), 1); // free data // close map_fd
 
+	trim_map(&data);
+
+	int cc = -1;
+	while (data.map_data.map[++cc])
+		printf("%s\n", data.map_data.map[cc]);
 
 // check when map not exist in .cub file
-// C      225,      30 ,0
-// C      ,225,30,0
-// C      225,30,0,
-
 
 
 	if (close(map_fd) == -1)
 		return (fatal("Error closing file !!"), 0); // free data
 
-	// if (go_to_mlx(&data))
-	// 	return (1); // free data
+	if (go_to_mlx(&data))
+		return (1); // free data
 
 	return (0);
 }
