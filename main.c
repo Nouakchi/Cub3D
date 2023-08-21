@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/21 13:29:32 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:04:38 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,6 @@ int	main(int ac, char *av[])
 		return (fatal("Invalid map"), 1); // free data // close map_fd
 
 	trim_map(&data);
-
-	int cc = -1;
-	while (data.map_data.map[++cc])
-		printf("%s\n", data.map_data.map[cc]);
 
 // check when map not exist in .cub file
 

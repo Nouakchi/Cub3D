@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bilal_tirm_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 09:28:29 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/08/21 12:50:45 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:05:16 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	start_spaces(char **map)
 			count++;
 			j++;
 		}
-		printf("count: %d\n", count);
 		if (count < min)
 			min = count;
 		i++;
@@ -63,7 +62,6 @@ void	trim_map(t_data *data)
 
 	end_spaces(data);
 	start = start_spaces(data->map_data.map);
-	printf("start: %d\n", start);
 	i = -1;
 	while (data->map_data.map[++i])
 	{

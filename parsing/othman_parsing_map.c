@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:06:15 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/21 13:42:17 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:05:04 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ int parse_textures(char *identifier, char *path_rgb, t_data *data)
 
 int parse_element(char *identifier, char *path_rgb, t_data *data, int *all_in)
 {
-    printf("[%s],[%s]\n", identifier, path_rgb);
     if (ft_strlen(identifier) == 1)
     {
         if (!parse_colors(identifier, path_rgb, data))
