@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bilal_check_map_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 14:57:36 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/08/21 13:46:27 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:04:45 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	check_chars_utils(char map)
 
 int	check_walls_utils(char **map, int i, int j)
 {
-	printf("--> %d\n", map[14][ft_strlen(map[15]) - 2]);
 	if (map[i][j] != ' ' && map[i][j] != '1')
 	{
 		if (map[i][j + 1] == ' ' || map[i][j - 1] == ' ' || map[i + 1][j] == ' '
