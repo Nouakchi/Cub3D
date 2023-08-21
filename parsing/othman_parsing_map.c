@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:06:15 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/21 15:25:13 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/21 15:59:54 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	parse_textures(char *identifier, char *path_rgb, t_data *data)
 	return (1);
 }
 
-static int	parse_element(char *identifier, char *path_rgb, t_data *data, int *all_in)
+int	parse_element(char *identifier, char *path_rgb, t_data *data, int *all_in)
 {
 	if (ft_strlen(identifier) == 1)
 	{
@@ -107,13 +107,13 @@ int	check_element(int map, t_data *data)
 	while (all_in < 6)
 	{
 		if (!read_line(map, &line))
-			return (fatal("Invalid data"), 0);
+			return (free(line), fatal("Invalid data"), 0);
 		if (!ft_strcmp(line, ""))
 			continue ;
 		if (!parse_line(&key, &value, line))
-			return (0);
+			return (free(line), 0);
 		if (ft_strlen(key) > 2 || !parse_element(key, value, data, &all_in))
-			return (fatal("Invalid identifier"), 0);
+			return (free(line), fatal("Invalid identifier"), 0);
 	}
-	return (1);
+	return (free(line), 1);
 }
