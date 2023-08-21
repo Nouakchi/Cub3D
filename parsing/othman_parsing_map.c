@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   othman_parsing_map.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:06:15 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/20 08:44:55 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/21 13:42:17 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,54 @@ void free_bins(char **bins)
 
 int is_numeric(char *str)
 {
+    int check_space;
     int i;
 
     i = -1;
-    if (ft_strlen(str) > 3)
+    check_space = 0;
+    while(str[++i] && str[i] == ' ')
+        ;
+    if (!str[i])
         return (0);
-    while (str[++i])
+    while (str[i])
+    {
         if (!ft_isdigit(str[i]))
+        {
+            if (str[i] == ' ')
+                check_space = 1;
+            else
+                return (0);
+        }
+        else if (check_space)
             return (0);
+        i++;
+    }
     return (1);
+}
+
+int count_commas(char *str)
+{
+    int i;
+    int count;
+
+    i = -1;
+    count = 0;
+    while (str[++i])
+        if (str[i] == ',')
+            count++;
+    return (count);
 }
 
 int parse_rgb(char *rgb_str, t_rgb *rgb)
 {
-    int     words;
     char    **args;
     int     i;
 
-    words = ft_count_words(rgb_str, ',');
-    if (words != 3)
+    if (count_commas(rgb_str) != 2)
         return (0);
     args = ft_split(rgb_str, ',');
+    if (!args[0] || !args[1] || !args[2])
+        return (0);
     i = 3;
     while (--i >= 0)
         if (!is_numeric(args[i]))
@@ -81,14 +108,15 @@ int parse_textures(char *identifier, char *path_rgb, t_data *data)
     path_fd = open(path_rgb, O_RDONLY);
     if (path_fd == -1)
         return (fatal("Invalid path for textures"), 0);
+    close (path_fd);
     if (!ft_strcmp(identifier, "NO") && !data->map_data.map_elements.north_text)
-        data->map_data.map_elements.north_text = path_rgb;
+        data->map_data.map_elements.north_text = ft_strdup(path_rgb);
     else if (!ft_strcmp(identifier, "SO") && !data->map_data.map_elements.south_text)
-        data->map_data.map_elements.south_text = path_rgb;
+        data->map_data.map_elements.south_text = ft_strdup(path_rgb);
     else if (!ft_strcmp(identifier, "WE") && !data->map_data.map_elements.west_text)
-        data->map_data.map_elements.west_text = path_rgb;
+        data->map_data.map_elements.west_text = ft_strdup(path_rgb);
     else if (!ft_strcmp(identifier, "EA") && !data->map_data.map_elements.east_text)
-        data->map_data.map_elements.east_text = path_rgb;
+        data->map_data.map_elements.east_text = ft_strdup(path_rgb);
     else
         return (fatal("Invalid | Duplicate identifier"), 0);
     return (1);
@@ -96,6 +124,7 @@ int parse_textures(char *identifier, char *path_rgb, t_data *data)
 
 int parse_element(char *identifier, char *path_rgb, t_data *data, int *all_in)
 {
+    printf("[%s],[%s]\n", identifier, path_rgb);
     if (ft_strlen(identifier) == 1)
     {
         if (!parse_colors(identifier, path_rgb, data))
@@ -119,36 +148,57 @@ char *remove_newline(char *line)
 
 int read_line(int map, char **line)
 {
-    int words;
-
     free(*line);
     *line = get_next_line(map);
     if (!*line)
-        return (-1);
+        return (0);
     *line = remove_newline(*line);
-    words = ft_count_words(*line, ' ');
-    *line = ft_strtrim(*line, " ");
-    return (words);
+    return (1);
+}
+
+int parse_line(char **key, char **value, char *line)
+{
+    int i;
+    
+    i = -1;
+    while (line[++i] == ' ')
+        ;
+    if (!line[i])
+        return (fatal("Invalid data"), 0);
+    *key = &line[i];
+    *value = ft_strchr(&line[i], ' ');
+    if (!*value)
+        return (fatal("Invalid data"), 0);
+    *((*value)++) = '\0';
+    if (!*value)
+        return (fatal("Invalid data"), 0);
+    while (**value == ' ')
+        (*value)++;
+    if (!*(*value + 1))
+        return (fatal("Invalid data"), 0);
+    return (1);
 }
 
 int check_element(int map, t_data *data)
 {
     int     all_in;
-    int     words;
     char    *line;
-    char    **av;
+    char    *key;
+    char    *value;
 
     all_in = 0;
     line = NULL;
+    key = NULL;
+    value = NULL;
     while (all_in < 6)
     {
-        words = read_line(map, &line);
-        if (words == 0)
-            continue;
-        if (words != 2)
+        if (!read_line(map, &line))
             return (fatal("Invalid data"), 0);
-        av = ft_split(line, ' ');
-        if (ft_strlen(av[0]) > 2 || !parse_element(av[0], av[1], data, &all_in))
+        if (!ft_strcmp(line, ""))
+            continue;
+        if (!parse_line(&key, &value, line))
+            return (0);
+        if (ft_strlen(key) > 2 || !parse_element(key, value, data, &all_in))
             return (fatal("Invalid identifier"), 0);
     }
     return (1);
