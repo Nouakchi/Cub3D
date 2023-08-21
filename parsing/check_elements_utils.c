@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:32:16 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/21 14:55:46 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/21 15:11:42 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,16 @@ int	parse_rgb(char *rgb_str, t_rgb *rgb)
 		return (0);
 	args = ft_split(rgb_str, ',');
 	if (!args[0] || !args[1] || !args[2])
-		return (0);
+		return (free_map(args), 0);
 	i = 3;
 	while (--i >= 0)
 		if (!is_numeric(args[i]))
-			return (0);
+			return (free_map(args), 0);
 	rgb->r = ft_atoi(args[0]);
 	rgb->g = ft_atoi(args[1]);
 	rgb->b = ft_atoi(args[2]);
 	if (rgb->r > 255 || rgb->g > 255 || rgb->b > 255)
-		return (0);
+		return (free_map(args), 0);
 	return (free_map(args), 1);
 }
 
