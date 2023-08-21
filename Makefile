@@ -1,5 +1,5 @@
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address -g
 RM			=	rm -rf
 MAKELIB		=	make -C
 RMLIB		=	make fclean -C
@@ -13,8 +13,10 @@ SRCS		=	main.c \
 				parsing/bilal_check_map_utils.c \
 				parsing/bilal_check_map.c \
 				parsing/bilal_init_map.c \
+				parsing/bilal_tirm_map.c \
 				get_next_line/get_next_line.c \
 				get_next_line/get_next_line_utils.c \
+				raycasting/bilal_gotomlx.c \
 
 BINDIR		=	bin/
 LIB			=	libft/libft.a
@@ -25,11 +27,13 @@ MAKEDIR		=	mkdir -p
 
 NAME		=	cub3D
 
+MLX			=	-L/usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
+
 all:	$(NAME)
 
 $(NAME):	$(OBJS)
 	$(MAKELIB) libft
-	$(CC) $(CFLAGS) $^ $(LIB) -o $@
+	$(CC) $(CFLAGS) $(MLX) $^ $(LIB) -o $@
 
 $(BINDIR)%.o: %.c $(INCLUDES)
 	$(MAKEDIR) $(OBJSDIR)
