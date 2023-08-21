@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/21 14:04:38 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/21 15:28:05 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,14 @@ void	data_init(t_data *data)
 	data->map_data.map_elements.crgb.r = -1;
 }
 
+void check()
+{
+	system("leaks cub3D");
+}
+
 int	main(int ac, char *av[])
 {
+	atexit(check);
 	int		map_fd;
 	t_data	data;
 	int		i;
@@ -51,10 +57,10 @@ int	main(int ac, char *av[])
 	data_init(&data);
 	 if (!check_element(map_fd, &data))
         return (1); // free data and close
-	if (check_map_pars(map_fd, &data))
-		return (fatal("Invalid map"), 1); // free data // close map_fd
+	// if (check_map_pars(map_fd, &data))
+	// 	return (fatal("Invalid map"), 1); // free data // close map_fd
 
-	trim_map(&data);
+	// trim_map(&data);
 
 // check when map not exist in .cub file
 
@@ -62,8 +68,15 @@ int	main(int ac, char *av[])
 	if (close(map_fd) == -1)
 		return (fatal("Error closing file !!"), 0); // free data
 
-	if (go_to_mlx(&data))
-		return (1); // free data
+	free(data.map_data.map_elements.east_text);
+	free(data.map_data.map_elements.west_text);
+	free(data.map_data.map_elements.north_text);
+	free(data.map_data.map_elements.south_text);
+	
+	// free_map(data.map_data.map);
+	
+	// if (go_to_mlx(&data))
+	// 	return (1); // free data
 
 	return (0);
 

@@ -1,5 +1,5 @@
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS		=	-Wall -Wextra -Werror #-fsanitize=address -g
 RM			=	rm -rf
 MAKELIB		=	make -C
 RMLIB		=	make fclean -C
@@ -10,6 +10,7 @@ INCLUDES	=	includes/cub.h \
 
 SRCS		=	main.c \
 				parsing/othman_parsing_map.c \
+				parsing/check_elements_utils.c \
 				parsing/bilal_check_map_utils.c \
 				parsing/bilal_check_map.c \
 				parsing/bilal_init_map.c \

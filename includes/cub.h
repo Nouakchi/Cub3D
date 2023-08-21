@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/21 13:25:25 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:53:46 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,11 @@ int		check_walls_utils(char **map, int i, int j);
 int		check_chars_utils(char map);
 int		check_newline(char *map);
 int     check_map_pars(int map_fd, t_data *data);
+int     is_numeric(char *str);
+int	    count_commas(char *str);
+int	    parse_rgb(char *rgb_str, t_rgb *rgb);
+char	*remove_newline(char *line);
+int     read_line(int map, char **line);
 
 int go_to_mlx(t_data *data);
 void    trim_map(t_data *data);
