@@ -1,14 +1,18 @@
-NO ./assets/textures/test1.txt
-EA ./assets/textures/test1.txt
 
+
+
+
+
+EA ./assets/textures/test1.txt
+NO ./assets/textures/test1.txt
 
 SO      ./assets/textures/test1.txt
 
-        F      220,100,255
 C 225,30,0
 
-WE ./assets/textures/test2.txt
+F   1, 0111,000025
 
+WE ./assets/textures/test2.txt
 
                 111111111111111111111111111
                110000000001   10000000000001
@@ -26,19 +30,6 @@ WE ./assets/textures/test2.txt
         11110111 1110101 101111010001
   1   11111111 111111111111111111111
                                                               101
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

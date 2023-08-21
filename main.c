@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
 /*   Updated: 2023/08/21 13:29:32 by bel-idri         ###   ########.fr       */
@@ -49,7 +49,8 @@ int	main(int ac, char *av[])
 	if (map_fd == -1)
 		return (fatal("Invalid file !!"), 0);
 	data_init(&data);
-	check_element(map_fd, &data); // add if to free in main // close map_fd
+	 if (!check_element(map_fd, &data))
+        return (1); // free data and close
 	if (check_map_pars(map_fd, &data))
 		return (fatal("Invalid map"), 1); // free data // close map_fd
 
@@ -69,4 +70,5 @@ int	main(int ac, char *av[])
 		return (1); // free data
 
 	return (0);
+
 }
