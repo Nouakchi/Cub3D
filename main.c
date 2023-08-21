@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/20 09:00:10 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/20 09:21:34 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ int main(int ac, char *av[])
     if (map_fd == -1)
         return (fatal("Invalid file !!"), 0);
     data_init(&data);
-    check_element(map_fd, &data); // add if to free in main
+    if (!check_element(map_fd, &data)) // add if to free in main
+        return (0);
+    
     printf("%s\n", data.map_data.map_elements.north_text);
     printf("%s\n", data.map_data.map_elements.west_text);
     printf("%s\n", data.map_data.map_elements.east_text);
@@ -53,6 +55,6 @@ int main(int ac, char *av[])
         return (fatal("Invalid map !!"), 0);
 
     // close files with if
-
+    close(map_fd);
     return (0);
 }
