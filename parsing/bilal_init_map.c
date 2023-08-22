@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 07:55:56 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/08/22 14:36:25 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:41:43 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,6 @@ char	*get_init_map(int fd)
 		line = get_next_line(fd);
 	}
 	return (init_map);
-}
-
-void	ft_error(char *msg, char *free_str1, char *free_str2)
-{
-	free(free_str1);
-	free(free_str2);
-	write(2, "Error\n", 6);
-	write(2, msg, ft_strlen(msg));
-	write(2, "\n", 1);
-	exit(EXIT_FAILURE);
 }
 
 void	free_map(char **map)

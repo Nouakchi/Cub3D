@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 17:22:57 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/08/22 16:00:23 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:35:55 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,4 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 	else if (n >= 0 && n < 10)
 		ft_putchar_fd(n + '0', fd);
-
-
 }

@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 09:55:41 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/08/22 16:07:39 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:35:50 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,4 @@ void	*ft_calloc(size_t count, size_t size)
 		return (NULL);
 	ft_bzero(p, count * size);
 	return (p);
-
-
 }

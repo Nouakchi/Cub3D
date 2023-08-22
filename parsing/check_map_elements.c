@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   othman_parsing_map.c                               :+:      :+:    :+:   */
+/*   check_map_elements.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:06:15 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/22 16:09:08 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:36:43 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	check_element(int map, t_data *data)
 			return (free(line), 0);
 		if (!ft_strcmp(line, ""))
 			continue ;
-		if (!parse_line(&key, &value,    line))
+		if (!parse_line(&key, &value, line))
 			return (free(line), 0);
 		if (ft_strlen(key) > 2 || !parse_element(key, value, data, &all_in))
 			return (free(line), 0);

@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 08:51:04 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/08/22 14:35:33 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:40:22 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	trim_end(char *m)
 
 int	check_map_pars(int map_fd, t_data *data)
 {
-	char   *init_map;
+	char	*init_map;
 
 	init_map = get_init_map(map_fd);
 	if (!init_map)
@@ -61,7 +61,7 @@ int	check_chars(char *map)
 			c++;
 		if (c > 1)
 			return (1);
-		if (check_chars_utils(map[i]))
+		if (!ft_strchr("10SNEW \n", map[i]))
 			return (1);
 	}
 	if (c == 0)
@@ -105,60 +105,6 @@ int	check_newline(char *map)
 	{
 		if (map[i] == '\n' && map[i + 1] == '\n')
 			return (1);
-	}
-	return (0);
-}
-
-int	check_init_map(char *map)
-{
-	if (check_newline(map))
-		return (1);
-	if (check_chars(map))
-		return (1);
-	return (0);
-}
-
-int	check_map(char **map)
-{
-	if (ft_strlen_height(map) < 3 || ft_strlen_width(map) < 3)
-		return (1);
-	if (check_walls(map))
-		return (1);
-	return (0);
-}
-
-
-
-
-
-
-
-
-
-
-// join_nulls(&data);
-
-int join_nulls(t_data *data)
-{
-	char	*str;
-	int i;
-	int j;
-
-	i = 0;
-	while (i < (int)ft_strlen(data->map_data.map[i]))
-	{
-		str = ft_calloc((ft_strlen_width(data->map_data.map) + 1), sizeof(char));
-		if (!str)
-			return (1);
-		j = 0;
-		while (j < (int)ft_strlen(data->map_data.map[i]))
-		{
-			str[j] = data->map_data.map[i][j];
-			j++;
-		}
-		free(data->map_data.map[i]);
-		data->map_data.map[i] = str;
-		i++;
 	}
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bilal_check_map_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 14:57:36 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/08/21 14:04:45 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:40:05 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	ft_strlen_height(char **map)
 int	ft_strlen_width(char **map)
 {
 	int	i;
-	int j;
-	int count;
-	int max;
+	int	j;
+	int	count;
+	int	max;
 
 	i = -1;
 	max = 0;
@@ -43,13 +43,6 @@ int	ft_strlen_width(char **map)
 	return (max);
 }
 
-int	check_chars_utils(char map)
-{
-	if (!ft_strchr("10SNEW \n", map))
-		return (1);
-	return (0);
-}
-
 int	check_walls_utils(char **map, int i, int j)
 {
 	if (map[i][j] != ' ' && map[i][j] != '1')
@@ -59,5 +52,23 @@ int	check_walls_utils(char **map, int i, int j)
 			- 1] == '\0' || map[i + 1][j] == '\0' || map[i - 1][j] == '\0')
 			return (1);
 	}
+	return (0);
+}
+
+int	check_init_map(char *map)
+{
+	if (check_newline(map))
+		return (1);
+	if (check_chars(map))
+		return (1);
+	return (0);
+}
+
+int	check_map(char **map)
+{
+	if (ft_strlen_height(map) < 3 || ft_strlen_width(map) < 3)
+		return (1);
+	if (check_walls(map))
+		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 09:55:46 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/08/22 16:03:09 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:35:38 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	ft_isspace(const char *str, size_t i)
 	return (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || \
 			str[i] == '\v' || str[i] == '\f' || str[i] == '\r');
 }
-  
+
 int	my_atio(const char *str, int i, int sign)
 {
 	size_t	res;

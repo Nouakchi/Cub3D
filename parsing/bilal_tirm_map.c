@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bilal_tirm_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 09:28:29 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/08/21 14:05:16 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:42:03 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,30 @@ void	trim_map(t_data *data)
 		}
 		data->map_data.map[i][j] = '\0';
 	}
+}
+
+int	join_nulls(t_data *data)
+{
+	char	*str;
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < (int)ft_strlen(data->map_data.map[i]))
+	{
+		str = ft_calloc((ft_strlen_width(data->map_data.map) + 1), \
+			sizeof(char));
+		if (!str)
+			return (1);
+		j = 0;
+		while (j < (int)ft_strlen(data->map_data.map[i]))
+		{
+			str[j] = data->map_data.map[i][j];
+			j++;
+		}
+		free(data->map_data.map[i]);
+		data->map_data.map[i] = str;
+		i++;
+	}
+	return (0);
 }
