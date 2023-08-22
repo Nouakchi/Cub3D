@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/22 10:51:18 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:28:15 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct s_data
 int     check_element(int map, t_data *data);
 void    fatal(char *mssg);
 void	ft_error(char *msg, char *free_str1, char *free_str2);
-void	ft_error_open(int fd);
 char	*get_init_map(int fd);
 void	free_map(char **map);
 char	*ft_strjoin_free(char *s1, char *s2);
@@ -82,7 +81,6 @@ int     read_line(int map, char **line);
 int	    parse_element(char *identifier, char *path_rgb, t_data *data, int *all_in);
 int     go_to_mlx(t_data *data);
 void    trim_map(t_data *data);
-void    join_nulls(t_data *data);
-int 	render(t_data *data);
+void join_nulls(t_data *data);
 
 # endif

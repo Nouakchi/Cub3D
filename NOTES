@@ -1,0 +1,6 @@
+* When use fatal inside a fuction, we can't close fd
+* let make fatal in the main
+* suggest to remove exit from fatal
+
+* No make when change libft
+* malloc(-1) have leaks

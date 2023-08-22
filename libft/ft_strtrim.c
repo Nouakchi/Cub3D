@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 12:45:33 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/08/19 14:25:09 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/22 13:56:27 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (!s1)
 		return (NULL);
 	if (ft_start(s1, set) == ft_strlen(s1) - 1 || !s1 || s1[0] == '\0')
-		return (ft_strdup(""));
+		return (free((char *)s1), ft_strdup(""));
 	start = ft_start(s1, set);
 	end = ft_end(s1, set);
 	str = ft_substr(s1, start, end - start + 1);
