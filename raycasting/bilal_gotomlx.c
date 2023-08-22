@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 11:12:15 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/08/21 11:52:13 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:48:02 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	init_mlx(t_data *data)
 			{
 				while (++x < size_x + jx)
 				{
-					y = ix - 1;
+					y = ix - 1; 
 					while (++y < size_y + ix)
 						if (mlx_pixel_put(mlx_ptr, win_ptr, x, y, 0x00FF0000) == -1)
 							return (1);

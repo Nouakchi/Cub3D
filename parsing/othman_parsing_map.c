@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   othman_parsing_map.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:06:15 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/21 15:59:54 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/22 13:24:45 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static int	parse_colors(char *identifier, char *path_rgb, t_data *data)
 {
-	if (!ft_strcmp(identifier, "F") 
+	if (!ft_strcmp(identifier, "F")
 		&& data->map_data.map_elements.frgb.r == -1)
 	{
 		if (!parse_rgb(path_rgb, &data->map_data.map_elements.frgb))
-			return (fatal("Invalid colors"), 0);
+			return (fatal("Invalid colors"), 0); // if fatal exit why return 0 || and we need not exit here to close the fd
 	}
 	else if (!ft_strcmp(identifier, "C")
 		&& data->map_data.map_elements.crgb.r == -1)
@@ -39,16 +39,16 @@ static int	parse_textures(char *identifier, char *path_rgb, t_data *data)
 	if (path_fd == -1)
 		return (fatal("Invalid path for textures"), 0);
 	close (path_fd);
-	if (!ft_strcmp(identifier, "NO") 
+	if (!ft_strcmp(identifier, "NO")
 		&& !data->map_data.map_elements.north_text)
 		data->map_data.map_elements.north_text = ft_strdup(path_rgb);
-	else if (!ft_strcmp(identifier, "SO") 
+	else if (!ft_strcmp(identifier, "SO")
 		&& !data->map_data.map_elements.south_text)
 		data->map_data.map_elements.south_text = ft_strdup(path_rgb);
-	else if (!ft_strcmp(identifier, "WE") 
+	else if (!ft_strcmp(identifier, "WE")
 		&& !data->map_data.map_elements.west_text)
 		data->map_data.map_elements.west_text = ft_strdup(path_rgb);
-	else if (!ft_strcmp(identifier, "EA") 
+	else if (!ft_strcmp(identifier, "EA")
 		&& !data->map_data.map_elements.east_text)
 		data->map_data.map_elements.east_text = ft_strdup(path_rgb);
 	else
@@ -110,7 +110,7 @@ int	check_element(int map, t_data *data)
 			return (free(line), fatal("Invalid data"), 0);
 		if (!ft_strcmp(line, ""))
 			continue ;
-		if (!parse_line(&key, &value, line))
+		if (!parse_line(&key, &value,    line))
 			return (free(line), 0);
 		if (ft_strlen(key) > 2 || !parse_element(key, value, data, &all_in))
 			return (free(line), fatal("Invalid identifier"), 0);

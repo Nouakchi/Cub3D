@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 08:51:04 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/08/21 13:45:27 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/22 14:35:33 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,25 @@ void	trim_end(char *m)
 	}
 }
 
-int     check_map_pars(int map_fd, t_data *data)
+int	check_map_pars(int map_fd, t_data *data)
 {
 	char   *init_map;
 
 	init_map = get_init_map(map_fd);
+	if (!init_map)
+		return (fatal("Malloc failed"), 1);
 	init_map = ft_strtrim(init_map, "\n");
+	if (!init_map)
+		return (1);
 	trim_end(init_map);
 	if (check_init_map(init_map))
 		return (free(init_map), 1);
 	data->map_data.map = ft_split(init_map, '\n');
-	join_nulls(data);
-	if (!data->map_data.map)
-		return (free(init_map), 1);
+	if (join_nulls(data))
+		return (fatal("Malloc failed"), 1);
 	free(init_map);
+	if (!data->map_data.map)
+		return (1);
 	if (check_map(data->map_data.map))
 		return (1);
 	return (0);
@@ -133,7 +138,7 @@ int	check_map(char **map)
 
 // join_nulls(&data);
 
-void join_nulls(t_data *data)
+int join_nulls(t_data *data)
 {
 	char	*str;
 	int i;
@@ -144,7 +149,7 @@ void join_nulls(t_data *data)
 	{
 		str = ft_calloc((ft_strlen_width(data->map_data.map) + 1), sizeof(char));
 		if (!str)
-			return ;
+			return (1);
 		j = 0;
 		while (j < (int)ft_strlen(data->map_data.map[i]))
 		{
@@ -155,4 +160,5 @@ void join_nulls(t_data *data)
 		data->map_data.map[i] = str;
 		i++;
 	}
+	return (0);
 }

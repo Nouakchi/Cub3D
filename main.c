@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/21 15:28:05 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/22 14:34:35 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,33 @@
 
 void	fatal(char *mssg)
 {
-	printf("Error\n%s\n", mssg);
-	exit(0);
+	write(2, "Error\n", 6);
+	write(2, mssg, ft_strlen(mssg));
+	write(2, "\n", 1);
+	// exit(1);
+}
+
+void	fatal_free_element(char *mssg, t_data *data, int map_fd)
+{
+	write(2, "Error\n", 6);
+	write(2, mssg, ft_strlen(mssg));
+	write(2, "\n", 1);
+	free(data->map_data.map_elements.east_text);
+	free(data->map_data.map_elements.west_text);
+	free(data->map_data.map_elements.north_text);
+	free(data->map_data.map_elements.south_text);
+	if (close(map_fd) == -1)
+		fatal("Close failed");
+	// exit(1);
+}
+
+void	free_element_map(t_data *data)
+{
+	free(data->map_data.map_elements.east_text);
+	free(data->map_data.map_elements.west_text);
+	free(data->map_data.map_elements.north_text);
+	free(data->map_data.map_elements.south_text);
+	free_map(data->map_data.map);
 }
 
 void	data_init(t_data *data)
@@ -42,42 +67,44 @@ int	main(int ac, char *av[])
 	int		i;
 
 	if (ac != 2)
-		return (fatal("Few arguments !!"), 1);
+		return (fatal("Invalid Input"), 1);
+
 	if (ft_strlen(av[1]) < 5)
-		return (fatal("The Extension not Valid"), 1);
+		return (fatal("Invalid Input"), 1);
+
+
 	else
 	{
 		i = ft_strlen(av[1]) - 1;
 		if (av[1][i] != 'b' || av[1][i - 1] != 'u' || av[1][i - 2] != 'c' || av[1][i - 3] != '.')
-			ft_error("The Extension not Valid", NULL, NULL);
+			return (fatal("Invalid Input"), 1);
 	}
+
 	map_fd = open(av[1], O_RDONLY);
 	if (map_fd == -1)
-		return (fatal("Invalid file !!"), 0);
+		return (fatal("Invalid Input"), 1);
+
+
 	data_init(&data);
+
 	 if (!check_element(map_fd, &data))
-        return (1); // free data and close
-	// if (check_map_pars(map_fd, &data))
-	// 	return (fatal("Invalid map"), 1); // free data // close map_fd
+		return(fatal_free_element("Invalid Input", &data, map_fd), 1);
 
-	// trim_map(&data);
+	if (check_map_pars(map_fd, &data))
+		return(fatal_free_element("Invalid Input", &data, map_fd), 1);
 
-// check when map not exist in .cub file
-
+	trim_map(&data);
 
 	if (close(map_fd) == -1)
-		return (fatal("Error closing file !!"), 0); // free data
+		fatal("Close failed");
 
-	free(data.map_data.map_elements.east_text);
-	free(data.map_data.map_elements.west_text);
-	free(data.map_data.map_elements.north_text);
-	free(data.map_data.map_elements.south_text);
-	
-	// free_map(data.map_data.map);
-	
-	// if (go_to_mlx(&data))
-	// 	return (1); // free data
 
+
+	// do raycasting here
+
+
+
+	free_element_map(&data);
 	return (0);
 
 }
