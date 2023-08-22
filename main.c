@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/21 15:28:05 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:38:55 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int	main(int ac, char *av[])
 	
 	// if (go_to_mlx(&data))
 	// 	return (1); // free data
+	
+	render(&data);
 
 	return (0);
 
