@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/22 16:10:03 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:27:55 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,13 @@ int	main(int ac, char *av[])
 
 
 	// do raycasting here
+	render(&data);
 
 
 
 	free_element_map(&data);
+
+
 
 	return (0);
 
