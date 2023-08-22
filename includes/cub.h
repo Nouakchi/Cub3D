@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/21 16:00:26 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/22 10:51:18 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <math.h>
 # include "../get_next_line/get_next_line.h"
 # include "../libft/libft.h"
+# include <math.h>
 
 typedef struct s_rgb
 {
@@ -44,9 +45,15 @@ typedef struct s_map
     char            **map;
 }   t_map;
 
+typedef struct s_player_data
+{
+
+}   t_player_data;
+
 typedef struct s_data
 {
     t_map map_data;
+    t_player_data plyr_data;
 }   t_data;
 
 
@@ -73,8 +80,9 @@ int	    parse_rgb(char *rgb_str, t_rgb *rgb);
 char	*remove_newline(char *line);
 int     read_line(int map, char **line);
 int	    parse_element(char *identifier, char *path_rgb, t_data *data, int *all_in);
-int go_to_mlx(t_data *data);
+int     go_to_mlx(t_data *data);
 void    trim_map(t_data *data);
-void join_nulls(t_data *data);
+void    join_nulls(t_data *data);
+int 	render(t_data *data);
 
 # endif

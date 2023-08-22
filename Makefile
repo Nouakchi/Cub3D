@@ -9,7 +9,8 @@ INCLUDES	=	includes/cub.h \
 				libft/libft.h
 
 SRCS		=	main.c \
-				parsing/othman_parsing_map.c \
+				raycasting/othman_raycasting.c \
+				parsing/check_map_elements.c \
 				parsing/check_elements_utils.c \
 				parsing/bilal_check_map_utils.c \
 				parsing/bilal_check_map.c \
