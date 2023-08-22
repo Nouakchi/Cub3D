@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/22 14:34:35 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:10:03 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	fatal(char *mssg)
 	write(2, "Error\n", 6);
 	write(2, mssg, ft_strlen(mssg));
 	write(2, "\n", 1);
-	// exit(1);
 }
 
 void	fatal_free_element(char *mssg, t_data *data, int map_fd)
@@ -31,7 +30,6 @@ void	fatal_free_element(char *mssg, t_data *data, int map_fd)
 	free(data->map_data.map_elements.south_text);
 	if (close(map_fd) == -1)
 		fatal("Close failed");
-	// exit(1);
 }
 
 void	free_element_map(t_data *data)
@@ -105,6 +103,7 @@ int	main(int ac, char *av[])
 
 
 	free_element_map(&data);
+
 	return (0);
 
 }
