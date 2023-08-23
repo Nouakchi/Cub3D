@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/22 16:32:30 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/23 13:29:51 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,6 @@ int	    parse_element(char *identifier, char *path_rgb, t_data *data, int *all_i
 int     go_to_mlx(t_data *data);
 void    trim_map(t_data *data);
 int join_nulls(t_data *data);
-int	render(t_data *data);
+int	render(t_data *data, double angle, void *mlx_ptr, void *mlx_win, int start);
 
 # endif

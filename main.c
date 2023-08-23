@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/22 16:27:55 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:40:54 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ void	data_init(t_data *data)
 	data->map_data.map_elements.crgb.r = -1;
 }
 
-void check()
-{
-	system("leaks cub3D");
-}
+// void check()
+// {
+// 	system("leaks cub3D");
+// }
 
 int	main(int ac, char *av[])
 {
-	atexit(check);
+	// atexit(check);
 	int		map_fd;
 	t_data	data;
 	int		i;
@@ -97,12 +97,24 @@ int	main(int ac, char *av[])
 		fatal("Close failed");
 
 
+	void *mlx_ptr;
+	void *mlx_win;
+	mlx_ptr = mlx_init();
+	mlx_win = mlx_new_window(mlx_ptr, 320, 200, "cub3D");
 
 	// do raycasting here
-	render(&data);
-
-
-
+	i = -1;
+	double angle = 60;
+	int start = 320;
+	while (++i < 160)
+	{
+		// printf("angle %f , ",angle);
+		render(&data, angle, mlx_ptr, mlx_win , --start);
+		angle += 0.1875;
+	}
+	
+	mlx_loop(mlx_ptr);
+	// render(&data, 89.625);
 	free_element_map(&data);
 
 
