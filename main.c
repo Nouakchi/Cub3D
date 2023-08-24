@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/23 16:40:54 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:16:36 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,17 +100,17 @@ int	main(int ac, char *av[])
 	void *mlx_ptr;
 	void *mlx_win;
 	mlx_ptr = mlx_init();
-	mlx_win = mlx_new_window(mlx_ptr, 320, 200, "cub3D");
+	mlx_win = mlx_new_window(mlx_ptr, 1024, 512, "cub3D");
 
 	// do raycasting here
 	i = -1;
-	double angle = 60;
-	int start = 320;
-	while (++i < 160)
+	double angle = 120;
+	int start = -1;
+	while (++i < 1024)
 	{
-		// printf("angle %f , ",angle);
-		render(&data, angle, mlx_ptr, mlx_win , --start);
-		angle += 0.1875;
+		// printf("angle => %f\n", angle);
+		render(&data, angle, mlx_ptr, mlx_win , ++start);
+		angle -= 0.0625;
 	}
 	
 	mlx_loop(mlx_ptr);

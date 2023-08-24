@@ -10,6 +10,7 @@ INCLUDES	=	includes/cub.h \
 
 SRCS		=	main.c \
 				raycasting/othman_raycasting.c \
+				raycasting/final_raycasting.c \
 				parsing/check_map_elements.c \
 				parsing/check_elements_utils.c \
 				parsing/bilal_check_map_utils.c \
