@@ -23,37 +23,55 @@ int	render(t_data *data, double angle, void *mlx_ptr, void *mlx_win, int start)
 {
     char map[5][6] = {
 		{1,1,1,1,1,1},
-		{1,1,0,1,9,1},
+		{1,1,9,0,0,1},
 		{1,0,0,0,0,1},
-		{1,0,0,0,0,1},
+		{1,0,0,0,1,1},
 		{1,1,1,1,1,1},
 	};
     
     double wall_height = 64.0;
 	int wall_height_shift = log2(wall_height);
     
-    double playr_x = 288;
+    double playr_x = 160;
 	double playr_y = 96;
     
     // check horizontal intersection
     
     double Xa = 64 / tan(angle * (M_PI / 180.0));
     double Ya = -64;
+
+	double vision = 0;
+	if (angle > 180 && angle < 360)
+		vision = 64;
 	
-    double first_horz_inter_y = ((int)floor((int)playr_y >> wall_height_shift) << wall_height_shift) - .01;
-    double first_horz_inter_x = playr_x + (playr_y - first_horz_inter_y) / tan(angle * (M_PI / 180.0));
+    double first_horz_inter_y = ((int)floor((int)playr_y >> wall_height_shift) << wall_height_shift) + vision - .01;
+    double first_horz_inter_x = playr_x + fabs(fabs(playr_y - first_horz_inter_y) / tan(angle * (M_PI / 180.0)));
+
+	printf("%f\n", first_horz_inter_x);
 
     int i = (int)first_horz_inter_y  >> wall_height_shift;
 	int j = (int)first_horz_inter_x  >> wall_height_shift;
+
+	if (angle > 180 && angle < 360)
+		i++;
     
     while (i < 5 && i >= 0 && j < 6 && j >= 0 && map[i][j] != 1)
 	{
-		first_horz_inter_y += Ya;
-		first_horz_inter_x += Xa;
+		if (angle > 180 && angle < 360)
+			first_horz_inter_y -= Ya;
+		else
+			first_horz_inter_y += Ya;
+		if (angle < 90 || angle > 270)
+			first_horz_inter_x -= Xa;
+		else
+			first_horz_inter_x += Xa;
 		i = (int)first_horz_inter_y >> wall_height_shift;
 		j = (int)first_horz_inter_x >> wall_height_shift;
+		if (angle > 180 && angle < 360)
+			i++;
 	}
-	
+	printf("%d , %d\n", i , j);
+	pause();
     // check vertical
     
     Xa = 64;
