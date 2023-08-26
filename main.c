@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/24 14:16:36 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/25 14:32:36 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,17 +104,15 @@ int	main(int ac, char *av[])
 
 	// do raycasting here
 	i = -1;
-	double angle = 120;
+	double angle = 300;
 	int start = -1;
-	while (++i < 1024)
+	while (++i < 512)
 	{
-		// printf("angle => %f\n", angle);
 		render(&data, angle, mlx_ptr, mlx_win , ++start);
 		angle -= 0.0625;
 	}
 	
 	mlx_loop(mlx_ptr);
-	// render(&data, 89.625);
 	free_element_map(&data);
 
 
