@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/23 13:29:51 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/30 10:38:01 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include "../get_next_line/get_next_line.h"
 # include "../libft/libft.h"
 # include <math.h>
+
+# define WALL_HEIGHT 64.0
+# define WALL_SHIFT log2(64.0)
 
 typedef struct s_rgb
 {
@@ -47,13 +50,28 @@ typedef struct s_map
 
 typedef struct s_player_data
 {
-
+    double  x_pos;
+    double  y_pos;
+    
 }   t_player_data;
+
+typedef struct s_ray
+{
+    double  angle;
+    double  x_step;
+    double  y_step;
+    double  x_inter;
+    double  y_inter;
+    
+}   t_ray;
 
 typedef struct s_data
 {
-    t_map map_data;
-    t_player_data plyr_data;
+    t_map           map_data;
+    t_player_data   player;
+    void            *mlx_ptr;
+	void            *mlx_win;
+    t_ray           ray;
 }   t_data;
 
 
@@ -81,7 +99,11 @@ int     read_line(int map, char **line);
 int	    parse_element(char *identifier, char *path_rgb, t_data *data, int *all_in);
 int     go_to_mlx(t_data *data);
 void    trim_map(t_data *data);
-int join_nulls(t_data *data);
-int	render(t_data *data, double angle, void *mlx_ptr, void *mlx_win, int start);
+int     join_nulls(t_data *data);
+int	    down_cast(t_data *data, void *mlx_ptr, void *mlx_win, int start, double beta_angle);
+int	    up_cast(t_data *data, void *mlx_ptr, void *mlx_win, int start, double beta_angle);
+void    draw_line(void *mlx_ptr, void *mlx_win, int x_start, int y_start, int y_end);
+int     render(void *data);
+int     moves(int keycode, void *args);
 
 # endif

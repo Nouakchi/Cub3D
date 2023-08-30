@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/25 14:32:36 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/30 21:28:15 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,23 +96,36 @@ int	main(int ac, char *av[])
 	if (close(map_fd) == -1)
 		fatal("Close failed");
 
-
-	void *mlx_ptr;
-	void *mlx_win;
-	mlx_ptr = mlx_init();
-	mlx_win = mlx_new_window(mlx_ptr, 1024, 512, "cub3D");
+	data.mlx_ptr = mlx_init();
+	data.mlx_win = mlx_new_window(data.mlx_ptr, 1024, 512, "cub3D");
 
 	// do raycasting here
-	i = -1;
-	double angle = 300;
-	int start = -1;
-	while (++i < 512)
-	{
-		render(&data, angle, mlx_ptr, mlx_win , ++start);
-		angle -= 0.0625;
-	}
+	data.ray.angle = 30;
+	data.player.x_pos = 96;
+	data.player.y_pos = 96;
 	
-	mlx_loop(mlx_ptr);
+	// int start = -1;
+	// double beta_angle = 30;
+	// while (start < 1024)
+	// {
+	// 	// printf("%f\n", data.ray.angle);
+	// 	if (data.ray.angle >= 180 && data.ray.angle <= 360)
+	// 		down_cast(&data, data.mlx_ptr, data.mlx_win , ++start, beta_angle);
+	// 	else
+	// 		up_cast(&data, data.mlx_ptr, data.mlx_win , ++start, beta_angle);
+	// 	if (data.ray.angle <= 0)
+	// 		data.ray.angle = 360 - 0.05859375;
+	// 	else
+	// 		data.ray.angle -= 0.05859375;
+	// 	beta_angle -= 0.05859375;
+		
+	// }
+
+	mlx_loop_hook(data.mlx_ptr, render, (void *)&data);
+	// mlx_loop_hook(data.mlx_ptr, render, (void *)&data);
+	// mlx_hook(data.mlx_win, 2, 1L<<0, moves, &data);
+	// mlx_hook(data.mlx_win,2, 0, render, &data);
+	mlx_loop(data.mlx_ptr);
 	free_element_map(&data);
 
 
