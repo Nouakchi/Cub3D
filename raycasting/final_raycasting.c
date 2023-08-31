@@ -6,20 +6,24 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 10:32:02 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/30 11:01:26 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/31 11:42:34 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
 
-void draw_line(void *mlx_ptr, void *mlx_win, int x_start, int y_start, int y_end)
+void draw_line(t_data *data, int x_start, int y_start, int y_end)
 {
+	if (y_end >= 512)
+		y_end = 511;
+	if (y_start < 0)
+		y_start = 0;
 	while (y_start <= y_end)
-		mlx_pixel_put(mlx_ptr, mlx_win, x_start, y_start++, 0x00FF0000);
+		my_mlx_pixel_put(&data->img, x_start, y_start++, 0x00FF0000);
 }
 
-int	down_cast(t_data *data, void *mlx_ptr, void *mlx_win, int start, double beta_angle)
+int	down_cast(t_data *data, int start, double beta_angle)
 {
     char map[5][6] = {
 		{1,1,1,1,1,1},
@@ -109,9 +113,19 @@ int	down_cast(t_data *data, void *mlx_ptr, void *mlx_win, int start, double beta
 	
 	double actual_height = ceil((64 * 886) / ray);
 	
+	// int y_end = 256 - (actual_height / 2) + actual_height;
+	// if (y_end >= 512)
+	// 	y_end = 511;
+	
+		// printf("%f\n", 256 - (actual_height / 2.0));
+
+	
 	// draw the casted ray
 	
-	draw_line(mlx_ptr, mlx_win, start, (256 - (actual_height / 2)), (256 - (actual_height / 2)) + actual_height);
+	// printf("%f , %f , %f , %f\n",ray, actual_height, fabs(256 - (actual_height / 2)), 256 - (actual_height / 2) + actual_height);
+
+	// getchar();
+	draw_line(data, start, 256 - (actual_height / 2), fabs(256 - (actual_height / 2)) + actual_height);
 
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/30 10:38:01 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/31 09:15:36 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,14 @@ typedef struct s_ray
     
 }   t_ray;
 
+typedef struct	s_img {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_img;
+
 typedef struct s_data
 {
     t_map           map_data;
@@ -72,6 +80,7 @@ typedef struct s_data
     void            *mlx_ptr;
 	void            *mlx_win;
     t_ray           ray;
+    t_img           img;
 }   t_data;
 
 
@@ -100,10 +109,11 @@ int	    parse_element(char *identifier, char *path_rgb, t_data *data, int *all_i
 int     go_to_mlx(t_data *data);
 void    trim_map(t_data *data);
 int     join_nulls(t_data *data);
-int	    down_cast(t_data *data, void *mlx_ptr, void *mlx_win, int start, double beta_angle);
-int	    up_cast(t_data *data, void *mlx_ptr, void *mlx_win, int start, double beta_angle);
-void    draw_line(void *mlx_ptr, void *mlx_win, int x_start, int y_start, int y_end);
+int	    down_cast(t_data *data, int start, double beta_angle);
+int	    up_cast(t_data *data, int start, double beta_angle);
+void    draw_line(t_data *data, int x_start, int y_start, int y_end);
 int     render(void *data);
 int     moves(int keycode, void *args);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 # endif

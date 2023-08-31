@@ -6,11 +6,19 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/30 21:28:15 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/31 11:32:16 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub.h"
+
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
 
 void	fatal(char *mssg)
 {
@@ -100,9 +108,12 @@ int	main(int ac, char *av[])
 	data.mlx_win = mlx_new_window(data.mlx_ptr, 1024, 512, "cub3D");
 
 	// do raycasting here
-	data.ray.angle = 30;
+	data.ray.angle = 359;
 	data.player.x_pos = 96;
 	data.player.y_pos = 96;
+								
+	// my_mlx_pixel_put(&data.img, 5, 5, 0x00FF0000);
+	
 	
 	// int start = -1;
 	// double beta_angle = 30;
@@ -110,9 +121,9 @@ int	main(int ac, char *av[])
 	// {
 	// 	// printf("%f\n", data.ray.angle);
 	// 	if (data.ray.angle >= 180 && data.ray.angle <= 360)
-	// 		down_cast(&data, data.mlx_ptr, data.mlx_win , ++start, beta_angle);
+	// 		down_cast(&data, ++start, beta_angle);
 	// 	else
-	// 		up_cast(&data, data.mlx_ptr, data.mlx_win , ++start, beta_angle);
+	// 		up_cast(&data , ++start, beta_angle);
 	// 	if (data.ray.angle <= 0)
 	// 		data.ray.angle = 360 - 0.05859375;
 	// 	else
@@ -121,10 +132,9 @@ int	main(int ac, char *av[])
 		
 	// }
 
-	mlx_loop_hook(data.mlx_ptr, render, (void *)&data);
-	// mlx_loop_hook(data.mlx_ptr, render, (void *)&data);
-	// mlx_hook(data.mlx_win, 2, 1L<<0, moves, &data);
-	// mlx_hook(data.mlx_win,2, 0, render, &data);
+	mlx_hook(data.mlx_win, 2, 0, moves, &data);
+	mlx_loop_hook(data.mlx_ptr, render, &data);
+	
 	mlx_loop(data.mlx_ptr);
 	free_element_map(&data);
 

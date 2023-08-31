@@ -6,13 +6,13 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:37:41 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/30 11:02:47 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/31 11:22:57 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/cub.h"
 
-int	up_cast(t_data *data, void *mlx_ptr, void *mlx_win, int start, double beta_angle)
+int	up_cast(t_data *data, int start, double beta_angle)
 {
     char map[5][6] = {
 		{1,1,1,1,1,1},
@@ -91,8 +91,9 @@ int	up_cast(t_data *data, void *mlx_ptr, void *mlx_win, int start, double beta_a
 	double actual_height = ceil((64 * 886) / ray);
 	
 	// draw the casted ray
+	// printf("%f , %f , %f , %f\n", ray, actual_height, 256 - (actual_height / 2), 256 - (actual_height / 2) + actual_height);
 	
-	draw_line(mlx_ptr, mlx_win, start, (256 - (actual_height / 2)), (256 - (actual_height / 2)) + actual_height);
+	draw_line(data, start, 256 - (actual_height / 2), 256 - (actual_height / 2) + actual_height);
 
     return (0);
 }

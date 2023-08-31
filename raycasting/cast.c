@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 10:11:35 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/30 21:30:23 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/08/31 11:41:30 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,34 @@ int render(void *args)
 {
     t_data *data = args;
     
-    int start = -1;
+    // mlx_clear_window(data->mlx_ptr, data->mlx_win);
+   int start = -1;
 	double beta_angle = 30;
-    double angle = 30;
-	while (start < 1024)
+    double angle = data->ray.angle;
+    data->img.img = mlx_new_image(data->mlx_ptr, 1024, 512);
+	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel, &data->img.line_length,
+							&data->img.endian);
+    
+	while (start < 1023)
 	{
-		// printf("%f\n", data.ray.angle);
-		if (angle >= 180 && angle <= 360)
-			down_cast(data, data->mlx_ptr, data->mlx_win , ++start, beta_angle);
+		if (data->ray.angle >= 180 && data->ray.angle <= 360)
+			down_cast(data, ++start, beta_angle);
 		else
-			up_cast(data, data->mlx_ptr, data->mlx_win , ++start, beta_angle);
-		if (angle <= 0)
-			angle = 360 - 0.05859375;
+			up_cast(data, ++start, beta_angle);
+		if (data->ray.angle <= 0)
+        {
+			data->ray.angle = 360 - 0.05859375;
+            // printf("%f\n", data->ray.angle);
+            // getchar();
+        }
 		else
-			angle -= 0.05859375;
+			data->ray.angle -= 0.05859375;
 		beta_angle -= 0.05859375;
+		
 	}
-    mlx_clear_window(data->mlx_ptr, data->mlx_win);
+    data->ray.angle = angle;
+    mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img, 0, 0);
+    mlx_destroy_image(data->mlx_ptr, data->img.img);
     return (0);
 }
 
@@ -43,10 +54,18 @@ int moves(int keycode, void *args)
     data = args;
     if (keycode == 2)
     {
-        printf("%d\n", keycode);
-        printf("%f\n", data->ray.angle);
-        // data->ray.angle -= 10;
+
+        if (data->ray.angle - 20 <= 0)
+            data->ray.angle = 360 + (data->ray.angle - 20);
+        else
+            data->ray.angle -= 20;
     }
-    // else
+    if (keycode == 0)
+    {
+        if (data->ray.angle + 20 >= 360)
+            data->ray.angle = fabs(360 - (data->ray.angle + 20));
+        else    
+            data->ray.angle += 20;
+    }
     return (0);
 }
