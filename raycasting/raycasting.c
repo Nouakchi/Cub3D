@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:37:41 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/01 14:21:10 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:24:51 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int	up_cast(t_data *data, int start, double beta_angle)
 	
 	// correct the fishbowl
 	ray = fabs((double)ray * cos(beta_angle * (M_PI / 180.0)));
+	
+	data->player.distance_to_wall = ray;
 	
 	// scale the ray
 	

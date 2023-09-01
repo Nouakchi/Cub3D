@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 10:11:35 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/01 16:17:21 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:53:13 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void update_data(t_data *data)
 {
-    if (data->moves.move_f)
+    if (data->moves.move_f && data->player.distance_to_wall > 50)
     {
         if (data->player.view_angle <= 90 || data->player.view_angle >= 270)
             data->player.x_pos += 5 * cos(data->player.view_angle * (M_PI / 180));

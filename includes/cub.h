@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/01 16:16:53 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:24:10 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_player_data
     double  x_pos;
     double  y_pos;
     double  view_angle;
+    double  distance_to_wall;
     
 }   t_player_data;
 
