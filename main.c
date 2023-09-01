@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/01 15:28:19 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/01 15:53:51 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,11 +128,9 @@ int	main(int ac, char *av[])
 	// do raycasting here
 	data.ray.angle = 120;
 	data.player.view_angle = data.ray.angle - 30;
-	// data.player.x_pos = 160;
-	// data.player.y_pos = 160;
 
-	mlx_hook(data.mlx_win, 2,1L<<13, moves, &data);
 	mlx_loop_hook(data.mlx_ptr, render, &data);
+	mlx_hook(data.mlx_win, 2,0, moves, &data);
 	
 	mlx_loop(data.mlx_ptr);
 	
