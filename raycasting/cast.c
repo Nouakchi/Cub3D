@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 10:11:35 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/31 11:41:30 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/01 11:17:03 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,13 @@ int render(void *args)
     return (0);
 }
 
+int ft_between(double angle, double f_interval, double s_interval)
+{
+    if (angle >= f_interval && angle <= s_interval)
+        return (1);
+    return (0);
+}
+
 int moves(int keycode, void *args)
 {
     t_data *data;
@@ -55,17 +62,41 @@ int moves(int keycode, void *args)
     if (keycode == 2)
     {
 
-        if (data->ray.angle - 20 <= 0)
-            data->ray.angle = 360 + (data->ray.angle - 20);
+        if (data->ray.angle - 30 <= 0)
+            data->ray.angle = 360 + (data->ray.angle - 30);
         else
-            data->ray.angle -= 20;
+            data->ray.angle -= 30;
+        data->player.view_angle = data->ray.angle - 30;
     }
-    if (keycode == 0)
+    else if (keycode == 0)
     {
-        if (data->ray.angle + 20 >= 360)
-            data->ray.angle = fabs(360 - (data->ray.angle + 20));
+        if (data->ray.angle + 30 >= 360)
+            data->ray.angle = fabs(360 - (data->ray.angle + 30));
         else    
-            data->ray.angle += 20;
+            data->ray.angle += 30;
+        data->player.view_angle = data->ray.angle - 30;
+    }
+    else if (keycode == 13)
+    {
+        if (data->player.view_angle <= 90 || data->player.view_angle >= 270)
+            data->player.x_pos += 3 * cos(data->player.view_angle * (M_PI / 180));
+        else
+            data->player.x_pos += 3 * cos(data->player.view_angle * (M_PI / 180));
+        if (data->player.view_angle >= 180)
+            data->player.y_pos += 3 * fabs(sin(data->player.view_angle * (M_PI / 180)));
+        else
+            data->player.y_pos -= 3 * sin(data->player.view_angle * (M_PI / 180));
+    }
+    else if (keycode == 1)
+    {
+        if (data->player.view_angle <= 90 || data->player.view_angle >= 270)
+            data->player.x_pos -= 3 * cos(data->player.view_angle * (M_PI / 180));
+        else
+            data->player.x_pos += 3 * fabs(cos(data->player.view_angle * (M_PI / 180)));
+        if (data->player.view_angle >= 180)
+            data->player.y_pos += 3 * sin(data->player.view_angle * (M_PI / 180));
+        else
+            data->player.y_pos += 3 * sin(data->player.view_angle * (M_PI / 180));
     }
     return (0);
 }
