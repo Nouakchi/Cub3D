@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 10:11:35 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/01 11:17:03 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/01 15:28:30 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 int render(void *args)
 {
     t_data *data = args;
-    
-    // mlx_clear_window(data->mlx_ptr, data->mlx_win);
-   int start = -1;
+
+    int start = -1;
 	double beta_angle = 30;
     double angle = data->ray.angle;
     data->img.img = mlx_new_image(data->mlx_ptr, 1024, 512);
@@ -31,11 +30,7 @@ int render(void *args)
 		else
 			up_cast(data, ++start, beta_angle);
 		if (data->ray.angle <= 0)
-        {
 			data->ray.angle = 360 - 0.05859375;
-            // printf("%f\n", data->ray.angle);
-            // getchar();
-        }
 		else
 			data->ray.angle -= 0.05859375;
 		beta_angle -= 0.05859375;
@@ -44,13 +39,6 @@ int render(void *args)
     data->ray.angle = angle;
     mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img, 0, 0);
     mlx_destroy_image(data->mlx_ptr, data->img.img);
-    return (0);
-}
-
-int ft_between(double angle, double f_interval, double s_interval)
-{
-    if (angle >= f_interval && angle <= s_interval)
-        return (1);
     return (0);
 }
 
@@ -79,24 +67,24 @@ int moves(int keycode, void *args)
     else if (keycode == 13)
     {
         if (data->player.view_angle <= 90 || data->player.view_angle >= 270)
-            data->player.x_pos += 3 * cos(data->player.view_angle * (M_PI / 180));
+            data->player.x_pos += 50 * cos(data->player.view_angle * (M_PI / 180));
         else
-            data->player.x_pos += 3 * cos(data->player.view_angle * (M_PI / 180));
+            data->player.x_pos += 50 * cos(data->player.view_angle * (M_PI / 180));
         if (data->player.view_angle >= 180)
-            data->player.y_pos += 3 * fabs(sin(data->player.view_angle * (M_PI / 180)));
+            data->player.y_pos += 50 * fabs(sin(data->player.view_angle * (M_PI / 180)));
         else
-            data->player.y_pos -= 3 * sin(data->player.view_angle * (M_PI / 180));
+            data->player.y_pos -= 50 * sin(data->player.view_angle * (M_PI / 180));
     }
     else if (keycode == 1)
     {
         if (data->player.view_angle <= 90 || data->player.view_angle >= 270)
-            data->player.x_pos -= 3 * cos(data->player.view_angle * (M_PI / 180));
+            data->player.x_pos -= 50 * cos(data->player.view_angle * (M_PI / 180));
         else
-            data->player.x_pos += 3 * fabs(cos(data->player.view_angle * (M_PI / 180)));
+            data->player.x_pos += 50 * fabs(cos(data->player.view_angle * (M_PI / 180)));
         if (data->player.view_angle >= 180)
-            data->player.y_pos += 3 * sin(data->player.view_angle * (M_PI / 180));
+            data->player.y_pos += 50 * sin(data->player.view_angle * (M_PI / 180));
         else
-            data->player.y_pos += 3 * sin(data->player.view_angle * (M_PI / 180));
+            data->player.y_pos += 50 * sin(data->player.view_angle * (M_PI / 180));
     }
     return (0);
 }

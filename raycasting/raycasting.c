@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:37:41 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/31 14:51:35 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/01 14:21:10 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	up_cast(t_data *data, int start, double beta_angle)
 {
-    char map[5][6] = {
-		{1,1,1,1,1,1},
-		{1,0,0,0,0,1},
-		{1,0,9,0,0,1},
-		{1,0,0,0,0,1},
-		{1,1,1,1,1,1},
-	};
+    // char map[5][6] = {
+	// 	{1,1,1,1,1,1},
+	// 	{1,0,0,0,0,1},
+	// 	{1,0,9,0,0,1},
+	// 	{1,0,0,0,0,1},
+	// 	{1,1,1,1,1,1},
+	// };
     
     // check horizontal intersection
     
@@ -33,7 +33,7 @@ int	up_cast(t_data *data, int start, double beta_angle)
     int i = (int)data->ray.y_inter  >> (int)WALL_SHIFT;
 	int j = (int)data->ray.x_inter  >> (int)WALL_SHIFT;
     
-    while (i < 5 && i >= 0 && j < 6 && j >= 0 && map[i][j] != 1)
+    while (i < data->map_data.map_height && i >= 0 && j < data->map_data.map_width && j >= 0 && data->map_data.map[i][j] != '1')
 	{
 		data->ray.y_inter += data->ray.y_step;
 		data->ray.x_inter += data->ray.x_step;
@@ -61,7 +61,7 @@ int	up_cast(t_data *data, int start, double beta_angle)
 	if (data->ray.angle >= 90)
 		j--;
 
-    while (i < 5 && i >= 0 && j < 6 && j >= 0 && map[i][j] != 1)
+    while (i < data->map_data.map_height && i >= 0 && j < data->map_data.map_width && j >= 0 && data->map_data.map[i][j] != '1')
 	{
 		if (data->ray.angle < 90 )
 			data->ray.y_inter -= data->ray.y_step;
@@ -91,7 +91,6 @@ int	up_cast(t_data *data, int start, double beta_angle)
 	double actual_height = ceil((64 * 886) / ray);
 	
 	// draw the casted ray
-	// printf("%f , %f , %f , %f\n", ray, actual_height, 256 - (actual_height / 2), 256 - (actual_height / 2) + actual_height);
 	
 	draw_line(data, start, 256 - (actual_height / 2), 256 - (actual_height / 2) + actual_height);
 

@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/31 14:30:23 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/01 15:28:37 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_map
 {
     t_map_elements  map_elements;
     char            **map;
+    int             map_height;
+    int             map_width;
 }   t_map;
 
 typedef struct s_player_data

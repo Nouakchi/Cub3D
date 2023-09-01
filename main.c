@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/31 14:57:24 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/01 15:28:19 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,24 @@ int	main(int ac, char *av[])
 
 	if (close(map_fd) == -1)
 		fatal("Close failed");
+		
+	i = -1;
+	data.map_data.map_width = 0;
+	while (data.map_data.map[++i])
+	{
+		int j = -1;
+		while (data.map_data.map[i][++j])
+		{
+			if (ft_strchr("NWSE", data.map_data.map[i][j]))
+			{
+				data.player.y_pos = i * 64 + 32;
+				data.player.x_pos = j * 64 + 32;
+			}
+		}
+		if (data.map_data.map_width < (int)ft_strlen(data.map_data.map[i]))
+			data.map_data.map_width = (int)ft_strlen(data.map_data.map[i]);
+	}
+	data.map_data.map_height = i;
 
 	data.mlx_ptr = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx_ptr, 1024, 512, "cub3D");
@@ -110,13 +128,14 @@ int	main(int ac, char *av[])
 	// do raycasting here
 	data.ray.angle = 120;
 	data.player.view_angle = data.ray.angle - 30;
-	data.player.x_pos = 160;
-	data.player.y_pos = 160;
+	// data.player.x_pos = 160;
+	// data.player.y_pos = 160;
 
-	mlx_hook(data.mlx_win, 2, 0, moves, &data);
+	mlx_hook(data.mlx_win, 2,1L<<13, moves, &data);
 	mlx_loop_hook(data.mlx_ptr, render, &data);
 	
 	mlx_loop(data.mlx_ptr);
+	
 	free_element_map(&data);
 
 

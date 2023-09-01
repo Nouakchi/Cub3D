@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 10:32:02 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/31 14:51:30 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/01 14:17:32 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,24 @@ void draw_line(t_data *data, int x_start, int y_start, int y_end)
 		y_end = 511;
 	if (y_start < 0)
 		y_start = 0;
+	int i = 0;
+	while (i < y_start)
+		my_mlx_pixel_put(&data->img, x_start, i++, 0x000000FF);
 	while (y_start <= y_end)
 		my_mlx_pixel_put(&data->img, x_start, y_start++, 0x00FF0000);
+	while (y_start < 512)
+		my_mlx_pixel_put(&data->img, x_start, y_start++, 0x0000FF00);
 }
 
 int	down_cast(t_data *data, int start, double beta_angle)
 {
-    char map[5][6] = {
-		{1,1,1,1,1,1},
-		{1,0,0,0,0,1},
-		{1,0,9,0,0,1},
-		{1,0,0,0,0,1},
-		{1,1,1,1,1,1},
-	};
+    // char map[5][6] = {
+	// 	{1,1,1,1,1,1},
+	// 	{1,0,0,0,0,1},
+	// 	{1,0,9,0,0,1},
+	// 	{1,0,0,0,0,1},
+	// 	{1,1,1,1,1,1},
+	// };
     
 
     // check horizontal intersection
@@ -51,7 +56,7 @@ int	down_cast(t_data *data, int start, double beta_angle)
 	if (data->ray.angle > 180 && data->ray.angle < 360)
 		i++;
 	
-    while (i < 5 && i >= 0 && j < 6 && j >= 0 && map[i][j] != 1)
+    while (i < data->map_data.map_height && i >= 0 && j < data->map_data.map_width && j >= 0 && data->map_data.map[i][j] != '1')
 	{
 		data->ray.y_inter += data->ray.y_step;
 		if (data->ray.angle < 90 || data->ray.angle > 270)
@@ -82,7 +87,7 @@ int	down_cast(t_data *data, int start, double beta_angle)
 	if (data->ray.angle > 180 && data->ray.angle < 271)
 		j--;
 	
-    while (i < 5 && i >= 0 && j < 6 && j >= 0 && map[i][j] != 1)
+    while (i < data->map_data.map_height && i >= 0 && j < data->map_data.map_width  && j >= 0 && data->map_data.map[i][j] != '1')
 	{
 		if (data->ray.angle < 90 || data->ray.angle > 270)
 			data->ray.x_inter += data->ray.x_step;
@@ -113,18 +118,6 @@ int	down_cast(t_data *data, int start, double beta_angle)
 	
 	double actual_height = ceil((64 * 886) / ray);
 	
-	// int y_end = 256 - (actual_height / 2) + actual_height;
-	// if (y_end >= 512)
-	// 	y_end = 511;
-	
-		// printf("%f\n", 256 - (actual_height / 2.0));
-
-	
-	// draw the casted ray
-	
-	// printf("%f , %f , %f , %f\n",ray, actual_height, fabs(256 - (actual_height / 2)), 256 - (actual_height / 2) + actual_height);
-
-	// getchar();
 	draw_line(data, start, 256 - (actual_height / 2), fabs(256 - (actual_height / 2)) + actual_height);
 
     return (0);
