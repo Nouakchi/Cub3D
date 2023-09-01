@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/01 15:28:37 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:16:53 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,14 @@ typedef struct	s_img {
 	int		endian;
 }				t_img;
 
+typedef struct s_moves
+{
+    int move_f;
+    int move_b;
+    int move_l;
+    int move_r;
+}   t_moves;
+
 typedef struct s_data
 {
     t_map           map_data;
@@ -84,6 +92,7 @@ typedef struct s_data
 	void            *mlx_win;
     t_ray           ray;
     t_img           img;
+    t_moves         moves;
 }   t_data;
 
 
@@ -116,7 +125,8 @@ int	    down_cast(t_data *data, int start, double beta_angle);
 int	    up_cast(t_data *data, int start, double beta_angle);
 void    draw_line(t_data *data, int x_start, int y_start, int y_end);
 int     render(void *data);
-int     moves(int keycode, void *args);
+int     moves_press(int keycode, void *args);
+int     moves_release(int keycode, void *args);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 # endif

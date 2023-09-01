@@ -6,11 +6,53 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 10:11:35 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/01 15:57:28 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:17:21 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
+
+void update_data(t_data *data)
+{
+    if (data->moves.move_f)
+    {
+        if (data->player.view_angle <= 90 || data->player.view_angle >= 270)
+            data->player.x_pos += 5 * cos(data->player.view_angle * (M_PI / 180));
+        else
+            data->player.x_pos += 5 * cos(data->player.view_angle * (M_PI / 180));
+        if (data->player.view_angle >= 180)
+            data->player.y_pos += 5 * fabs(sin(data->player.view_angle * (M_PI / 180)));
+        else
+            data->player.y_pos -= 5 * sin(data->player.view_angle * (M_PI / 180));
+    }
+    if (data->moves.move_b)
+    {
+        if (data->player.view_angle <= 90 || data->player.view_angle >= 270)
+            data->player.x_pos -= 5 * cos(data->player.view_angle * (M_PI / 180));
+        else
+            data->player.x_pos += 5 * fabs(cos(data->player.view_angle * (M_PI / 180)));
+        if (data->player.view_angle >= 180)
+            data->player.y_pos += 5 * sin(data->player.view_angle * (M_PI / 180));
+        else
+            data->player.y_pos += 5 * sin(data->player.view_angle * (M_PI / 180));
+    }
+    if (data->moves.move_r)
+    {
+        if (data->ray.angle - 2 <= 0)
+            data->ray.angle = 360 + (data->ray.angle - 2);
+        else
+            data->ray.angle -= 2;
+        data->player.view_angle = data->ray.angle - 30;
+    }
+    if (data->moves.move_l)
+    {
+        if (data->ray.angle + 2 >= 360)
+            data->ray.angle = fabs(360 - (data->ray.angle + 2));
+        else    
+            data->ray.angle += 2;
+        data->player.view_angle = data->ray.angle - 30;
+    }
+}
 
 int render(void *args)
 {
@@ -18,6 +60,7 @@ int render(void *args)
 
     int start = -1;
 	double beta_angle = 30;
+    update_data(data);
     double angle = data->ray.angle;
     data->img.img = mlx_new_image(data->mlx_ptr, 1024, 512);
 	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel, &data->img.line_length,
@@ -42,49 +85,34 @@ int render(void *args)
     return (0);
 }
 
-int moves(int keycode, void *args)
+int moves_press(int keycode, void *args)
 {
     t_data *data;
 
     data = args;
     if (keycode == 2)
-    {
-
-        if (data->ray.angle - 30 <= 0)
-            data->ray.angle = 360 + (data->ray.angle - 30);
-        else
-            data->ray.angle -= 30;
-        data->player.view_angle = data->ray.angle - 30;
-    }
+        data->moves.move_r = 1;
     else if (keycode == 0)
-    {
-        if (data->ray.angle + 30 >= 360)
-            data->ray.angle = fabs(360 - (data->ray.angle + 30));
-        else    
-            data->ray.angle += 30;
-        data->player.view_angle = data->ray.angle - 30;
-    }
+        data->moves.move_l = 1;
     else if (keycode == 13)
-    {
-        if (data->player.view_angle <= 90 || data->player.view_angle >= 270)
-            data->player.x_pos += 50 * cos(data->player.view_angle * (M_PI / 180));
-        else
-            data->player.x_pos += 50 * cos(data->player.view_angle * (M_PI / 180));
-        if (data->player.view_angle >= 180)
-            data->player.y_pos += 50 * fabs(sin(data->player.view_angle * (M_PI / 180)));
-        else
-            data->player.y_pos -= 50 * sin(data->player.view_angle * (M_PI / 180));
-    }
+        data->moves.move_f = 1;
     else if (keycode == 1)
-    {
-        if (data->player.view_angle <= 90 || data->player.view_angle >= 270)
-            data->player.x_pos -= 50 * cos(data->player.view_angle * (M_PI / 180));
-        else
-            data->player.x_pos += 50 * fabs(cos(data->player.view_angle * (M_PI / 180)));
-        if (data->player.view_angle >= 180)
-            data->player.y_pos += 50 * sin(data->player.view_angle * (M_PI / 180));
-        else
-            data->player.y_pos += 50 * sin(data->player.view_angle * (M_PI / 180));
-    }
+        data->moves.move_b = 1;
+    return (0);
+}
+
+int moves_release(int keycode, void *args)
+{
+    t_data *data;
+
+    data = args;
+    if (keycode == 2)
+        data->moves.move_r = 0;
+    else if (keycode == 0)
+        data->moves.move_l = 0;
+    else if (keycode == 13)
+        data->moves.move_f = 0;
+    else if (keycode == 1)
+        data->moves.move_b = 0;
     return (0);
 }
