@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 08:51:04 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/08/22 16:40:22 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:08:11 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,28 +24,74 @@ void	trim_end(char *m)
 	}
 }
 
-int	check_map_pars(int map_fd, t_data *data)
+void    join_ones(t_data *data) //
 {
-	char	*init_map;
+    int    i;
+    int    j;
+    int    max;
 
-	init_map = get_init_map(map_fd);
-	if (!init_map)
-		return (fatal("Malloc failed"), 1);
-	init_map = ft_strtrim(init_map, "\n");
-	if (!init_map)
-		return (1);
-	trim_end(init_map);
-	if (check_init_map(init_map))
-		return (free(init_map), 1);
-	data->map_data.map = ft_split(init_map, '\n');
-	if (join_nulls(data))
-		return (fatal("Malloc failed"), 1);
-	free(init_map);
-	if (!data->map_data.map)
-		return (1);
-	if (check_map(data->map_data.map))
-		return (1);
-	return (0);
+    i = -1;
+	while(data->map_data.map[++i])
+	{
+		j = -1;
+		while (data->map_data.map[i][++j])
+		{
+			if (data->map_data.map[i][j] == ' ')
+				data->map_data.map[i][j] = '1';
+		}
+	}
+	i = -1;
+    max = ft_strlen_width(data->map_data.map);
+    while (data->map_data.map[++i])
+    {
+        j = ft_strlen(data->map_data.map[i]);
+        while (j < max)
+        {
+            data->map_data.map[i][j] = '1';
+            j++;
+        }
+    }
+}
+
+int    check_map_pars(int map_fd, t_data *data)
+{
+    char    *init_map;
+
+    init_map = get_init_map(map_fd);
+    if (!init_map)
+        return (fatal("Malloc failed"), 1);
+    init_map = ft_strtrim(init_map, "\n");
+    if (!init_map)
+        return (1);
+    trim_end(init_map);
+    if (check_init_map(init_map))
+        return (free(init_map), 1);
+    data->map_data.map = ft_split(init_map, '\n');
+    if (join_nulls(data))
+        return (fatal("Malloc failed"), 1);
+    free(init_map);
+    if (!data->map_data.map)
+        return (1);
+    if (check_map(data->map_data.map))
+        return (1);
+
+    join_ones(data);
+
+    int len = ft_strlen_width(data->map_data.map);
+    int i = -1;
+    while (++i <= len + 1)
+        printf("-");
+    printf("\n");
+    i = -1;
+    while (data->map_data.map[++i])
+        printf("|%s|\n", data->map_data.map[i]);
+    i = -1;
+    while (++i <= len + 1)
+        printf("-");
+    printf("\n");
+
+
+    return (0);
 }
 
 int	check_chars(char *map)
