@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/01 16:24:10 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:23:20 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ typedef struct s_map_elements
     char *south_text;
     char *west_text;
     char *east_text;
+
+    unsigned int **colors_north;
+    unsigned int **colors_south;
+    unsigned int **colors_west;
+    unsigned int **colors_east;
+
     t_rgb frgb;
     t_rgb crgb;
 } t_map_elements;
@@ -56,7 +62,7 @@ typedef struct s_player_data
     double  y_pos;
     double  view_angle;
     double  distance_to_wall;
-    
+
 }   t_player_data;
 
 typedef struct s_ray
@@ -66,7 +72,7 @@ typedef struct s_ray
     double  y_step;
     double  x_inter;
     double  y_inter;
-    
+
 }   t_ray;
 
 typedef struct	s_img {
@@ -93,6 +99,10 @@ typedef struct s_data
 	void            *mlx_win;
     t_ray           ray;
     t_img           img;
+    t_img           img_north; //
+    t_img           img_south;
+    t_img           img_west;
+    t_img           img_east;
     t_moves         moves;
 }   t_data;
 
@@ -124,7 +134,7 @@ void    trim_map(t_data *data);
 int     join_nulls(t_data *data);
 int	    down_cast(t_data *data, int start, double beta_angle);
 int	    up_cast(t_data *data, int start, double beta_angle);
-void    draw_line(t_data *data, int x_start, int y_start, int y_end);
+void    draw_line(t_data *data, int x_start, int y_start, int y_end, int actual_height);
 int     render(void *data);
 int     moves_press(int keycode, void *args);
 int     moves_release(int keycode, void *args);

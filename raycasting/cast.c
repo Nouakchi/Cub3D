@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 10:11:35 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/01 16:53:13 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/10 18:41:05 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void update_data(t_data *data)
     {
         if (data->ray.angle + 2 >= 360)
             data->ray.angle = fabs(360 - (data->ray.angle + 2));
-        else    
+        else
             data->ray.angle += 2;
         data->player.view_angle = data->ray.angle - 30;
     }
@@ -65,7 +65,7 @@ int render(void *args)
     data->img.img = mlx_new_image(data->mlx_ptr, 1024, 512);
 	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel, &data->img.line_length,
 							&data->img.endian);
-    
+
 	while (start < 1023)
 	{
 		if (data->ray.angle >= 180 && data->ray.angle <= 360)
@@ -77,7 +77,7 @@ int render(void *args)
 		else
 			data->ray.angle -= 0.05859375;
 		beta_angle -= 0.05859375;
-		
+
 	}
     data->ray.angle = angle;
     mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img, 0, 0);
