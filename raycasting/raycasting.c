@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:37:41 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/20 23:01:06 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/21 00:25:41 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,13 @@ int	up_cast(t_data *data, int start, double beta_angle)
 	// correct the fishbowl
 	ray = fabs((double)ray * cos(beta_angle * (M_PI / 180.0)));
 
-	data->player.distance_to_wall = ray;
+	if (start == 511)
+		data->player.distance_to_wall = ray;
 
 	// scale the ray
 
 	double actual_height = ceil((64 * 886) / ray);
+
 
 
 

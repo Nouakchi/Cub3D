@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 10:32:02 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/20 23:04:53 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/21 00:26:12 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ void draw_line(t_data *data, int x_start, int y_start, int y_end, int actual_hei
 			start_index = 0;
 	}
 
-
-	printf("is vert %d | data->ray.y_inter %f | data->ray.x_inter %f | start_index %d\n", data->ray.is_vert, data->ray.y_inter, data->ray.x_inter, start_index);
 
 
 
@@ -175,7 +173,8 @@ int	down_cast(t_data *data, int start, double beta_angle)
 
 	ray = fabs((double)ray * cos(beta_angle * (M_PI / 180.0)));
 
-	data->player.distance_to_wall = ray;
+	if (start == 511)
+		data->player.distance_to_wall = ray;
 
 	// scale the ray
 

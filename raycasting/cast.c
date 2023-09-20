@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 10:11:35 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/10 18:41:05 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/21 00:27:07 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void update_data(t_data *data)
 {
+    printf("%f , %f , %f\n", data->player.view_angle, data->ray.angle, data->player.distance_to_wall);
+
+
     if (data->moves.move_f && data->player.distance_to_wall > 50)
     {
         if (data->player.view_angle <= 90 || data->player.view_angle >= 270)
@@ -42,7 +45,13 @@ void update_data(t_data *data)
             data->ray.angle = 360 + (data->ray.angle - 2);
         else
             data->ray.angle -= 2;
-        data->player.view_angle = data->ray.angle - 30;
+        if (data->ray.angle <= 30)
+            data->player.view_angle = 360 - (30 - data->ray.angle);
+        else
+            data->player.view_angle = data->ray.angle - 30;
+        // if (data->player.view_angle < 0)
+        //     data->player.view_angle = 360 - data->player.view_angle;
+
     }
     if (data->moves.move_l)
     {
@@ -50,7 +59,10 @@ void update_data(t_data *data)
             data->ray.angle = fabs(360 - (data->ray.angle + 2));
         else
             data->ray.angle += 2;
-        data->player.view_angle = data->ray.angle - 30;
+        if (data->ray.angle <= 30)
+            data->player.view_angle = 360 - (30 - data->ray.angle);
+        else
+            data->player.view_angle = data->ray.angle - 30;
     }
 }
 
