@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 10:32:02 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/18 15:44:42 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/18 22:56:01 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,30 @@ void draw_line(t_data *data, int x_start, int y_start, int y_end, int actual_hei
 	unsigned int color = 0x00FF0000;
 	float total = 0;
 
-	int start_index_j = (int)data->ray.y_inter % 64;
-	int start_index_i = (int)data->ray.x_inter % 64;
-	int start_index;
-	if (start_index_i > start_index_j)
-		start_index = start_index_i;
-	else
-		start_index = start_index_j;
 
-	// printf("start_index_i = %d\n", start_index_i);
-	// printf("start_index_j = %d\n", start_index_j);
+	int start_index_j = (int)data->ray.y_inter % 64;
+	// int start_index_i = (int)data->ray.x_inter % 64;
+
+	// printf("data->ray.y_inter = %f\n", data->ray.y_inter);
+	// printf("data->ray.x_inter = %f\n", data->ray.x_inter);
+
+
+	int start_index;
+	start_index = start_index_j;
+	if (start_index < 0)
+		start_index = start_index_j + 64;
+
+
+	// if (start_index_i > start_index_j)
+	// 	start_index = start_index_i;
+	// else
+	// 	start_index = start_index_j;
+
 
 
 	int in;
 	if (actual_height > 512)
-	{
 		total = (((float) actual_height - 512.0) / 2.0) * (64.0 / (float) actual_height);
-	}
 	else
 		total = 0;
 	in = (int)total;
