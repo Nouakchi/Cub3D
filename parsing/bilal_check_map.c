@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 08:51:04 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/09/08 14:08:11 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/21 00:37:53 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,18 @@ int    check_map_pars(int map_fd, t_data *data)
 
     join_ones(data);
 
-    int len = ft_strlen_width(data->map_data.map);
-    int i = -1;
-    while (++i <= len + 1)
-        printf("-");
-    printf("\n");
-    i = -1;
-    while (data->map_data.map[++i])
-        printf("|%s|\n", data->map_data.map[i]);
-    i = -1;
-    while (++i <= len + 1)
-        printf("-");
-    printf("\n");
+    // int len = ft_strlen_width(data->map_data.map);
+    // int i = -1;
+    // while (++i <= len + 1)
+    //     printf("-");
+    // printf("\n");
+    // i = -1;
+    // while (data->map_data.map[++i])
+    //     printf("|%s|\n", data->map_data.map[i]);
+    // i = -1;
+    // while (++i <= len + 1)
+    //     printf("-");
+    // printf("\n");
 
 
     return (0);
