@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 10:32:02 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/18 22:56:01 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/20 23:04:53 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,26 @@ void draw_line(t_data *data, int x_start, int y_start, int y_end, int actual_hei
 	unsigned int color = 0x00FF0000;
 	float total = 0;
 
-
-	int start_index_j = (int)data->ray.y_inter % 64;
-	// int start_index_i = (int)data->ray.x_inter % 64;
-
-	// printf("data->ray.y_inter = %f\n", data->ray.y_inter);
-	// printf("data->ray.x_inter = %f\n", data->ray.x_inter);
-
-
 	int start_index;
-	start_index = start_index_j;
-	if (start_index < 0)
-		start_index = start_index_j + 64;
+	if (data->ray.is_vert)
+	{
+		start_index = (int)data->ray.y_inter % 64;
+		if (data->ray.y_inter < 0)
+			start_index = 0;
+	}
+	else
+	{
+		start_index = (int)data->ray.x_inter % 64;
+		if (data->ray.x_inter < 0)
+			start_index = 0;
+	}
+
+
+	printf("is vert %d | data->ray.y_inter %f | data->ray.x_inter %f | start_index %d\n", data->ray.is_vert, data->ray.y_inter, data->ray.x_inter, start_index);
+
+
+
+
 
 
 	// if (start_index_i > start_index_j)
@@ -42,10 +50,9 @@ void draw_line(t_data *data, int x_start, int y_start, int y_end, int actual_hei
 
 
 	int in;
+	total = 0;
 	if (actual_height > 512)
 		total = (((float) actual_height - 512.0) / 2.0) * (64.0 / (float) actual_height);
-	else
-		total = 0;
 	in = (int)total;
 	if (y_end >= 512)
 		y_end = 511;
@@ -90,45 +97,45 @@ int	down_cast(t_data *data, int start, double beta_angle)
     data->ray.x_step = fabs(64 / tan(data->ray.angle * (M_PI / 180.0)));
     data->ray.y_step = 64;
 
-    data->ray.y_inter = ((int)floor((int)data->player.y_pos >> (int)WALL_SHIFT) << (int)WALL_SHIFT) + data->ray.y_step - .02;
-	double chart = fabs(fabs(data->player.y_pos - data->ray.y_inter) / tan(data->ray.angle * (M_PI / 180.0)));
-    data->ray.x_inter = data->player.x_pos - chart;
+    data->ray.y_h_inter = ((int)floor((int)data->player.y_pos >> (int)WALL_SHIFT) << (int)WALL_SHIFT) + data->ray.y_step - .02;
+	double chart = fabs(fabs(data->player.y_pos - data->ray.y_h_inter) / tan(data->ray.angle * (M_PI / 180.0)));
+    data->ray.x_h_inter = data->player.x_pos - chart;
 	if (data->ray.angle < 90 || data->ray.angle > 270)
-		data->ray.x_inter = data->player.x_pos + chart;
+		data->ray.x_h_inter = data->player.x_pos + chart;
 
-    int i = (int)data->ray.y_inter  >> (int)WALL_SHIFT;
-	int j = (int)data->ray.x_inter  >> (int)WALL_SHIFT;
+    int i = (int)data->ray.y_h_inter  >> (int)WALL_SHIFT;
+	int j = (int)data->ray.x_h_inter  >> (int)WALL_SHIFT;
 
 	if (data->ray.angle > 180 && data->ray.angle < 360)
 		i++;
 
     while (i < data->map_data.map_height && i >= 0 && j < data->map_data.map_width && j >= 0 && data->map_data.map[i][j] != '1')
 	{
-		data->ray.y_inter += data->ray.y_step;
+		data->ray.y_h_inter += data->ray.y_step;
 		if (data->ray.angle < 90 || data->ray.angle > 270)
-			data->ray.x_inter += data->ray.x_step;
+			data->ray.x_h_inter += data->ray.x_step;
 		else
-			data->ray.x_inter -= data->ray.x_step;
-		i = (int)data->ray.y_inter >> (int)WALL_SHIFT;
-		j = (int)data->ray.x_inter >> (int)WALL_SHIFT;
+			data->ray.x_h_inter -= data->ray.x_step;
+		i = (int)data->ray.y_h_inter >> (int)WALL_SHIFT;
+		j = (int)data->ray.x_h_inter >> (int)WALL_SHIFT;
 
 		if (data->ray.angle > 180 && data->ray.angle < 360)
 			i++;
 	}
 
-	double horz_dist = fabs(fabs(data->player.y_pos - data->ray.y_inter) / sin(data->ray.angle * (M_PI / 180.0)));
+	double horz_dist = fabs(fabs(data->player.y_pos - data->ray.y_h_inter) / sin(data->ray.angle * (M_PI / 180.0)));
 	// check vertical
 
     data->ray.x_step = 64;
     data->ray.y_step = fabs(64 * tan(data->ray.angle * (M_PI / 180.0)));
 
 	double tmp = (data->ray.angle < 90 || data->ray.angle > 270) ? 64 : 0;
-    data->ray.x_inter = ((int)floor((int)data->player.x_pos >> (int)WALL_SHIFT) << (int)WALL_SHIFT) + tmp;
-	data->ray.y_inter = fabs(data->player.y_pos + fabs(fabs(data->ray.x_inter - data->player.x_pos) * tan(data->ray.angle * (M_PI / 180.0))));
+    data->ray.x_v_inter = ((int)floor((int)data->player.x_pos >> (int)WALL_SHIFT) << (int)WALL_SHIFT) + tmp;
+	data->ray.y_v_inter = fabs(data->player.y_pos + fabs(fabs(data->ray.x_v_inter - data->player.x_pos) * tan(data->ray.angle * (M_PI / 180.0))));
 
 
-    i = (int)data->ray.y_inter  >> (int)WALL_SHIFT;
-	j = (int)data->ray.x_inter  >> (int)WALL_SHIFT;
+    i = (int)data->ray.y_v_inter  >> (int)WALL_SHIFT;
+	j = (int)data->ray.x_v_inter  >> (int)WALL_SHIFT;
 
 	if (data->ray.angle > 180 && data->ray.angle < 271)
 		j--;
@@ -136,25 +143,33 @@ int	down_cast(t_data *data, int start, double beta_angle)
     while (i < data->map_data.map_height && i >= 0 && j < data->map_data.map_width  && j >= 0 && data->map_data.map[i][j] != '1')
 	{
 		if (data->ray.angle < 90 || data->ray.angle > 270)
-			data->ray.x_inter += data->ray.x_step;
+			data->ray.x_v_inter += data->ray.x_step;
 		else
-			data->ray.x_inter -= data->ray.x_step;
-		data->ray.y_inter += data->ray.y_step;
+			data->ray.x_v_inter -= data->ray.x_step;
+		data->ray.y_v_inter += data->ray.y_step;
 
-		i = (int)data->ray.y_inter >> (int)WALL_SHIFT;
-		j = (int)data->ray.x_inter >> (int)WALL_SHIFT;
+		i = (int)data->ray.y_v_inter >> (int)WALL_SHIFT;
+		j = (int)data->ray.x_v_inter >> (int)WALL_SHIFT;
 
 		if (data->ray.angle > 180 && data->ray.angle < 271)
 			j--;
 	}
 
+
+	double vert_dist = fabs(fabs(data->player.y_pos - data->ray.y_v_inter) / sin(data->ray.angle * (M_PI / 180.0)));
 	// calculate ray distance
 
-	double vert_dist = fabs(fabs(data->player.y_pos - data->ray.y_inter) / sin(data->ray.angle * (M_PI / 180.0)));
-
 	double ray = horz_dist;
+	data->ray.is_vert = 0;
+	data->ray.x_inter = data->ray.x_h_inter;
+	data->ray.y_inter = data->ray.y_h_inter;
 	if (ray > vert_dist)
-		ray = vert_dist;
+	{
+		 ray = vert_dist;
+		 data->ray.x_inter = data->ray.x_v_inter;
+		 data->ray.y_inter = data->ray.y_v_inter;
+		 data->ray.is_vert = 1;
+	}
 
 	// correct the fishbowl
 

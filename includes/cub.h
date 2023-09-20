@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/18 15:23:20 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/20 22:53:48 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,13 @@ typedef struct s_ray
     double  angle;
     double  x_step;
     double  y_step;
+    double  x_h_inter;
+    double  y_h_inter;
+    double  x_v_inter;
+    double  y_v_inter;
     double  x_inter;
     double  y_inter;
+    int     is_vert;
 
 }   t_ray;
 
