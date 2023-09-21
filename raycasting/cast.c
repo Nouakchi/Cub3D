@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 10:11:35 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/21 05:46:07 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/21 08:39:24 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ void update_data(t_data *data)
     }
     if (data->moves.move_r)
     {
-        if (data->ray.angle - 2 <= 0)
-            data->ray.angle = 360 + (data->ray.angle - 2);
+        if (data->ray.angle - 2 /*(35 * 0.05859375)*/ <= 0)
+            data->ray.angle = 360 + (data->ray.angle - 2/*(35 * 0.05859375)*/);
         else
-            data->ray.angle -= 2;
+            data->ray.angle -= 2/*(35 * 0.05859375)*/;
         if (data->ray.angle <= 30)
             data->player.view_angle = 360 - (30 - data->ray.angle);
         else
@@ -64,10 +64,10 @@ void update_data(t_data *data)
     }
     if (data->moves.move_l)
     {
-        if (data->ray.angle + 2 >= 360)
-            data->ray.angle = fabs(360 - (data->ray.angle + 2));
+        if (data->ray.angle + 2/*(35 * 0.05859375)*/ >= 360)
+            data->ray.angle = fabs(360 - (data->ray.angle + 2/*(35 * 0.05859375)*/));
         else
-            data->ray.angle += 2;
+            data->ray.angle += 2/*(35 * 0.05859375)*/;
         if (data->ray.angle <= 30)
             data->player.view_angle = 360 - (30 - data->ray.angle);
         else

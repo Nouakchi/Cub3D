@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 10:32:02 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/21 04:56:47 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/21 08:34:40 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void draw_line(t_data *data, int x_start, int y_start, int y_end, int actual_hei
 		if (data->ray.x_inter < 0)
 			start_index = 0;
 	}
-
-
 
 	int in;
 	total = 0;

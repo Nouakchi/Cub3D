@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/21 04:06:30 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/21 08:11:56 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ typedef struct s_data
     t_map           map_data;
     t_player_data   player;
     double          last_ray;
+    double          last_x_inter;
+    double          last_y_inter;
     void            *mlx_ptr;
 	void            *mlx_win;
     t_ray           ray;

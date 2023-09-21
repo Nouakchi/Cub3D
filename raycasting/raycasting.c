@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:37:41 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/21 05:45:04 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/21 08:37:51 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,20 +86,19 @@ int	up_cast(t_data *data, int start, double beta_angle)
 		data->ray.y_inter = data->ray.y_v_inter;
 	}
 	
-	// printf("%f\n", data->ray.angle);
-	
-	if (data->ray.angle <= 1 && data->ray.angle > 0)
-	{
-		data->last_ray = ray;
-		printf("[%f]\n", ray);
-	}
+	// if (data->ray.angle - 0.05859375 == 0)
+	// {
+	// 	data->last_ray = ray;
+	// 	data->last_x_inter = data->ray.x_inter;
+	// 	data->last_y_inter = data->ray.y_inter;
+	// }
 		
-	if (data->ray.angle == 0)
-	{
-		ray = data->last_ray;
-		printf("%f\n", ray);
-		// printf("0 => [%f]\n", actual_height);
-	}
+	// if (data->ray.angle == 0)
+	// {
+	// 	ray = data->last_ray;
+	// 	data->ray.x_inter = data->last_x_inter;
+	// 	data->ray.y_inter = data->last_y_inter;
+	// }
 
 	// correct the fishbowl
 	
