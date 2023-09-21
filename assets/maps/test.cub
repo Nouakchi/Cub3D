@@ -8,9 +8,9 @@ NO ./assets/textures/test1.xpm
 
 SO      ./assets/textures/test1.xpm
 
-C 225,30,0
+C 99,255,255
 
-F   1, 0111,000025
+F   66, 11,00
 
 WE ./assets/textures/test1.xpm
 

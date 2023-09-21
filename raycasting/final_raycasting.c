@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 10:32:02 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/21 09:14:22 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/21 10:43:49 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ void draw_line(t_data *data, int x_start, int y_start, int y_end, int actual_hei
 		y_end = 511;
 	if (y_start < 0)
 		y_start = 0;
-
+	printf("[%d]\n", data->map_data.map_elements.frgb.g);
+	color = (data->map_data.map_elements.crgb.r * 65536) + (data->map_data.map_elements.crgb.g * 256) + data->map_data.map_elements.crgb.b;
 	while (i < y_start)
-		my_mlx_pixel_put(&data->img, x_start, i++, 0x000000FF);
+		my_mlx_pixel_put(&data->img, x_start, i++, color);
 
 	while (y_start <= y_end)
 	{
@@ -60,9 +61,9 @@ void draw_line(t_data *data, int x_start, int y_start, int y_end, int actual_hei
 			in = 0;
 		my_mlx_pixel_put(&data->img, x_start, y_start++, color);
 	}
-
+	color = (data->map_data.map_elements.frgb.r * 65536) + (data->map_data.map_elements.frgb.g * 256) + data->map_data.map_elements.frgb.b;
 	while (y_start < 512)
-		my_mlx_pixel_put(&data->img, x_start, y_start++, 0x0000FF00);
+		my_mlx_pixel_put(&data->img, x_start, y_start++, color);
 }
 
 int	down_cast(t_data *data, int start, double beta_angle)
