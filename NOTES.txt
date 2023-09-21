@@ -1,7 +1,7 @@
 - ADD AWDS (view) start
 - flow and s9af
 - textures north and south and east and west
-- backwall collision
+- backwall collision {DONE}
 - 270 and 90 degree rotation
 - ESC button
 - protoctions

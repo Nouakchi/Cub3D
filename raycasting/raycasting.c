@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:37:41 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/21 00:25:41 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/21 05:45:04 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,6 @@
 
 int	up_cast(t_data *data, int start, double beta_angle)
 {
-    // char map[5][6] = {
-	// 	{1,1,1,1,1,1},
-	// 	{1,0,0,0,0,1},
-	// 	{1,0,9,0,0,1},
-	// 	{1,0,0,0,0,1},
-	// 	{1,1,1,1,1,1},
-	// };
-
     // check horizontal intersection
 
     data->ray.x_step = 64 / tan(data->ray.angle * (M_PI / 180.0));
@@ -77,8 +69,11 @@ int	up_cast(t_data *data, int start, double beta_angle)
 
 
 	double vert_dist = (double)fabs(data->player.y_pos - data->ray.y_v_inter) / sin(data->ray.angle * (M_PI / 180.0));
+	
 
 	// calculate ray distance
+	
+
 	double ray = horz_dist;
 	data->ray.is_vert = 0;
 	data->ray.x_inter = data->ray.x_h_inter;
@@ -90,22 +85,31 @@ int	up_cast(t_data *data, int start, double beta_angle)
 		data->ray.x_inter = data->ray.x_v_inter;
 		data->ray.y_inter = data->ray.y_v_inter;
 	}
-
+	
+	// printf("%f\n", data->ray.angle);
+	
+	if (data->ray.angle <= 1 && data->ray.angle > 0)
+	{
+		data->last_ray = ray;
+		printf("[%f]\n", ray);
+	}
+		
+	if (data->ray.angle == 0)
+	{
+		ray = data->last_ray;
+		printf("%f\n", ray);
+		// printf("0 => [%f]\n", actual_height);
+	}
 
 	// correct the fishbowl
-	ray = fabs((double)ray * cos(beta_angle * (M_PI / 180.0)));
+	
 
-	if (start == 511)
-		data->player.distance_to_wall = ray;
+	ray = fabs((double)ray * cos(beta_angle * (M_PI / 180.0)));
+	
 
 	// scale the ray
 
 	double actual_height = ceil((64 * 886) / ray);
-
-
-
-
-
 
 	draw_line(data, start, 256 - (actual_height / 2), fabs(256 - (actual_height / 2)) + actual_height, actual_height);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   final_raycasting.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 10:32:02 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/21 00:26:12 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/21 04:56:47 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 void draw_line(t_data *data, int x_start, int y_start, int y_end, int actual_height)
 {
-	// (void)actual_height;
 	int i = 0;
 	unsigned int color = 0x00FF0000;
 	float total = 0;
@@ -33,17 +32,6 @@ void draw_line(t_data *data, int x_start, int y_start, int y_end, int actual_hei
 		if (data->ray.x_inter < 0)
 			start_index = 0;
 	}
-
-
-
-
-
-
-
-	// if (start_index_i > start_index_j)
-	// 	start_index = start_index_i;
-	// else
-	// 	start_index = start_index_j;
 
 
 
@@ -81,15 +69,7 @@ void draw_line(t_data *data, int x_start, int y_start, int y_end, int actual_hei
 
 int	down_cast(t_data *data, int start, double beta_angle)
 {
-    // char map[5][6] = {
-	// 	{1,1,1,1,1,1},
-	// 	{1,0,0,0,0,1},
-	// 	{1,0,9,0,0,1},
-	// 	{1,0,0,0,0,1},
-	// 	{1,1,1,1,1,1},
-	// };
-
-
+	
     // check horizontal intersection
 
     data->ray.x_step = fabs(64 / tan(data->ray.angle * (M_PI / 180.0)));
@@ -98,7 +78,7 @@ int	down_cast(t_data *data, int start, double beta_angle)
     data->ray.y_h_inter = ((int)floor((int)data->player.y_pos >> (int)WALL_SHIFT) << (int)WALL_SHIFT) + data->ray.y_step - .02;
 	double chart = fabs(fabs(data->player.y_pos - data->ray.y_h_inter) / tan(data->ray.angle * (M_PI / 180.0)));
     data->ray.x_h_inter = data->player.x_pos - chart;
-	if (data->ray.angle < 90 || data->ray.angle > 270)
+	if (data->ray.angle < 90 || data->ray.angle >= 270)
 		data->ray.x_h_inter = data->player.x_pos + chart;
 
     int i = (int)data->ray.y_h_inter  >> (int)WALL_SHIFT;
@@ -110,7 +90,7 @@ int	down_cast(t_data *data, int start, double beta_angle)
     while (i < data->map_data.map_height && i >= 0 && j < data->map_data.map_width && j >= 0 && data->map_data.map[i][j] != '1')
 	{
 		data->ray.y_h_inter += data->ray.y_step;
-		if (data->ray.angle < 90 || data->ray.angle > 270)
+		if (data->ray.angle < 90 || data->ray.angle >= 270)
 			data->ray.x_h_inter += data->ray.x_step;
 		else
 			data->ray.x_h_inter -= data->ray.x_step;
@@ -127,7 +107,7 @@ int	down_cast(t_data *data, int start, double beta_angle)
     data->ray.x_step = 64;
     data->ray.y_step = fabs(64 * tan(data->ray.angle * (M_PI / 180.0)));
 
-	double tmp = (data->ray.angle < 90 || data->ray.angle > 270) ? 64 : 0;
+	double tmp = (data->ray.angle < 90 || data->ray.angle >= 270) ? 64 : 0;
     data->ray.x_v_inter = ((int)floor((int)data->player.x_pos >> (int)WALL_SHIFT) << (int)WALL_SHIFT) + tmp;
 	data->ray.y_v_inter = fabs(data->player.y_pos + fabs(fabs(data->ray.x_v_inter - data->player.x_pos) * tan(data->ray.angle * (M_PI / 180.0))));
 
@@ -135,12 +115,12 @@ int	down_cast(t_data *data, int start, double beta_angle)
     i = (int)data->ray.y_v_inter  >> (int)WALL_SHIFT;
 	j = (int)data->ray.x_v_inter  >> (int)WALL_SHIFT;
 
-	if (data->ray.angle > 180 && data->ray.angle < 271)
+	if (data->ray.angle > 180 && data->ray.angle <= 270)
 		j--;
 
     while (i < data->map_data.map_height && i >= 0 && j < data->map_data.map_width  && j >= 0 && data->map_data.map[i][j] != '1')
 	{
-		if (data->ray.angle < 90 || data->ray.angle > 270)
+		if (data->ray.angle < 90 || data->ray.angle >= 270)
 			data->ray.x_v_inter += data->ray.x_step;
 		else
 			data->ray.x_v_inter -= data->ray.x_step;
@@ -149,7 +129,7 @@ int	down_cast(t_data *data, int start, double beta_angle)
 		i = (int)data->ray.y_v_inter >> (int)WALL_SHIFT;
 		j = (int)data->ray.x_v_inter >> (int)WALL_SHIFT;
 
-		if (data->ray.angle > 180 && data->ray.angle < 271)
+		if (data->ray.angle > 180 && data->ray.angle <= 270)
 			j--;
 	}
 
@@ -173,8 +153,6 @@ int	down_cast(t_data *data, int start, double beta_angle)
 
 	ray = fabs((double)ray * cos(beta_angle * (M_PI / 180.0)));
 
-	if (start == 511)
-		data->player.distance_to_wall = ray;
 
 	// scale the ray
 

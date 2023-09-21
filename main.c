@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/15 19:55:31 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/21 04:50:03 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,19 @@ void	data_init(t_data *data)
 void init_textures(t_data *data)
 {
 	int size = 64;
-	data->img_north.img = mlx_xpm_file_to_image(data->mlx_ptr, "/Users/bel-idri/Desktop/Cub3D/assets/textures/test1.xpm", &size, &size);
+	data->img_north.img = mlx_xpm_file_to_image(data->mlx_ptr, "assets/textures/_test1.xpm", &size, &size);
 	data->img_north.addr = mlx_get_data_addr(data->img_north.img, &data->img_north.bits_per_pixel, &data->img_north.line_length,
 							&data->img_north.endian);
 
-	data->img_south.img = mlx_xpm_file_to_image(data->mlx_ptr, "/Users/bel-idri/Desktop/Cub3D/assets/textures/test2.xpm", &size, &size);
+	data->img_south.img = mlx_xpm_file_to_image(data->mlx_ptr, "assets/textures/test2.xpm", &size, &size);
 	data->img_south.addr = mlx_get_data_addr(data->img_south.img, &data->img_south.bits_per_pixel, &data->img_south.line_length,
 							&data->img_south.endian);
 
-	data->img_east.img = mlx_xpm_file_to_image(data->mlx_ptr, "/Users/bel-idri/Desktop/Cub3D/assets/textures/test3.xpm", &size, &size);
+	data->img_east.img = mlx_xpm_file_to_image(data->mlx_ptr, "assets/textures/test3.xpm", &size, &size);
 	data->img_east.addr = mlx_get_data_addr(data->img_east.img, &data->img_east.bits_per_pixel, &data->img_east.line_length,
 							&data->img_east.endian);
 
-	data->img_west.img = mlx_xpm_file_to_image(data->mlx_ptr, "/Users/bel-idri/Desktop/Cub3D/assets/textures/test4.xpm", &size, &size);
+	data->img_west.img = mlx_xpm_file_to_image(data->mlx_ptr, "assets/textures/test4.xpm", &size, &size);
 	data->img_west.addr = mlx_get_data_addr(data->img_west.img, &data->img_west.bits_per_pixel, &data->img_west.line_length,
 							&data->img_west.endian);
 
@@ -201,8 +201,6 @@ int	main(int ac, char *av[])
 
 	if (ft_strlen(av[1]) < 5)
 		return (fatal("Invalid Input"), 1);
-
-
 	else
 	{
 		i = ft_strlen(av[1]) - 1;
@@ -250,8 +248,8 @@ int	main(int ac, char *av[])
 	data.mlx_win = mlx_new_window(data.mlx_ptr, 1024, 512, "cub3D");
 
 	// do raycasting here
-	data.ray.angle = 120;
-	data.player.view_angle = data.ray.angle - 30;
+	data.ray.angle = 30;
+	data.player.view_angle = 0;
 	data.moves.move_r = 0;
     data.moves.move_l = 0;
     data.moves.move_f = 0;

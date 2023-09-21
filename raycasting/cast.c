@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 10:11:35 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/21 00:27:07 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/21 05:46:07 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,41 @@
 
 void update_data(t_data *data)
 {
-    printf("%f , %f , %f\n", data->player.view_angle, data->ray.angle, data->player.distance_to_wall);
+    
+    double pos_x = data->player.x_pos;
+    double pos_y = data->player.y_pos;
 
-
-    if (data->moves.move_f && data->player.distance_to_wall > 50)
+    if (data->moves.move_f)
     {
         if (data->player.view_angle <= 90 || data->player.view_angle >= 270)
-            data->player.x_pos += 5 * cos(data->player.view_angle * (M_PI / 180));
+            pos_x += 8 * cos(data->player.view_angle * (M_PI / 180));
         else
-            data->player.x_pos += 5 * cos(data->player.view_angle * (M_PI / 180));
+            pos_x += 8 * cos(data->player.view_angle * (M_PI / 180));
         if (data->player.view_angle >= 180)
-            data->player.y_pos += 5 * fabs(sin(data->player.view_angle * (M_PI / 180)));
+            pos_y += 8 * fabs(sin(data->player.view_angle * (M_PI / 180)));
         else
-            data->player.y_pos -= 5 * sin(data->player.view_angle * (M_PI / 180));
+            pos_y -= 8 * sin(data->player.view_angle * (M_PI / 180));
+        if (data->map_data.map[(int)(pos_y) >> (int)WALL_SHIFT][(int)(pos_x) >> (int)WALL_SHIFT] != '1')
+        {
+            data->player.x_pos = pos_x;
+            data->player.y_pos = pos_y;
+        }
     }
     if (data->moves.move_b)
     {
         if (data->player.view_angle <= 90 || data->player.view_angle >= 270)
-            data->player.x_pos -= 5 * cos(data->player.view_angle * (M_PI / 180));
+            pos_x -= 8 * cos(data->player.view_angle * (M_PI / 180));
         else
-            data->player.x_pos += 5 * fabs(cos(data->player.view_angle * (M_PI / 180)));
+            pos_x += 8 * fabs(cos(data->player.view_angle * (M_PI / 180)));
         if (data->player.view_angle >= 180)
-            data->player.y_pos += 5 * sin(data->player.view_angle * (M_PI / 180));
+            pos_y += 8 * sin(data->player.view_angle * (M_PI / 180));
         else
-            data->player.y_pos += 5 * sin(data->player.view_angle * (M_PI / 180));
+            pos_y += 8 * sin(data->player.view_angle * (M_PI / 180));
+        if (data->map_data.map[(int)(pos_y) >> (int)WALL_SHIFT][(int)(pos_x) >> (int)WALL_SHIFT] != '1')
+        {
+            data->player.x_pos = pos_x;
+            data->player.y_pos = pos_y;
+        }
     }
     if (data->moves.move_r)
     {
@@ -49,8 +60,6 @@ void update_data(t_data *data)
             data->player.view_angle = 360 - (30 - data->ray.angle);
         else
             data->player.view_angle = data->ray.angle - 30;
-        // if (data->player.view_angle < 0)
-        //     data->player.view_angle = 360 - data->player.view_angle;
 
     }
     if (data->moves.move_l)
@@ -80,7 +89,7 @@ int render(void *args)
 
 	while (start < 1023)
 	{
-		if (data->ray.angle >= 180 && data->ray.angle <= 360)
+		if (data->ray.angle >= 180 && data->ray.angle < 360)
 			down_cast(data, ++start, beta_angle);
 		else
 			up_cast(data, ++start, beta_angle);
@@ -89,10 +98,10 @@ int render(void *args)
 		else
 			data->ray.angle -= 0.05859375;
 		beta_angle -= 0.05859375;
-
 	}
     data->ray.angle = angle;
     mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img, 0, 0);
+    // pause();
     mlx_destroy_image(data->mlx_ptr, data->img.img);
     return (0);
 }
