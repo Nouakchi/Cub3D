@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:37:41 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/21 08:37:51 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/21 09:13:25 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,20 +85,22 @@ int	up_cast(t_data *data, int start, double beta_angle)
 		data->ray.x_inter = data->ray.x_v_inter;
 		data->ray.y_inter = data->ray.y_v_inter;
 	}
+	// if (data->ray.angle == 180)
+	// 	printf("[%f], [%f]\n", data->ray.x_inter, data->ray.y_inter);
 	
-	// if (data->ray.angle - 0.05859375 == 0)
-	// {
-	// 	data->last_ray = ray;
-	// 	data->last_x_inter = data->ray.x_inter;
-	// 	data->last_y_inter = data->ray.y_inter;
-	// }
+	if (data->ray.angle - 0.05859375 == 0 || data->ray.angle + 0.05859375 == 180)
+	{
+		data->last_ray = ray;
+		data->last_x_inter = data->ray.x_inter;
+		data->last_y_inter = data->ray.y_inter;
+	}
 		
-	// if (data->ray.angle == 0)
-	// {
-	// 	ray = data->last_ray;
-	// 	data->ray.x_inter = data->last_x_inter;
-	// 	data->ray.y_inter = data->last_y_inter;
-	// }
+	if (data->ray.angle == 0 || data->ray.angle == 180)
+	{
+		ray = data->last_ray;
+		data->ray.x_inter = data->last_x_inter;
+		data->ray.y_inter = data->last_y_inter;
+	}
 
 	// correct the fishbowl
 	
@@ -109,6 +111,8 @@ int	up_cast(t_data *data, int start, double beta_angle)
 	// scale the ray
 
 	double actual_height = ceil((64 * 886) / ray);
+	
+	
 
 	draw_line(data, start, 256 - (actual_height / 2), fabs(256 - (actual_height / 2)) + actual_height, actual_height);
 

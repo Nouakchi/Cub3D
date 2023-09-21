@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 10:32:02 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/21 08:34:40 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/21 09:14:22 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void draw_line(t_data *data, int x_start, int y_start, int y_end, int actual_hei
 	float total = 0;
 
 	int start_index;
-	if (data->ray.is_vert)
+	if (data->ray.is_vert || !data->ray.angle)
 	{
 		start_index = (int)data->ray.y_inter % 64;
 		if (data->ray.y_inter < 0)

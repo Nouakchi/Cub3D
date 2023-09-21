@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/21 04:50:03 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/21 09:04:33 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,8 +248,8 @@ int	main(int ac, char *av[])
 	data.mlx_win = mlx_new_window(data.mlx_ptr, 1024, 512, "cub3D");
 
 	// do raycasting here
-	data.ray.angle = 30;
-	data.player.view_angle = 0;
+	data.ray.angle = 210;
+	data.player.view_angle = 180;
 	data.moves.move_r = 0;
     data.moves.move_l = 0;
     data.moves.move_f = 0;
