@@ -1,4 +1,4 @@
-- ADD AWDS (view) start
+- ADD AWDS (view) start {DONE}
 - floor and s9af {DONE}
 - textures north and south and east and west
 - backwall collision {DONE}

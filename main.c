@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/21 09:04:33 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/21 23:17:21 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,6 +237,7 @@ int	main(int ac, char *av[])
 			{
 				data.player.y_pos = i * 64 + 32;
 				data.player.x_pos = j * 64 + 32;
+				data.player.start_angle = data.map_data.map[i][j];
 			}
 		}
 		if (data.map_data.map_width < (int)ft_strlen(data.map_data.map[i]))
@@ -248,8 +249,15 @@ int	main(int ac, char *av[])
 	data.mlx_win = mlx_new_window(data.mlx_ptr, 1024, 512, "cub3D");
 
 	// do raycasting here
-	data.ray.angle = 210;
-	data.player.view_angle = 180;
+	if (data.player.start_angle == 'N')
+		data.ray.angle = 120;
+	else if (data.player.start_angle == 'W')
+		data.ray.angle = 210;
+	else if (data.player.start_angle == 'S')
+		data.ray.angle = 300;
+	else
+		data.ray.angle = 30;
+	data.player.view_angle = data.player.start_angle - 30;
 	data.moves.move_r = 0;
     data.moves.move_l = 0;
     data.moves.move_f = 0;
