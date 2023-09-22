@@ -4,5 +4,5 @@
 - backwall collision {DONE}
 - 270 and 90 degree rotation {DONE}
 - ESC button {DONE}
-- protections
-
+- Norme raycasting mostly done still drawline and separate funtions on files {TODO}
+- protections {TODO}
