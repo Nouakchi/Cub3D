@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:37:41 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/22 05:00:52 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/22 23:44:27 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ double	check_vert_inter(t_data *data)
 		else
 			data->ray.y_v_inter += data->ray.y_step;
 		data->ray.x_v_inter += data->ray.x_step;
-
 		i = (int)data->ray.y_v_inter >> (int)WALL_SHIFT;
 		j = (int)data->ray.x_v_inter >> (int)WALL_SHIFT;
 		if (data->ray.angle >= 90)

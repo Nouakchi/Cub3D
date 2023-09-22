@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 10:32:02 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/22 05:13:25 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/22 23:42:40 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	get_first_horz_inter(t_data *data, int *i, int *j)
 	data->ray.x_step = fabs(WALL_HEIGHT / tan(data->ray.angle * (M_PI / 180.0)));
     data->ray.y_step = WALL_HEIGHT;
 
-    data->ray.y_h_inter = ((int)floor((int)data->player.y_pos >> (int)WALL_SHIFT) << (int)WALL_SHIFT) + data->ray.y_step - .02;
+    data->ray.y_h_inter = ((int)floor((int)data->player.y_pos >> (int)WALL_SHIFT) << (int)WALL_SHIFT) + data->ray.y_step - 1;
 	chart = fabs(fabs(data->player.y_pos - data->ray.y_h_inter) / tan(data->ray.angle * (M_PI / 180.0)));
     data->ray.x_h_inter = data->player.x_pos - chart;
 	if (data->ray.angle < 90 || data->ray.angle >= 270)

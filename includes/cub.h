@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/22 06:02:50 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/22 23:19:48 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,12 @@ typedef struct s_moves
     int move_r;
 }   t_moves;
 
+typedef struct s_mouse
+{
+    int x;
+    int y;
+}   t_mouse;
+
 typedef struct s_data
 {
     t_map           map_data;
@@ -125,8 +131,11 @@ typedef struct s_data
     t_img           img_west;
     t_img           img_east;
     t_moves         moves;
+    t_mouse         mouse_pos;
+    int             mouse_app;
 }   t_data;
 
+int mlx_mouse_get_pos(void *win_ptr, int *x, int *y);
 void	free_element_map(t_data *data);
 int     check_element(int map, t_data *data);
 void    fatal(char *mssg);

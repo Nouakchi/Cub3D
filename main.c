@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/22 05:28:44 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/22 23:24:29 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,12 +287,14 @@ int	main(int ac, char *av[])
 	/////
 
 
-
-
+	data.mouse_pos.x = W_WIDTH / 2;
+	data.mouse_pos.y = W_HEIGHT / 2;
+	data.mouse_app = 0;
+	mlx_mouse_hide();
+	
 	mlx_loop_hook(data.mlx_ptr, render, &data);
 	mlx_hook(data.mlx_win, 2,0, moves_press, &data);
 	mlx_hook(data.mlx_win, 3,0, moves_release, &data);
-
 	mlx_loop(data.mlx_ptr);
 
 	printf("hello\n");

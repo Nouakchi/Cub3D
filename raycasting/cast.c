@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/FOV / 210 11:ROTATION:00 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/22 05:21:37 by onouakch         ###   ########.fr       */
+/*   Created: 2023/09/22 21:05:33 by onouakch          #+#    #+#             */
+/*   Updated: 2023/09/22 23:26:39 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,27 @@ void    cast_rays(t_data *data)
 	}
 }
 
+int mouse_hook(t_data *data)
+{
+    int x;
+    int y;
+
+    if (!data->mouse_app)
+    {
+        mlx_mouse_get_pos(data->mlx_win, &x, &y);
+        // printf("%d\n", x);
+        if (x != W_WIDTH / 2)
+        {
+            if (x > W_WIDTH / 2)
+                rotate_right(data);
+            else
+                rotate_left(data);
+        }
+        mlx_mouse_move(data->mlx_win, W_WIDTH / 2, W_HEIGHT / 2);
+    }
+    return (0);
+}
+
 int render(void *args)
 {
     t_data *data;
@@ -113,6 +134,7 @@ int render(void *args)
     
     data = args;
     update_data(data);
+    mouse_hook(data);
     angle = data->ray.angle;
     data->img.img = mlx_new_image(data->mlx_ptr, W_WIDTH, W_HEIGHT);
 	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel,
@@ -141,6 +163,14 @@ int moves_press(int keycode, void *args)
     {
         free_element_map(data);
         exit(1);
+    }
+    else if (keycode == 49)
+    {
+        data->mouse_app = !data->mouse_app;
+        if (!data->mouse_app)
+            mlx_mouse_hide();
+        else
+            mlx_mouse_show();
     }
     return (0);
 }
