@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:37:41 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/22 03:17:53 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/22 05:00:52 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ double	check_horz_inter(t_data *data)
 	int	i;
 	int	j;
 	
-	data->ray.x_step = 64 / tan(data->ray.angle * (M_PI / 180.0));
-    data->ray.y_step = -64;
+	data->ray.x_step = WALL_HEIGHT / tan(data->ray.angle * (M_PI / 180.0));
+    data->ray.y_step = -WALL_HEIGHT;
     data->ray.y_h_inter = ((int)floor((int)data->player.y_pos >> (int)WALL_SHIFT)
 	 << (int)WALL_SHIFT) - 1;;
     data->ray.x_h_inter = data->player.x_pos + (data->player.y_pos 
@@ -41,13 +41,13 @@ void	get_first_inter(t_data *data)
 {
 	double	tmp;
 
-	data->ray.x_step = 64;
-    data->ray.y_step = 64 * tan(data->ray.angle * (M_PI / 180.0));
+	data->ray.x_step = WALL_HEIGHT;
+    data->ray.y_step = WALL_HEIGHT * tan(data->ray.angle * (M_PI / 180.0));
 	if (data->ray.angle >= 90)
 		data->ray.x_step *= -1;
     tmp = 0;
 	if (data->ray.angle < 90)
-		tmp = 64;
+		tmp = WALL_HEIGHT;
     data->ray.x_v_inter = ((int)floor((int)data->player.x_pos 
 	>> (int)WALL_SHIFT) << (int)WALL_SHIFT) + tmp;
 	data->ray.y_v_inter = data->player.y_pos - 
@@ -85,7 +85,7 @@ double	check_vert_inter(t_data *data)
 
 void	check_0_degrees(t_data *data, double *ray)
 {
-	if (data->ray.angle - 0.05859375 == 0 || data->ray.angle + 0.05859375 == 180)
+	if (data->ray.angle - DIFF_RAYS == 0 || data->ray.angle + DIFF_RAYS == 180)
 	{
 		data->last_ray = *ray;
 		data->last_x_inter = data->ray.x_inter;
@@ -128,8 +128,8 @@ int	up_cast(t_data *data, int start, double beta_angle)
 	// correct the fishbowl
 	ray = fabs((double)ray * cos(beta_angle * (M_PI / 180.0)));
 	// scale the ray
-	double actual_height = ceil((64 * 886) / ray);
-	draw_line(data, start, 256 - (actual_height / 2),
-	fabs(256 - (actual_height / 2)) + actual_height, actual_height);
+	double actual_height = ceil((WALL_HEIGHT * DIST_TO_PROJ) / ray);
+	draw_line(data, start, (W_HEIGHT / 2) - (actual_height / 2),
+	fabs((W_HEIGHT / 2) - (actual_height / 2)) + actual_height, actual_height);
     return (0);
 }

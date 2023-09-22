@@ -5,12 +5,70 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/30 10:11:35 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/21 23:44:09 by onouakch         ###   ########.fr       */
+/*   Created: 2023/08/FOV / 210 11:ROTATION:00 by onouakch          #+#    #+#             */
+/*   Updated: 2023/09/22 05:21:37 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
+
+void    move_forward(t_data *data, double *pos_x, double *pos_y)
+{
+    if (data->player.view_angle <= 90 || data->player.view_angle >= 270)
+        *pos_x += SPEED * cos(data->player.view_angle * (M_PI / 180));
+    else
+        *pos_x += SPEED * cos(data->player.view_angle * (M_PI / 180));
+    if (data->player.view_angle >= 180)
+        *pos_y += SPEED * fabs(sin(data->player.view_angle * (M_PI / 180)));
+    else
+        *pos_y -= SPEED * sin(data->player.view_angle * (M_PI / 180));
+    if (data->map_data.map[(int)(*pos_y) >> (int)WALL_SHIFT][(int)(*pos_x) >> (int)WALL_SHIFT] != '1')
+    {
+        data->player.x_pos = *pos_x;
+        data->player.y_pos = *pos_y;
+    }
+}
+
+void    move_backward(t_data *data, double *pos_x, double *pos_y)
+{
+    if (data->player.view_angle <= 90 || data->player.view_angle >= 270)
+        *pos_x -= SPEED * cos(data->player.view_angle * (M_PI / 180));
+    else
+        *pos_x += SPEED * fabs(cos(data->player.view_angle * (M_PI / 180)));
+    if (data->player.view_angle >= 180)
+        *pos_y += SPEED * sin(data->player.view_angle * (M_PI / 180));
+    else
+        *pos_y += SPEED * sin(data->player.view_angle * (M_PI / 180));
+    if (data->map_data.map[(int)(*pos_y) >> (int)WALL_SHIFT][(int)(*pos_x) >> (int)WALL_SHIFT] != '1')
+    {
+        data->player.x_pos = *pos_x;
+        data->player.y_pos = *pos_y;
+    }
+}
+
+void    rotate_right(t_data *data)
+{
+    if (data->ray.angle - (ROTATION * DIFF_RAYS) <= 0)
+        data->ray.angle = 360 + (data->ray.angle - (ROTATION * DIFF_RAYS));
+    else
+        data->ray.angle -= (ROTATION * DIFF_RAYS);
+    if (data->ray.angle <= (FOV / 2))
+        data->player.view_angle = 360 - ((FOV / 2) - data->ray.angle);
+    else
+        data->player.view_angle = data->ray.angle - (FOV / 2);
+}
+
+void    rotate_left(t_data *data)
+{
+    if (data->ray.angle + (ROTATION * DIFF_RAYS) >= 360)
+        data->ray.angle = fabs(360 - (data->ray.angle + (ROTATION * DIFF_RAYS)));
+    else
+        data->ray.angle += (ROTATION * DIFF_RAYS);
+    if (data->ray.angle <= (FOV / 2))
+        data->player.view_angle = 360 - ((FOV / 2) - data->ray.angle);
+    else
+        data->player.view_angle = data->ray.angle - (FOV / 2);
+}
 
 void update_data(t_data *data)
 {
@@ -19,86 +77,47 @@ void update_data(t_data *data)
     double pos_y = data->player.y_pos;
 
     if (data->moves.move_f)
-    {
-        if (data->player.view_angle <= 90 || data->player.view_angle >= 270)
-            pos_x += 8 * cos(data->player.view_angle * (M_PI / 180));
-        else
-            pos_x += 8 * cos(data->player.view_angle * (M_PI / 180));
-        if (data->player.view_angle >= 180)
-            pos_y += 8 * fabs(sin(data->player.view_angle * (M_PI / 180)));
-        else
-            pos_y -= 8 * sin(data->player.view_angle * (M_PI / 180));
-        if (data->map_data.map[(int)(pos_y) >> (int)WALL_SHIFT][(int)(pos_x) >> (int)WALL_SHIFT] != '1')
-        {
-            data->player.x_pos = pos_x;
-            data->player.y_pos = pos_y;
-        }
-    }
+        move_forward(data, &pos_x, &pos_y);
     if (data->moves.move_b)
-    {
-        if (data->player.view_angle <= 90 || data->player.view_angle >= 270)
-            pos_x -= 8 * cos(data->player.view_angle * (M_PI / 180));
-        else
-            pos_x += 8 * fabs(cos(data->player.view_angle * (M_PI / 180)));
-        if (data->player.view_angle >= 180)
-            pos_y += 8 * sin(data->player.view_angle * (M_PI / 180));
-        else
-            pos_y += 8 * sin(data->player.view_angle * (M_PI / 180));
-        if (data->map_data.map[(int)(pos_y) >> (int)WALL_SHIFT][(int)(pos_x) >> (int)WALL_SHIFT] != '1')
-        {
-            data->player.x_pos = pos_x;
-            data->player.y_pos = pos_y;
-        }
-    }
+        move_backward(data, &pos_x, &pos_y);
     if (data->moves.move_r)
-    {
-        if (data->ray.angle - (35 * 0.05859375) <= 0)
-            data->ray.angle = 360 + (data->ray.angle - (35 * 0.05859375));
-        else
-            data->ray.angle -= (35 * 0.05859375);
-        if (data->ray.angle <= 30)
-            data->player.view_angle = 360 - (30 - data->ray.angle);
-        else
-            data->player.view_angle = data->ray.angle - 30;
-
-    }
+        rotate_right(data);
     if (data->moves.move_l)
-    {
-        if (data->ray.angle + (35 * 0.05859375) >= 360)
-            data->ray.angle = fabs(360 - (data->ray.angle + (35 * 0.05859375)));
-        else
-            data->ray.angle += (35 * 0.05859375);
-        if (data->ray.angle <= 30)
-            data->player.view_angle = 360 - (30 - data->ray.angle);
-        else
-            data->player.view_angle = data->ray.angle - 30;
-    }
+        rotate_left(data);
 }
-
-int render(void *args)
+void    cast_rays(t_data *data)
 {
-    t_data *data = args;
+    int     start;
+    double  beta_angle;
 
-    int start = -1;
-	double beta_angle = 30;
-    update_data(data);
-    double angle = data->ray.angle;
-    data->img.img = mlx_new_image(data->mlx_ptr, 1024, 512);
-	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel, &data->img.line_length,
-							&data->img.endian);
-
-	while (start < 1023)
+    start = -1;
+	beta_angle = (FOV / 2);
+    while (start < W_WIDTH - 1)
 	{
 		if (data->ray.angle > 180 && data->ray.angle < 360)
 			down_cast(data, ++start, beta_angle);
 		else
 			up_cast(data, ++start, beta_angle);
 		if (data->ray.angle <= 0)
-			data->ray.angle = 360 - 0.05859375;
+			data->ray.angle = 360 - DIFF_RAYS;
 		else
-			data->ray.angle -= 0.05859375;
-		beta_angle -= 0.05859375;
+			data->ray.angle -= DIFF_RAYS;
+		beta_angle -= DIFF_RAYS;
 	}
+}
+
+int render(void *args)
+{
+    t_data *data;
+    double  angle;
+    
+    data = args;
+    update_data(data);
+    angle = data->ray.angle;
+    data->img.img = mlx_new_image(data->mlx_ptr, W_WIDTH, W_HEIGHT);
+	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel,
+    &data->img.line_length, &data->img.endian);
+    cast_rays(data);
     data->ray.angle = angle;
     mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img, 0, 0);
     mlx_destroy_image(data->mlx_ptr, data->img.img);
@@ -110,15 +129,15 @@ int moves_press(int keycode, void *args)
     t_data *data;
 
     data = args;
-    if (keycode == 2)
+    if (keycode == RIGHT_KEY)
         data->moves.move_r = 1;
-    else if (keycode == 0)
+    else if (keycode == LEFT_KEY)
         data->moves.move_l = 1;
-    else if (keycode == 13)
+    else if (keycode == UP_KEY)
         data->moves.move_f = 1;
-    else if (keycode == 1)
+    else if (keycode == DOWN_KEY)
         data->moves.move_b = 1;
-    else if (keycode == 53)
+    else if (keycode == QUIT_KEY)
     {
         free_element_map(data);
         exit(1);
@@ -131,13 +150,13 @@ int moves_release(int keycode, void *args)
     t_data *data;
 
     data = args;
-    if (keycode == 2)
+    if (keycode == RIGHT_KEY)
         data->moves.move_r = 0;
-    else if (keycode == 0)
+    else if (keycode == LEFT_KEY)
         data->moves.move_l = 0;
-    else if (keycode == 13)
+    else if (keycode == UP_KEY)
         data->moves.move_f = 0;
-    else if (keycode == 1)
+    else if (keycode == DOWN_KEY)
         data->moves.move_b = 0;
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/21 23:33:35 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/22 06:02:50 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,19 @@
 # include <math.h>
 
 # define WALL_HEIGHT 64.0
+# define FOV 60.0
+# define W_WIDTH 1024.0
+# define W_HEIGHT 512.0
+# define SPEED 8.0
+# define ROTATION 35.0
 # define WALL_SHIFT log2(64.0)
+# define DIFF_RAYS FOV / W_WIDTH
+# define DIST_TO_PROJ (W_WIDTH / 2) / tan((FOV / 2) * (M_PI / 180.0))
+# define RIGHT_KEY 2
+# define LEFT_KEY 0
+# define UP_KEY 13
+# define DOWN_KEY 1
+# define QUIT_KEY 53
 
 typedef struct s_rgb
 {

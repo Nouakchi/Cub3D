@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/22 00:55:08 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/22 05:28:44 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,7 +246,7 @@ int	main(int ac, char *av[])
 	data.map_data.map_height = i;
 
 	data.mlx_ptr = mlx_init();
-	data.mlx_win = mlx_new_window(data.mlx_ptr, 1024, 512, "cub3D");
+	data.mlx_win = mlx_new_window(data.mlx_ptr, W_WIDTH, W_HEIGHT, "cub3D");
 
 	// do raycasting here
 	if (data.player.start_angle == 'N')
