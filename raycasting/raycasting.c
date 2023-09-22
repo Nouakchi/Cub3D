@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:37:41 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/21 09:13:25 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/22 01:15:19 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ int	up_cast(t_data *data, int start, double beta_angle)
 	// scale the ray
 
 	double actual_height = ceil((64 * 886) / ray);
-	
 	
 
 	draw_line(data, start, 256 - (actual_height / 2), fabs(256 - (actual_height / 2)) + actual_height, actual_height);

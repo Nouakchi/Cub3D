@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 10:11:35 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/21 09:02:40 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/21 23:44:09 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ int render(void *args)
 	}
     data->ray.angle = angle;
     mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img, 0, 0);
-    // pause();
     mlx_destroy_image(data->mlx_ptr, data->img.img);
     return (0);
 }
@@ -119,6 +118,11 @@ int moves_press(int keycode, void *args)
         data->moves.move_f = 1;
     else if (keycode == 1)
         data->moves.move_b = 1;
+    else if (keycode == 53)
+    {
+        free_element_map(data);
+        exit(1);
+    }
     return (0);
 }
 

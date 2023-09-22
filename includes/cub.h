@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/21 23:13:24 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/21 23:33:35 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ typedef struct s_data
     t_moves         moves;
 }   t_data;
 
-
+void	free_element_map(t_data *data);
 int     check_element(int map, t_data *data);
 void    fatal(char *mssg);
 void	ft_error(char *msg, char *free_str1, char *free_str2);

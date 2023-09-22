@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 10:32:02 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/21 10:43:49 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/22 01:13:01 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,33 @@ void draw_line(t_data *data, int x_start, int y_start, int y_end, int actual_hei
 		y_end = 511;
 	if (y_start < 0)
 		y_start = 0;
-	printf("[%d]\n", data->map_data.map_elements.frgb.g);
 	color = (data->map_data.map_elements.crgb.r * 65536) + (data->map_data.map_elements.crgb.g * 256) + data->map_data.map_elements.crgb.b;
 	while (i < y_start)
 		my_mlx_pixel_put(&data->img, x_start, i++, color);
 
 	while (y_start <= y_end)
 	{
-
-
-		color = data->map_data.map_elements.colors_north[in][start_index];
+		if (data->ray.angle == 0)
+			color = data->map_data.map_elements.colors_east[in][start_index];
+		else
+		{
+			if (!data->ray.is_vert)
+			{
+				if (data->ray.angle <= 180 && data->ray.angle > 0)
+					color = data->map_data.map_elements.colors_north[in][start_index];
+				else
+					color = data->map_data.map_elements.colors_south[in][start_index];
+			}
+			else
+			{
+				if (data->ray.angle >= 90 && data->ray.angle <= 270)
+					color = data->map_data.map_elements.colors_west[in][start_index];
+				else
+					color = data->map_data.map_elements.colors_east[in][start_index];
+			}
+		}
+		
+		// color = data->map_data.map_elements.colors_north[in][start_index];
 
 		if (actual_height == 0)
 			actual_height = 1;

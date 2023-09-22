@@ -1,8 +1,8 @@
 - ADD AWDS (view) start {DONE}
 - floor and s9af {DONE}
-- textures north and south and east and west
+- textures north and south and east and west {DONE}
 - backwall collision {DONE}
 - 270 and 90 degree rotation {DONE}
-- ESC button
+- ESC button {DONE}
 - protoctions
 
