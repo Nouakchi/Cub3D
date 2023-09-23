@@ -287,7 +287,8 @@ int	main(int ac, char *av[])
 	/////
 
 
-
+	data.mouse_app = 0;
+	mlx_mouse_hide();
 
 	mlx_loop_hook(data.mlx_ptr, render, &data);
 	mlx_hook(data.mlx_win, 2,0, moves_press, &data);

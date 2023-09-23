@@ -125,6 +125,7 @@ typedef struct s_data
     t_img           img_west;
     t_img           img_east;
     t_moves         moves;
+    int             mouse_app;
 }   t_data;
 
 void	free_element_map(t_data *data);
