@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/22 05:28:44 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/23 02:29:12 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,7 @@ unsigned int **get_color_each_pixel_from_img(t_img *img)
 
 int	main(int ac, char *av[])
 {
-	atexit(check);
+	// atexit(check);
 	int		map_fd;
 	t_data	data;
 	int		i;
