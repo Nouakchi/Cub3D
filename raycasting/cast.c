@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:05:33 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/22 23:26:39 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/23 01:59:11 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ int mouse_hook(t_data *data)
     if (!data->mouse_app)
     {
         mlx_mouse_get_pos(data->mlx_win, &x, &y);
-        // printf("%d\n", x);
         if (x != W_WIDTH / 2)
         {
             if (x > W_WIDTH / 2)
