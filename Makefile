@@ -37,6 +37,7 @@ all:	$(NAME)
 
 $(NAME):	$(OBJS)
 	$(MAKELIB) libft
+	$(MAKELIB) mlx
 	$(CC) $(CFLAGS) $(MLX) $^ $(LIB) -o $@
 
 $(BINDIR)%.o: %.c $(INCLUDES)

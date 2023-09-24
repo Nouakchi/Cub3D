@@ -7,7 +7,13 @@
 
 ---------------
 
+onouakch
 - remove cursor from mandatory part {TODO}
+- (A) , (D) buttons to move right and left
+- makefile of libft  {TODO}
+
+bel-idr
+
 - destroy img_wall {TODO}
 - free colors {TODO}
 - free when error {TODO}
@@ -15,9 +21,5 @@
 - destroy img_wall and image when exit or error {TODO}
 - Norme raycasting mostly done still drawline and separate funtions on files {TODO}
 - protections {TODO}
-- makefile of libft {TODO}
-
----------------
-
-- remove raycasting bilal from makefile
+- 
 
