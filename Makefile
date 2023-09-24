@@ -21,7 +21,6 @@ SRCS		=	main.c \
 				parsing/bilal_tirm_map.c \
 				get_next_line/get_next_line.c \
 				get_next_line/get_next_line_utils.c \
-				raycasting/bilal_gotomlx.c \
 
 BINDIR		=	bin/
 LIB			=	libft/libft.a mlx/libmlx.a

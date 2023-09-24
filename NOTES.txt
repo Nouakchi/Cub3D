@@ -4,5 +4,20 @@
 - backwall collision {DONE}
 - 270 and 90 degree rotation {DONE}
 - ESC button {DONE}
+
+---------------
+
+- remove cursor from mandatory part {TODO}
+- destroy img_wall {TODO}
+- free colors {TODO}
+- free when error {TODO}
+- free when exit {TODO}
+- destroy img_wall and image when exit or error {TODO}
 - Norme raycasting mostly done still drawline and separate funtions on files {TODO}
 - protections {TODO}
+- makefile of libft {TODO}
+
+---------------
+
+- remove raycasting bilal from makefile
+

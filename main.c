@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/23 23:13:39 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/24 20:28:42 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,20 +71,61 @@ void init_textures(t_data *data)
 {
 	int size = 64;
 	data->img_north.img = mlx_xpm_file_to_image(data->mlx_ptr, "assets/textures/text1.xpm", &size, &size);
+	if (!data->img_north.img)
+	{
+		printf("error\n"); // TODO: handle error
+		exit(1);
+	}
 	data->img_north.addr = mlx_get_data_addr(data->img_north.img, &data->img_north.bits_per_pixel, &data->img_north.line_length,
 							&data->img_north.endian);
+	if (!data->img_north.addr)
+	{
+		printf("error\n"); // TODO: handle error
+		exit(1);
+	}
 
 	data->img_south.img = mlx_xpm_file_to_image(data->mlx_ptr, "assets/textures/text2.xpm", &size, &size);
+	if (!data->img_south.img)
+	{
+		printf("error\n"); // TODO: handle error
+		exit(1);
+	}
 	data->img_south.addr = mlx_get_data_addr(data->img_south.img, &data->img_south.bits_per_pixel, &data->img_south.line_length,
 							&data->img_south.endian);
+	if (!data->img_south.addr)
+	{
+		printf("error\n"); // TODO: handle error
+		exit(1);
+	}
 
 	data->img_east.img = mlx_xpm_file_to_image(data->mlx_ptr, "assets/textures/text3.xpm", &size, &size);
+	if (!data->img_east.img)
+	{
+		printf("error\n"); // TODO: handle error
+		exit(1);
+	}
 	data->img_east.addr = mlx_get_data_addr(data->img_east.img, &data->img_east.bits_per_pixel, &data->img_east.line_length,
 							&data->img_east.endian);
+	if (!data->img_east.addr)
+	{
+		printf("error\n"); // TODO: handle error
+		exit(1);
+	}
+
 
 	data->img_west.img = mlx_xpm_file_to_image(data->mlx_ptr, "assets/textures/text4.xpm", &size, &size);
+	if (!data->img_west.img)
+	{
+		printf("error\n"); // TODO: handle error
+		exit(1);
+	}
 	data->img_west.addr = mlx_get_data_addr(data->img_west.img, &data->img_west.bits_per_pixel, &data->img_west.line_length,
 							&data->img_west.endian);
+	if (!data->img_west.addr)
+	{
+		printf("error\n"); // TODO: handle error
+		exit(1);
+	}
 
 }
 
@@ -177,7 +218,17 @@ int	main(int ac, char *av[])
 	data.map_data.map_height = i;
 
 	data.mlx_ptr = mlx_init();
+	if (!data.mlx_ptr)
+	{
+		printf("error\n"); // TODO: handle error
+		exit(1);
+	}
 	data.mlx_win = mlx_new_window(data.mlx_ptr, W_WIDTH, W_HEIGHT, "cub3D");
+	if (!data.mlx_win)
+	{
+		printf("error\n"); // TODO: handle error
+		exit(1);
+	}
 
 	// do raycasting here
 	if (data.player.start_angle == 'N')
@@ -207,15 +258,34 @@ int	main(int ac, char *av[])
 
 
 	data.mouse_app = 0;
-	mlx_mouse_hide();
+	if (mlx_mouse_hide() == -1)
+	{
+		printf("error\n"); // TODO: handle error
+		exit(1);
+	}
 
-	mlx_loop_hook(data.mlx_ptr, render, &data);
-	mlx_hook(data.mlx_win, 2,0, moves_press, &data);
-	mlx_hook(data.mlx_win, 3,0, moves_release, &data);
+	if (mlx_loop_hook(data.mlx_ptr, render, &data) == -1)
+	{
+		printf("error\n"); // TODO: handle error
+		exit(1);
+	}
+	if (mlx_hook(data.mlx_win, 2,0, moves_press, &data) == -1)
+	{
+		printf("error\n"); // TODO: handle error
+		exit(1);
+	}
+	if (mlx_hook(data.mlx_win, 3,0, moves_release, &data) == -1)
+	{
+		printf("error\n"); // TODO: handle error
+		exit(1);
+	}
 
-	mlx_loop(data.mlx_ptr);
+	if (mlx_loop(data.mlx_ptr) == -1)
+	{
+		printf("error\n"); // TODO: handle error
+		exit(1);
+	}
 
-	printf("hello\n");
 	free_element_map(&data);
 
 

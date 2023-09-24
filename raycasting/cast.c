@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cast.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/FOV / 210 11:ROTATION:00 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/22 05:21:37 by onouakch         ###   ########.fr       */
+/*   Created: 2023/09/24 20:31:37 by bel-idri          #+#    #+#             */
+/*   Updated: 2023/09/24 20:34:57 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "../includes/cub.h"
 
@@ -72,7 +74,7 @@ void    rotate_left(t_data *data)
 
 void update_data(t_data *data)
 {
-    
+
     double pos_x = data->player.x_pos;
     double pos_y = data->player.y_pos;
 
@@ -113,7 +115,11 @@ int mouse_hook(t_data *data)
 
     if (!data->mouse_app)
     {
-        mlx_mouse_get_pos(data->mlx_win, &x, &y);
+        if (mlx_mouse_get_pos(data->mlx_win, &x, &y) == -1)
+        {
+            printf("error\n"); // TODO: handle error
+            exit(1);
+        }
         if (x != W_WIDTH / 2)
         {
             if (x > W_WIDTH / 2)
@@ -121,7 +127,11 @@ int mouse_hook(t_data *data)
             else
                 rotate_left(data);
         }
-        mlx_mouse_move(data->mlx_win, W_WIDTH / 2, W_HEIGHT / 2);
+        if (mlx_mouse_move(data->mlx_win, W_WIDTH / 2, W_HEIGHT / 2) == -1)
+        {
+            printf("error\n"); // TODO: handle error
+            exit(1);
+        }
     }
     return (0);
 }
@@ -130,18 +140,36 @@ int render(void *args)
 {
     t_data *data;
     double  angle;
-    
+
     data = args;
     update_data(data);
     mouse_hook(data);
     angle = data->ray.angle;
     data->img.img = mlx_new_image(data->mlx_ptr, W_WIDTH, W_HEIGHT);
+    if (!data->img.img)
+    {
+        printf("error\n"); // TODO: handle error
+        exit(1);
+    }
 	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel,
     &data->img.line_length, &data->img.endian);
+    if (!data->img.addr)
+    {
+        printf("error\n"); // TODO: handle error
+        exit(1);
+    }
     cast_rays(data);
     data->ray.angle = angle;
-    mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img, 0, 0);
-    mlx_destroy_image(data->mlx_ptr, data->img.img);
+    if (mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img, 0, 0) == -1)
+    {
+        printf("error\n"); // TODO: handle error
+        exit(1);
+    }
+    if (mlx_destroy_image(data->mlx_ptr, data->img.img) == -1)
+    {
+        printf("error\n"); // TODO: handle error
+        exit(1);
+    }
     return (0);
 }
 
@@ -167,9 +195,22 @@ int moves_press(int keycode, void *args)
     {
         data->mouse_app = !data->mouse_app;
         if (!data->mouse_app)
-            mlx_mouse_hide();
+        {
+            if (mlx_mouse_hide() == -1)
+            {
+                printf("error\n"); // TODO: handle error
+                exit(1);
+            }
+
+        }
         else
-            mlx_mouse_show();
+        {
+            if (mlx_mouse_show() == -1)
+            {
+                printf("error\n"); // TODO: handle error
+                exit(1);
+            }
+        }
     }
     return (0);
 }
