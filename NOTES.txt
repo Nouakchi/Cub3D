@@ -8,9 +8,9 @@
 ---------------
 
 onouakch
-- remove cursor from mandatory part {TODO}
-- (A) , (D) buttons to move right and left
-- makefile of libft  {TODO}
+- remove cursor from mandatory part {DONE}
+- (A) , (D) buttons to move right and left {DONE}
+- makefile of libft  {DONE}
 
 bel-idr
 

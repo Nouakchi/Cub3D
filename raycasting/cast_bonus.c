@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cast_bonus.c                                       :+:      :+:    :+:   */
+/*   cast.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 20:31:37 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/09/25 06:37:42 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/25 06:37:55 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,25 @@ void    move_forward(t_data *data, double *pos_x, double *pos_y)
         *pos_y += SPEED * fabs(sin(data->player.view_angle * (M_PI / 180)));
     else
         *pos_y -= SPEED * sin(data->player.view_angle * (M_PI / 180));
-    data->player.x_pos = *pos_x;
-    data->player.y_pos = *pos_y;
+    if (data->map_data.map[(int)(*pos_y) >> (int)WALL_SHIFT][(int)(*pos_x) >> (int)WALL_SHIFT] != '1')
+    {
+        data->player.x_pos = *pos_x;
+        data->player.y_pos = *pos_y;
+    }
 }
 
 void    move_backward(t_data *data, double *pos_x, double *pos_y)
 {
-    if (data->player.view_angle <= 90 || data->player.view_angle >= 270)
+   if (data->player.view_angle <= 90 || data->player.view_angle >= 270)
         *pos_x -= SPEED * cos(data->player.view_angle * (M_PI / 180));
     else
         *pos_x += SPEED * fabs(cos(data->player.view_angle * (M_PI / 180)));
     *pos_y += SPEED * sin(data->player.view_angle * (M_PI / 180));
-    data->player.x_pos = *pos_x;
-    data->player.y_pos = *pos_y;
+    if (data->map_data.map[(int)(*pos_y) >> (int)WALL_SHIFT][(int)(*pos_x) >> (int)WALL_SHIFT] != '1')
+    {
+        data->player.x_pos = *pos_x;
+        data->player.y_pos = *pos_y;
+    }
 }
 
 void    move_right(t_data *data, double *pos_x, double *pos_y)
@@ -48,8 +54,11 @@ void    move_right(t_data *data, double *pos_x, double *pos_y)
         *pos_y -= SPEED * sin(righ_view_angle * (M_PI / 180));
     else
         *pos_y -= SPEED * sin(righ_view_angle * (M_PI / 180));
-    data->player.x_pos = *pos_x;
-    data->player.y_pos = *pos_y;
+    if (data->map_data.map[(int)(*pos_y) >> (int)WALL_SHIFT][(int)(*pos_x) >> (int)WALL_SHIFT] != '1')
+    {
+        data->player.x_pos = *pos_x;
+        data->player.y_pos = *pos_y;
+    }
 }
 
 void    move_left(t_data *data, double *pos_x, double *pos_y)
@@ -64,8 +73,11 @@ void    move_left(t_data *data, double *pos_x, double *pos_y)
         *pos_y -= SPEED * sin(righ_view_angle * (M_PI / 180));
     else
         *pos_y -= SPEED * sin(righ_view_angle * (M_PI / 180));
+    if (data->map_data.map[(int)(*pos_y) >> (int)WALL_SHIFT][(int)(*pos_x) >> (int)WALL_SHIFT] != '1')
+    {
         data->player.x_pos = *pos_x;
         data->player.y_pos = *pos_y;
+    }
 }
 
 void    rotate_right(t_data *data)
@@ -97,7 +109,7 @@ void update_data(t_data *data)
 
     double pos_x = data->player.x_pos;
     double pos_y = data->player.y_pos;
-
+    
     if (data->moves.move_f)
         move_forward(data, &pos_x, &pos_y);
     if (data->moves.move_b)
@@ -132,10 +144,32 @@ void    cast_rays(t_data *data)
 	}
 }
 
-void    mouse_visibility(t_data *data)
+int mouse_hook(t_data *data)
 {
-    (void)data;
-    return ;
+    int x;
+    int y;
+
+    if (!data->mouse_app)
+    {
+        if (mlx_mouse_get_pos(data->mlx_win, &x, &y) == -1)
+        {
+            printf("error\n"); // TODO: handle error
+            exit(1);
+        }
+        if (x != W_WIDTH / 2)
+        {
+            if (x > W_WIDTH / 2)
+                rotate_right(data);
+            else
+                rotate_left(data);
+        }
+        if (mlx_mouse_move(data->mlx_win, W_WIDTH / 2, W_HEIGHT / 2) == -1)
+        {
+            printf("error\n"); // TODO: handle error
+            exit(1);
+        }
+    }
+    return (0);
 }
 
 int render(void *args)
@@ -145,7 +179,7 @@ int render(void *args)
 
     data = args;
     update_data(data);
-    // mouse_hook(data);
+    mouse_hook(data);
     angle = data->ray.angle;
     data->img.img = mlx_new_image(data->mlx_ptr, W_WIDTH, W_HEIGHT);
     if (!data->img.img)
@@ -197,6 +231,26 @@ int moves_press(int keycode, void *args)
         data->moves.rotate_l = 1;
     else if (keycode == ROTATE_R) // right
         data->moves.rotate_r = 1;
+    else if (keycode == 49)
+    {
+        data->mouse_app = !data->mouse_app;
+        if (!data->mouse_app)
+        {
+            if (mlx_mouse_hide() == -1)
+            {
+                printf("error\n"); // TODO: handle error
+                exit(1);
+            }
+        }
+        else
+        {
+            if (mlx_mouse_show() == -1)
+            {
+                printf("error\n"); // TODO: handle error
+                exit(1);
+            }
+        }
+    }
     return (0);
 }
 
@@ -218,4 +272,14 @@ int moves_release(int keycode, void *args)
     else if (keycode == ROTATE_L)
         data->moves.rotate_l = 0;
     return (0);
+}
+
+void    mouse_visibility(t_data *data)
+{
+    data->mouse_app = 0;
+	if (mlx_mouse_hide() == -1)
+	{
+		printf("error\n"); // TODO: handle error
+		exit(1);
+	}
 }

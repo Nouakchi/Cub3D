@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/25 03:38:26 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/25 05:52:00 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define RIGHT_KEY 2
 # define LEFT_KEY 0
 # define UP_KEY 13
+# define ROTATE_R 124
+# define ROTATE_L 123
 # define DOWN_KEY 1
 # define QUIT_KEY 53
 
@@ -130,6 +132,7 @@ typedef struct s_data
     int             mouse_app;
 }   t_data;
 
+void    mouse_visibility(t_data *data);
 void	free_element_map(t_data *data);
 int     check_element(int map, t_data *data);
 void    fatal(char *mssg);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/24 20:28:42 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/25 06:16:03 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,15 +239,14 @@ int	main(int ac, char *av[])
 		data.ray.angle = 300;
 	else
 		data.ray.angle = 30;
-	data.player.view_angle = data.player.start_angle - 30;
+	data.player.view_angle = data.ray.angle - 30;
 	data.moves.move_r = 0;
     data.moves.move_l = 0;
     data.moves.move_f = 0;
     data.moves.move_b = 0;
-
+	
 	init_textures(&data);
-
-
+	
 	/////
 
 
@@ -255,14 +254,8 @@ int	main(int ac, char *av[])
 	data.map_data.map_elements.colors_south = get_color_each_pixel_from_img(&data.img_south);
 	data.map_data.map_elements.colors_east = get_color_each_pixel_from_img(&data.img_east);
 	data.map_data.map_elements.colors_west = get_color_each_pixel_from_img(&data.img_west);
-
-
-	data.mouse_app = 0;
-	if (mlx_mouse_hide() == -1)
-	{
-		printf("error\n"); // TODO: handle error
-		exit(1);
-	}
+	
+	mouse_visibility(&data);
 
 	if (mlx_loop_hook(data.mlx_ptr, render, &data) == -1)
 	{
