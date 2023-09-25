@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/24 23:54:24 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/25 03:38:26 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ typedef struct s_moves
     int move_b;
     int move_l;
     int move_r;
+    int rotate_l;
+    int rotate_r;
 }   t_moves;
 
 typedef struct s_data

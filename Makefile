@@ -49,6 +49,7 @@ clean:
 
 fclean: clean
 	$(RMLIB) libft
+	make clean -C mlx
 	$(RM) $(NAME)
 
 re: fclean all
