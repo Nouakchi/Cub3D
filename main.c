@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/22 23:24:29 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/25 01:21:59 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,41 +88,6 @@ void init_textures(t_data *data)
 
 }
 
-// unsigned int *get_color_each_pixel_from_img(t_img *img)
-// {
-// 	int i = 0;
-// 	int j = 0;
-// 	int index = 0;
-// 	unsigned int color_r;
-// 	unsigned int color_g;
-// 	unsigned int color_b;
-// 	unsigned int color_a;
-// 	unsigned int color;
-// 	unsigned int *map;
-
-// 	map = malloc(sizeof(int) * 64 * 64);
-// 	while (j < 64)
-// 	{
-// 		if (j == 63)
-// 		{
-// 			j = 0;
-// 			i++;
-// 		}
-// 		if (i == 64)
-// 			break;
-// 		color_r = img->addr[(i * img->line_length + j * (img->bits_per_pixel / 8))];
-// 		color_g = img->addr[(i * img->line_length + j * (img->bits_per_pixel / 8)) + 1];
-// 		color_b = img->addr[(i * img->line_length + j * (img->bits_per_pixel / 8)) + 2];
-// 		color_a = img->addr[(i * img->line_length + j * (img->bits_per_pixel / 8)) + 3];
-// 		color = color_a << 24 | color_r << 16 | color_g << 8 | color_b;
-// 		map[index] = color;
-// 		index++;
-// 		j++;
-
-// 	}
-// 	return (map);
-// }
-
 unsigned int **get_color_each_pixel_from_img(t_img *img)
 {
 	int i = 0;
@@ -155,43 +120,9 @@ unsigned int **get_color_each_pixel_from_img(t_img *img)
 	return (map);
 }
 
-
-// int test(void *args)
-// {
-//     t_data *data = args;
-// 	int i = 0;
-// 	int j = 0;
-// 	unsigned int color;
-
-// 	data->img.img = mlx_new_image(data->mlx_ptr, 1024, 512);
-// 	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel, &data->img.line_length,
-// 							&data->img.endian);
-
-// 	while (i < 64)
-// 	{
-// 		j = 0;
-// 		while (j < 64)
-// 		{
-// 			color = data->map_data.map_elements.colors_north[i][j];
-// 			// color = data->map_data.map_elements.colors_north[i * 64 + j];
-// 			// if (color < 0)
-// 			// 	color = 0;
-// 			printf("i = %d, j = %d, color = %u\n", i, j, color);
-// 			my_mlx_pixel_put(&data->img, j, i, color);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-
-// 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img, 0, 0);
-// 	mlx_destroy_image(data->mlx_ptr, data->img.img);
-// 	return (0);
-
-// }
-
 int	main(int ac, char *av[])
 {
-	atexit(check);
+	// atexit(check);
 	int		map_fd;
 	t_data	data;
 	int		i;
@@ -273,25 +204,11 @@ int	main(int ac, char *av[])
 	data.map_data.map_elements.colors_south = get_color_each_pixel_from_img(&data.img_south);
 	data.map_data.map_elements.colors_east = get_color_each_pixel_from_img(&data.img_east);
 	data.map_data.map_elements.colors_west = get_color_each_pixel_from_img(&data.img_west);
-	// int k = 0;
-	// while (k < 64 * 64)
-	// {
-	// 	printf("%d|", data.map_data.map_elements.colors_north[k]);
-	// 	if (k % 64 == 0 && k != 0)
-	// 		printf("\n");
-	// 	k++;
-	// }
-
-	// mlx_loop_hook(data.mlx_ptr, test, &data);
-
-	/////
 
 
-	data.mouse_pos.x = W_WIDTH / 2;
-	data.mouse_pos.y = W_HEIGHT / 2;
 	data.mouse_app = 0;
 	mlx_mouse_hide();
-	
+
 	mlx_loop_hook(data.mlx_ptr, render, &data);
 	mlx_hook(data.mlx_win, 2,0, moves_press, &data);
 	mlx_hook(data.mlx_win, 3,0, moves_release, &data);

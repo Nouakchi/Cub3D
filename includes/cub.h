@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/22 23:19:48 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/25 01:21:32 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ typedef struct s_data
     t_img           img_west;
     t_img           img_east;
     t_moves         moves;
-    t_mouse         mouse_pos;
+    int             mouse_pos;
     int             mouse_app;
 }   t_data;
 

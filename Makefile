@@ -1,5 +1,5 @@
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address -g
 RM			=	rm -rf
 MAKELIB		=	make -C
 RMLIB		=	make fclean -C
