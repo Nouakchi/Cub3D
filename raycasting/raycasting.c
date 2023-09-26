@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:37:41 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/22 05:00:52 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/26 04:19:25 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ double	check_horz_inter(t_data *data)
 	data->ray.x_step = WALL_HEIGHT / tan(data->ray.angle * (M_PI / 180.0));
     data->ray.y_step = -WALL_HEIGHT;
     data->ray.y_h_inter = ((int)floor((int)data->player.y_pos >> (int)WALL_SHIFT)
-	 << (int)WALL_SHIFT) - 1;;
+	 << (int)WALL_SHIFT);
     data->ray.x_h_inter = data->player.x_pos + (data->player.y_pos 
 	- data->ray.y_h_inter) / tan(data->ray.angle * (M_PI / 180.0));
-    i = (int)data->ray.y_h_inter  >> (int)WALL_SHIFT;
+    i = (int)(data->ray.y_h_inter - 1)  >> (int)WALL_SHIFT;
 	j = (int)data->ray.x_h_inter  >> (int)WALL_SHIFT;
     while (i < data->map_data.map_height && i >= 0 && j < data->map_data.map_width 
 	&& j >= 0 && data->map_data.map[i][j] != '1')
 	{
 		data->ray.y_h_inter += data->ray.y_step;
 		data->ray.x_h_inter += data->ray.x_step;
-		i = (int)data->ray.y_h_inter >> (int)WALL_SHIFT;
+		i = (int)(data->ray.y_h_inter - 1) >> (int)WALL_SHIFT;
 		j = (int)data->ray.x_h_inter >> (int)WALL_SHIFT;
 	}
 	return ((double)fabs(data->player.y_pos - data->ray.y_h_inter) 
@@ -62,7 +62,7 @@ double	check_vert_inter(t_data *data)
 	
 	get_first_inter(data);
     i = (int)data->ray.y_v_inter  >> (int)WALL_SHIFT;
-	j = (int)data->ray.x_v_inter  >> (int)WALL_SHIFT;
+	j = (int)(data->ray.x_v_inter + 1)  >> (int)WALL_SHIFT;
 	if (data->ray.angle >= 90)
 		j--;
     while (i < data->map_data.map_height && i >= 0 
@@ -75,7 +75,7 @@ double	check_vert_inter(t_data *data)
 		data->ray.x_v_inter += data->ray.x_step;
 
 		i = (int)data->ray.y_v_inter >> (int)WALL_SHIFT;
-		j = (int)data->ray.x_v_inter >> (int)WALL_SHIFT;
+		j = (int)(data->ray.x_v_inter + 1) >> (int)WALL_SHIFT;
 		if (data->ray.angle >= 90)
 			j--;
 	}

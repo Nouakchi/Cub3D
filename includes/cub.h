@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/25 05:52:00 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/26 02:31:35 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define FOV 60.0
 # define W_WIDTH 1024.0
 # define W_HEIGHT 512.0
-# define SPEED 8.0
+# define SPEED 4.0
 # define ROTATION 35.0
 # define WALL_SHIFT log2(64.0)
 # define DIFF_RAYS FOV / W_WIDTH

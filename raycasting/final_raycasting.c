@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 10:32:02 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/22 05:13:25 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/26 01:44:47 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,13 @@ void	get_first_horz_inter(t_data *data, int *i, int *j)
 	data->ray.x_step = fabs(WALL_HEIGHT / tan(data->ray.angle * (M_PI / 180.0)));
     data->ray.y_step = WALL_HEIGHT;
 
-    data->ray.y_h_inter = ((int)floor((int)data->player.y_pos >> (int)WALL_SHIFT) << (int)WALL_SHIFT) + data->ray.y_step - .02;
+    data->ray.y_h_inter = ((int)floor((int)data->player.y_pos >> (int)WALL_SHIFT) << (int)WALL_SHIFT) + data->ray.y_step;
 	chart = fabs(fabs(data->player.y_pos - data->ray.y_h_inter) / tan(data->ray.angle * (M_PI / 180.0)));
     data->ray.x_h_inter = data->player.x_pos - chart;
 	if (data->ray.angle < 90 || data->ray.angle >= 270)
 		data->ray.x_h_inter = data->player.x_pos + chart;
 
-    *i = (int)data->ray.y_h_inter  >> (int)WALL_SHIFT;
+    *i = (int)(data->ray.y_h_inter - 1)  >> (int)WALL_SHIFT;
 	*j = (int)data->ray.x_h_inter  >> (int)WALL_SHIFT;
 	if (data->ray.angle > 180 && data->ray.angle < 360)
 		(*i)++;
@@ -113,7 +113,7 @@ double	d_check_horz_inter(t_data *data)
 			data->ray.x_h_inter += data->ray.x_step;
 		else
 			data->ray.x_h_inter -= data->ray.x_step;
-		i = (int)data->ray.y_h_inter >> (int)WALL_SHIFT;
+		i = (int)(data->ray.y_h_inter - 1) >> (int)WALL_SHIFT;
 		j = (int)data->ray.x_h_inter >> (int)WALL_SHIFT;
 
 		if (data->ray.angle > 180 && data->ray.angle < 360)
@@ -134,7 +134,7 @@ void	get_first_vert_inter(t_data *data, int *i, int *j)
     data->ray.x_v_inter = ((int)floor((int)data->player.x_pos >> (int)WALL_SHIFT) << (int)WALL_SHIFT) + tmp;
 	data->ray.y_v_inter = fabs(data->player.y_pos + fabs(fabs(data->ray.x_v_inter - data->player.x_pos) * tan(data->ray.angle * (M_PI / 180.0))));
     *i = (int)data->ray.y_v_inter  >> (int)WALL_SHIFT;
-	*j = (int)data->ray.x_v_inter  >> (int)WALL_SHIFT;
+	*j = (int)(data->ray.x_v_inter + 1) >> (int)WALL_SHIFT;
 	if (data->ray.angle > 180 && data->ray.angle <= 270)
 		(*j)--;
 }
@@ -153,7 +153,7 @@ double d_check_vert_inter(t_data *data)
 		data->ray.y_v_inter += data->ray.y_step;
 
 		i = (int)data->ray.y_v_inter >> (int)WALL_SHIFT;
-		j = (int)data->ray.x_v_inter >> (int)WALL_SHIFT;
+		j = (int)(data->ray.x_v_inter + 1) >> (int)WALL_SHIFT;
 
 		if (data->ray.angle > 180 && data->ray.angle <= 270)
 			j--;
