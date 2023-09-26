@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 14:57:36 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/08/22 16:40:05 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/26 21:48:15 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	check_walls_utils(char **map, int i, int j)
 		if (map[i][j + 1] == ' ' || map[i][j - 1] == ' ' || map[i + 1][j] == ' '
 			|| map[i - 1][j] == ' ' || map[i][j + 1] == '\0' || map[i][j
 			- 1] == '\0' || map[i + 1][j] == '\0' || map[i - 1][j] == '\0')
-			return (1);
+				return (1);
 	}
 	return (0);
 }

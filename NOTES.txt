@@ -15,33 +15,13 @@ onouakch
 ---------------
 
 bel-idr
+- protections {DONE}
+- handle SEGV when the map is cut to 2 pieces {DONE}
+- read textures from config file {DONE}
+- free colors {DONE}
+- free when error {DONE}
+- free when exit {DONE}
+- destroy img_wall and image when exit or error {DONE ++}
+- button X {DONE}
 
-- destroy img_wall {TODO}
-- free colors {TODO}
-- free when error {TODO}
-- free when exit {TODO}
-- destroy img_wall and image when exit or error {TODO}
 - Norme raycasting mostly done still drawline and separate funtions on files {TODO}
-- protections {TODO}
-- read textures from config file {TODO}
-
-- handle SEGV when the map is cut to 2 pieces
-(exemple)
-              1111111111111111111111111
-              1001000000000000010010001
-              1000100000000000100010001
-              1000000000000000000010001
-              1000000000000000000010001
-              1111111111111111111110001
-                                          // empty line with spaces it will SEGV
-                                  10001
-                               11110001111
-                               10000000001
-   1111111111111               10000000001
-   1000000000001               10000000001
-   1000000000001               10000000001
-   1000000000001               10000000001
-   1000000000001               10100000101
-   1000000000001               10000000001
-   10011111111111111111111     11111011111
-    11                              1

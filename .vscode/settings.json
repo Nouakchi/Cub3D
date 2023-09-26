@@ -11,6 +11,8 @@
 		"algorithm": "c",
 		"chrono": "c",
 		"unordered_map": "c",
-		"math.h": "c"
+		"math.h": "c",
+		"__node_handle": "c",
+		"complex": "c"
 	}
 }

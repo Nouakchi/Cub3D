@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 09:28:29 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/08/22 16:42:03 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:51:02 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	join_nulls(t_data *data)
 	int		j;
 
 	i = 0;
-	while (i < (int)ft_strlen(data->map_data.map[i]))
+	while (i < (int)ft_strlen_height(data->map_data.map))
 	{
 		str = ft_calloc((ft_strlen_width(data->map_data.map) + 1), \
 			sizeof(char));

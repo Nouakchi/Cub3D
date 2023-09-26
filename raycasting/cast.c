@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cast_bonus.c                                       :+:      :+:    :+:   */
+/*   cast.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 20:31:37 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/09/25 06:37:42 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/26 22:26:50 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void    move_backward(t_data *data, double *pos_x, double *pos_y)
 void    move_right(t_data *data, double *pos_x, double *pos_y)
 {
     double  righ_view_angle;
-    
+
     righ_view_angle = data->player.view_angle - 90;
     if (righ_view_angle < 0)
         righ_view_angle = 360 + (data->player.view_angle - 90);
@@ -55,7 +55,7 @@ void    move_right(t_data *data, double *pos_x, double *pos_y)
 void    move_left(t_data *data, double *pos_x, double *pos_y)
 {
     double  righ_view_angle;
-    
+
     righ_view_angle = data->player.view_angle + 90;
     if (righ_view_angle >= 360)
         righ_view_angle = fabs(360 - (data->player.view_angle + 90));
@@ -132,12 +132,6 @@ void    cast_rays(t_data *data)
 	}
 }
 
-void    mouse_visibility(t_data *data)
-{
-    (void)data;
-    return ;
-}
-
 int render(void *args)
 {
     t_data *data;
@@ -149,29 +143,17 @@ int render(void *args)
     angle = data->ray.angle;
     data->img.img = mlx_new_image(data->mlx_ptr, W_WIDTH, W_HEIGHT);
     if (!data->img.img)
-    {
-        printf("error\n"); // TODO: handle error
-        exit(1);
-    }
+        free_all_fatal("mlx_new_image() failed", data);
 	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel,
     &data->img.line_length, &data->img.endian);
     if (!data->img.addr)
-    {
-        printf("error\n"); // TODO: handle error
-        exit(1);
-    }
+        free_all_fatal("mlx_get_data_addr() failed", data);
     cast_rays(data);
     data->ray.angle = angle;
     if (mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img, 0, 0) == -1)
-    {
-        printf("error\n"); // TODO: handle error
-        exit(1);
-    }
+        free_all_fatal("mlx_put_image_to_window() failed", data);
     if (mlx_destroy_image(data->mlx_ptr, data->img.img) == -1)
-    {
-        printf("error\n"); // TODO: handle error
-        exit(1);
-    }
+        free_all_fatal("mlx_destroy_image() failed", data);
     return (0);
 }
 
@@ -189,13 +171,10 @@ int moves_press(int keycode, void *args)
     else if (keycode == DOWN_KEY)
         data->moves.move_b = 1;
     else if (keycode == QUIT_KEY)
-    {
-        free_element_map(data);
-        exit(1);
-    }
-    else if (keycode == ROTATE_L) // left
+        free_all_success(data);
+    else if (keycode == ROTATE_L)
         data->moves.rotate_l = 1;
-    else if (keycode == ROTATE_R) // right
+    else if (keycode == ROTATE_R)
         data->moves.rotate_r = 1;
     return (0);
 }
@@ -218,4 +197,10 @@ int moves_release(int keycode, void *args)
     else if (keycode == ROTATE_L)
         data->moves.rotate_l = 0;
     return (0);
+}
+
+int	mouse_visibility(t_data *data) // ADD BY BILAL
+{
+	(void)data;
+    return 0;
 }
