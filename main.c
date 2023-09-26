@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/26 06:49:36 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/26 08:13:49 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,12 +161,18 @@ unsigned int **get_color_each_pixel_from_img(t_img *img)
 	return (map);
 }
 
+void hh ()
+{
+	system("leaks cub3D_bonus");
+}
+
 int	main(int ac, char *av[])
 {
 	int		map_fd;
 	t_data	data;
 	int		i;
 
+	atexit(hh);
 	if (ac != 2)
 		return (fatal("Invalid Input"), 1);
 
