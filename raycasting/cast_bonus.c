@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 20:31:37 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/09/26 02:54:49 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/26 07:14:13 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,56 @@ int mouse_hook(t_data *data)
     return (0);
 }
 
+void draw_mini_cube(t_data *data, int x, int y, unsigned int color)
+{
+    int i;
+    int j;
+
+    i = x - 6;
+    while (++i < x + 6)
+    {
+        j = y - 6;
+        while (++j < y + 6)
+            my_mlx_pixel_put(&data->img, j, i, color);
+    }
+}
+
+void    mini_map(t_data *data)
+{
+    int start_x;
+    int start_y;
+    int map_x;
+    int map_y;
+    unsigned color;
+    unsigned color_;
+    int i;
+    int j;
+    
+    start_y = -1;
+    map_y = data->player.y_pos - 125;
+    color = (255 * pow(2,16)) + (255 * pow(2,8)) + 255;
+    color_ = (255 * pow(2,16)) + (0 * pow(2,8)) + 0;
+    while(++start_y < 250)
+    {
+        start_x = -1;
+        map_x = data->player.x_pos - 125;
+        while (++start_x < 250)
+        {
+            i = (int)map_y  >> (int)WALL_SHIFT;
+	        j = (int)map_x >> (int)WALL_SHIFT;
+            if (i < data->map_data.map_height && i >= 0 && j < data->map_data.map_width  && j >= 0 && data->map_data.map[i][j] == '1')
+                my_mlx_pixel_put(&data->img, start_x, start_y, color);
+            else if (i < data->map_data.map_height && i >= 0 && j < data->map_data.map_width  && j >= 0 && data->map_data.map[i][j] == '0')
+                my_mlx_pixel_put(&data->img, start_x, start_y, 0);
+            else
+                my_mlx_pixel_put(&data->img, start_x, start_y, color_);
+            map_x++;
+        }
+        map_y++;
+    }
+    draw_mini_cube(data, 125, 125, color_);
+}
+
 int render(void *args)
 {
     t_data *data;
@@ -218,6 +268,7 @@ int render(void *args)
         exit(1);
     }
     cast_rays(data);
+    mini_map(data);
     data->ray.angle = angle;
     if (mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img, 0, 0) == -1)
     {

@@ -10,6 +10,7 @@ onouakch
 - backwall collision {DONE}
 - 270 and 90 degree rotation {DONE}
 - ESC button {DONE}
+- MiniMap {DONE}
 
 ---------------
 

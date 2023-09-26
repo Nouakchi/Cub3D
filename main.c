@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/26 01:49:39 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/26 06:49:36 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void check()
 void init_textures(t_data *data)
 {
 	int size = 64;
-	data->img_north.img = mlx_xpm_file_to_image(data->mlx_ptr, "assets/textures/text1.xpm", &size, &size);
+	data->img_north.img = mlx_xpm_file_to_image(data->mlx_ptr, data->map_data.map_elements.north_text, &size, &size);
 	if (!data->img_north.img)
 	{
 		printf("error\n"); // TODO: handle error
@@ -84,7 +84,7 @@ void init_textures(t_data *data)
 		exit(1);
 	}
 
-	data->img_south.img = mlx_xpm_file_to_image(data->mlx_ptr, "assets/textures/text2.xpm", &size, &size);
+	data->img_south.img = mlx_xpm_file_to_image(data->mlx_ptr, data->map_data.map_elements.south_text, &size, &size);
 	if (!data->img_south.img)
 	{
 		printf("error\n"); // TODO: handle error
@@ -98,7 +98,7 @@ void init_textures(t_data *data)
 		exit(1);
 	}
 
-	data->img_east.img = mlx_xpm_file_to_image(data->mlx_ptr, "assets/textures/text3.xpm", &size, &size);
+	data->img_east.img = mlx_xpm_file_to_image(data->mlx_ptr, data->map_data.map_elements.east_text, &size, &size);
 	if (!data->img_east.img)
 	{
 		printf("error\n"); // TODO: handle error
@@ -113,7 +113,7 @@ void init_textures(t_data *data)
 	}
 
 
-	data->img_west.img = mlx_xpm_file_to_image(data->mlx_ptr, "assets/textures/text4.xpm", &size, &size);
+	data->img_west.img = mlx_xpm_file_to_image(data->mlx_ptr, data->map_data.map_elements.west_text, &size, &size);
 	if (!data->img_west.img)
 	{
 		printf("error\n"); // TODO: handle error
@@ -163,7 +163,6 @@ unsigned int **get_color_each_pixel_from_img(t_img *img)
 
 int	main(int ac, char *av[])
 {
-	// atexit(check);
 	int		map_fd;
 	t_data	data;
 	int		i;
@@ -210,6 +209,7 @@ int	main(int ac, char *av[])
 				data.player.y_pos = i * 64 + 32;
 				data.player.x_pos = j * 64 + 32;
 				data.player.start_angle = data.map_data.map[i][j];
+				data.map_data.map[i][j] = '0';
 			}
 		}
 		if (data.map_data.map_width < (int)ft_strlen(data.map_data.map[i]))
@@ -280,9 +280,4 @@ int	main(int ac, char *av[])
 	}
 
 	free_element_map(&data);
-
-
-
-	return (0);
-
 }
