@@ -1,3 +1,9 @@
+onouakch
+
+- remove cursor from mandatory part {DONE}
+- (A) , (D) buttons to move right and left {DONE}
+- makefile of libft  {DONE}
+- fix wall colison between cubes {DONE}
 - ADD AWDS (view) start {DONE}
 - floor and s9af {DONE}
 - textures north and south and east and west {DONE}
@@ -6,12 +12,6 @@
 - ESC button {DONE}
 
 ---------------
-
-onouakch
-- remove cursor from mandatory part {DONE}
-- (A) , (D) buttons to move right and left {DONE}
-- makefile of libft  {DONE}
-- fix wall colison between cubes {DONE}
 
 bel-idr
 
@@ -22,5 +22,5 @@ bel-idr
 - destroy img_wall and image when exit or error {TODO}
 - Norme raycasting mostly done still drawline and separate funtions on files {TODO}
 - protections {TODO}
-- 
+- read textures from config file {TODO}
 
