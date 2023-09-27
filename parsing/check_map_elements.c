@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_elements.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:06:15 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/26 17:53:28 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/27 04:09:45 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static int	parse_textures(char *identifier, char *path_rgb, t_data *data)
 	path_fd = open(path_rgb, O_RDONLY);
 	if (path_fd == -1) // ADD BY BILAL
 		return (0);
+	close(path_fd);
 	if (!ft_strcmp(identifier, "NO")
 		&& !data->map_data.map_elements.north_text)
 		data->map_data.map_elements.north_text = ft_strdup(path_rgb);

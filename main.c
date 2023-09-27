@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/26 22:41:24 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/27 04:29:46 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,12 +281,12 @@ int	init_my_mlx(t_data *data)
 void free_all(t_data *data)
 {
 	free_element_walls(data);
+	// if (mlx_destroy_image(data->mlx_ptr, &data->img) == -1) // WHY ERROR
+	// 	fatal("MLX failed");
 	if (mlx_clear_window(data->mlx_ptr, data->mlx_win) == -1)
 		fatal("MLX failed");
 	if (mlx_destroy_window(data->mlx_ptr, data->mlx_win) == -1)
 		fatal("MLX failed");
-	// if (mlx_destroy_image(data->mlx_ptr, data->img.img) == -1) // WHY ERROR
-	// 	fatal("MLX failed");
 }
 
 void	free_all_fatal(char *msg ,t_data *data)
