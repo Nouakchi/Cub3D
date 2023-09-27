@@ -26,6 +26,7 @@ SRCS		=	main.c \
 				parsing/check_map.c \
 				parsing/init_map.c \
 				parsing/tirm_map.c \
+				parsing/check_valid_map.c \
 				raycasting/down_cast.c \
 				raycasting/draw_line.c \
 				raycasting/ray_casting_utils.c \
@@ -51,6 +52,7 @@ SRCS_B		=	main.c \
 				parsing/check_map.c \
 				parsing/init_map.c \
 				parsing/tirm_map.c \
+				parsing/check_valid_map.c \
 				raycasting/down_cast.c \
 				raycasting/draw_line.c \
 				raycasting/ray_casting_utils.c \

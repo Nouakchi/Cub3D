@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 08:51:04 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/09/27 05:26:32 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/27 11:00:35 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,7 @@ int	check_map_pars(int map_fd, t_data *data)
 		return (1);
 	if (check_map(data->map_data.map))
 		return (1);
-	join_ones(data);
-	return (0);
+	return (join_ones(data), 0);
 }
 
 int	check_chars(char *map)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 07:55:56 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/09/27 05:27:27 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/27 11:17:38 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,21 @@ static char	*ft_strjoin_free(char *s1, char *s2)
 	return (free(s1), free(s2), str);
 }
 
+int	only_spaces(char *line)
+{
+	int	i;
+
+	i = -1;
+	while (line[++i])
+	{
+		if (line[i] != ' ' && line[i] != '\n')
+		{
+			return (0);
+		}
+	}
+	return (1);
+}
+
 char	*get_init_map(int fd)
 {
 	char	*init_map;
@@ -50,6 +65,8 @@ char	*get_init_map(int fd)
 	line = get_next_line(fd);
 	while (line)
 	{
+		if (only_spaces(line) && ft_strlen(line) > 1)
+			return (free(init_map), free(line), NULL);
 		init_map = ft_strjoin_free(init_map, line);
 		if (!init_map)
 			return (NULL);
@@ -78,14 +95,5 @@ int	check_newline(char *map)
 		if (map[i] == '\n' && map[i + 1] == '\n')
 			return (1);
 	}
-	return (0);
-}
-
-int	check_map_is_valid(int map_fd, t_data *data)
-{
-	if (!check_element(map_fd, data))
-		return (1);
-	if (check_map_pars(map_fd, data))
-		return (1);
 	return (0);
 }
