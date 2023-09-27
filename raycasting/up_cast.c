@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
+/*   up_cast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:37:41 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 04:32:20 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/27 05:31:19 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-double	check_horz_inter(t_data *data)
+static double	check_horz_inter(t_data *data)
 {
 	int	i;
 	int	j;
@@ -38,7 +38,7 @@ double	check_horz_inter(t_data *data)
 		/ sin(data->ray.angle * (M_PI / 180.0)));
 }
 
-void	get_first_inter(t_data *data)
+static void	get_first_inter(t_data *data)
 {
 	double	tmp;
 
@@ -55,7 +55,7 @@ void	get_first_inter(t_data *data)
 		- data->player.x_pos) * tan(data->ray.angle * (M_PI / 180.0)));
 }
 
-double	check_vert_inter(t_data *data)
+static double	check_vert_inter(t_data *data)
 {
 	int	i;
 	int	j;
@@ -83,23 +83,7 @@ double	check_vert_inter(t_data *data)
 		/ sin(data->ray.angle * (M_PI / 180.0)));
 }
 
-void	check_0_degrees(t_data *data, double *ray)
-{
-	if (data->ray.angle - DIFF_RAYS == 0 || data->ray.angle + DIFF_RAYS == 180)
-	{
-		data->last_ray = *ray;
-		data->last_x_inter = data->ray.x_inter;
-		data->last_y_inter = data->ray.y_inter;
-	}
-	if (data->ray.angle == 0 || data->ray.angle == 180)
-	{
-		*ray = data->last_ray;
-		data->ray.x_inter = data->last_x_inter;
-		data->ray.y_inter = data->last_y_inter;
-	}
-}
-
-void	get_correct_ray(t_data *data, double *ray)
+static void	get_correct_ray(t_data *data, double *ray)
 {
 	double	horz_dist;
 	double	vert_dist;

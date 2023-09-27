@@ -6,7 +6,7 @@
 /*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:06:15 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 04:09:45 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/27 05:25:14 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	parse_textures(char *identifier, char *path_rgb, t_data *data)
 	return (1);
 }
 
-int	parse_element(char *identifier, char *path_rgb, t_data *data, int *all_in)
+static int	parse_element(char *identifier, char *path_rgb, t_data *data, int *all_in)
 {
 	if (ft_strlen(identifier) == 1)
 	{
