@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 20:31:37 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/09/27 01:42:31 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/27 02:41:50 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,44 +215,42 @@ void	draw_mini_cube(t_data *data, int x, int y, unsigned int color)
 	}
 }
 
+void	put_the_mini_map(t_data *data, t_mini_map mm)
+{
+	if (mm.i < data->map_data.map_height && mm.i >= 0 && \
+		mm.j < data->map_data.map_width && mm.j >= 0 && \
+			data->map_data.map[mm.i][mm.j] == '1')
+		my_mlx_pixel_put(&data->img, mm.start_x, mm.start_y, mm.color);
+	else if (mm.i < data->map_data.map_height && mm.i >= 0 \
+		&& mm.j < data->map_data.map_width && mm.j >= 0 && \
+		data->map_data.map[mm.i][mm.j] == '0')
+		my_mlx_pixel_put(&data->img, mm.start_x, mm.start_y, 0);
+	else
+		my_mlx_pixel_put(&data->img, mm.start_x, mm.start_y, mm.color_);
+}
+
 void	mini_map(t_data *data)
 {
-	int				start_x;
-	int				start_y;
-	int				map_x;
-	int				map_y;
-	int				i;
-	int				j;
-	unsigned int	color;
-	unsigned int	color_;
+	t_mini_map	mm;
 
-	start_y = -1;
-	map_y = data->player.y_pos - 125;
-	color = (255 * pow(2, 16)) + (255 * pow(2, 8)) + 255;
-	color_ = (255 * pow(2, 16)) + (0 * pow(2, 8)) + 0;
-	while (++start_y < 250)
+	mm.start_y = -1;
+	mm.map_y = data->player.y_pos - 125;
+	mm.color = (255 * pow(2, 16)) + (255 * pow(2, 8)) + 255;
+	mm.color_ = (255 * pow(2, 16)) + (0 * pow(2, 8)) + 0;
+	while (++mm.start_y < 250)
 	{
-		start_x = -1;
-		map_x = data->player.x_pos - 125;
-		while (++start_x < 250)
+		mm.start_x = -1;
+		mm.map_x = data->player.x_pos - 125;
+		while (++mm.start_x < 250)
 		{
-			i = (int)map_y >> (int)WALL_SHIFT;
-			j = (int)map_x >> (int)WALL_SHIFT;
-			if (i < data->map_data.map_height && i >= 0 && \
-				j < data->map_data.map_width && j >= 0 && \
-					data->map_data.map[i][j] == '1')
-				my_mlx_pixel_put(&data->img, start_x, start_y, color);
-			else if (i < data->map_data.map_height && i >= 0 \
-				&& j < data->map_data.map_width && j >= 0 && \
-				data->map_data.map[i][j] == '0')
-				my_mlx_pixel_put(&data->img, start_x, start_y, 0);
-			else
-				my_mlx_pixel_put(&data->img, start_x, start_y, color_);
-			map_x++;
+			mm.i = (int)mm.map_y >> (int)WALL_SHIFT;
+			mm.j = (int)mm.map_x >> (int)WALL_SHIFT;
+			put_the_mini_map(data, mm);
+			mm.map_x++;
 		}
-		map_y++;
+		mm.map_y++;
 	}
-	draw_mini_cube(data, 125, 125, color_);
+	draw_mini_cube(data, 125, 125, mm.color_);
 }
 
 int	render(void *args)

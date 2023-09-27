@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 02:14:53 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/27 02:35:15 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,19 @@
 # define ROTATE_L 123
 # define DOWN_KEY 1
 # define QUIT_KEY 53
+
+
+typedef struct s_mini_map
+{
+	int				start_x;
+	int				start_y;
+	int				map_x;
+	int				map_y;
+	int				i;
+	int				j;
+	unsigned int	color;
+	unsigned int	color_;
+}					t_mini_map;
 
 typedef struct s_cond
 {
