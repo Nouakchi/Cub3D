@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:37:41 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/26 21:52:23 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/27 02:16:24 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,13 +122,17 @@ void	get_correct_ray(t_data *data, double *ray)
 int	up_cast(t_data *data, int start, double beta_angle)
 {
 	double	ray;
-	double	actual_height;
+	t_cond	cond;
 
 	get_correct_ray(data, &ray);
 	check_0_degrees(data, &ray);
 	ray = fabs((double)ray * cos(beta_angle * (M_PI / 180.0)));
-	actual_height = ceil((WALL_HEIGHT * DIST_TO_PROJ) / ray);
-	draw_line(data, start, (W_HEIGHT / 2) - (actual_height / 2), fabs((W_HEIGHT
-				/ 2) - (actual_height / 2)) + actual_height, actual_height);
+
+	cond.ac_h = ceil((WALL_HEIGHT * DIST_TO_PROJ) / ray);
+	cond.x_start = start;
+	cond.y_start = (W_HEIGHT / 2) - (cond.ac_h / 2);
+	cond.y_end = fabs((W_HEIGHT / 2) - (cond.ac_h / 2)) + cond.ac_h;
+	draw_line(data, cond);
+	
 	return (0);
 }

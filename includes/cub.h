@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/26 22:31:20 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/27 02:14:53 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,14 @@
 # define ROTATE_L 123
 # define DOWN_KEY 1
 # define QUIT_KEY 53
+
+typedef struct s_cond
+{
+	int				x_start;
+	int				y_start;
+	int				y_end;
+	double			ac_h;
+}					t_cond;
 
 typedef struct s_rgb
 {
@@ -170,8 +178,7 @@ void				trim_map(t_data *data);
 int					join_nulls(t_data *data);
 int					down_cast(t_data *data, int start, double beta_angle);
 int					up_cast(t_data *data, int start, double beta_angle);
-void				draw_line(t_data *data, int x_start, int y_start, int y_end,
-						int actual_height);
+void				draw_line(t_data *data, t_cond c);
 int					render(void *data);
 int					moves_press(int keycode, void *args);
 int					moves_release(int keycode, void *args);

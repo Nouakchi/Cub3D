@@ -6,14 +6,13 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 10:32:02 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 01:54:12 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/27 02:21:07 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-void	draw_line(t_data *data, int x_start, int y_start, int y_end,
-		int actual_height)
+void	draw_line(t_data *data, t_cond c)
 {
 	int				i;
 	unsigned int	color;
@@ -34,21 +33,21 @@ void	draw_line(t_data *data, int x_start, int y_start, int y_end,
 			start_index = 0;
 	}
 	total = 0;
-	if (actual_height > W_HEIGHT)
-		total = (((float)actual_height - W_HEIGHT) / 2.0) * \
-			(WALL_HEIGHT / (float)actual_height);
+	if (c.ac_h > W_HEIGHT)
+		total = (((float)c.ac_h - W_HEIGHT) / 2.0) * \
+			(WALL_HEIGHT / (float)c.ac_h);
 	in = (int)total;
-	if (y_end >= W_HEIGHT)
-		y_end = W_HEIGHT - 1;
-	if (y_start < 0)
-		y_start = 0;
+	if (c.y_end >= W_HEIGHT)
+		c.y_end = W_HEIGHT - 1;
+	if (c.y_start < 0)
+		c.y_start = 0;
 	color = (data->map_data.map_elements.crgb.r * pow(2, 16))
 		+ (data->map_data.map_elements.crgb.g * pow(2, 8))
 		+ data->map_data.map_elements.crgb.b;
 	i = 0;
-	while (i < y_start)
-		my_mlx_pixel_put(&data->img, x_start, i++, color);
-	while (y_start <= y_end)
+	while (i < c.y_start)
+		my_mlx_pixel_put(&data->img, c.x_start, i++, color);
+	while (c.y_start <= c.y_end)
 	{
 		if (data->ray.angle == 0)
 			color = data->map_data.map_elements.colors_east[in][start_index];
@@ -73,19 +72,19 @@ void	draw_line(t_data *data, int x_start, int y_start, int y_end,
 						[in][start_index];
 			}
 		}
-		if (actual_height == 0)
-			actual_height = 1;
-		total += ((float)WALL_HEIGHT / (float)actual_height);
+		if (c.ac_h == 0)
+			c.ac_h = 1;
+		total += ((float)WALL_HEIGHT / (float)c.ac_h);
 		in = (int)total;
 		if (in > WALL_HEIGHT - 1)
 			in = 0;
-		my_mlx_pixel_put(&data->img, x_start, y_start++, color);
+		my_mlx_pixel_put(&data->img, c.x_start, c.y_start++, color);
 	}
 	color = (data->map_data.map_elements.frgb.r * pow(2, 16))
 		+ (data->map_data.map_elements.frgb.g * pow(2, 8))
 		+ data->map_data.map_elements.frgb.b;
-	while (y_start < W_HEIGHT)
-		my_mlx_pixel_put(&data->img, x_start, y_start++, color);
+	while (c.y_start < W_HEIGHT)
+		my_mlx_pixel_put(&data->img, c.x_start, c.y_start++, color);
 }
 
 void	get_first_horz_inter(t_data *data, int *i, int *j)
@@ -184,7 +183,7 @@ int	down_cast(t_data *data, int start, double beta_angle)
 	double	horz_dist;
 	double	vert_dist;
 	double	ray;
-	double	actual_height;
+	t_cond	cond;
 
 	horz_dist = d_check_horz_inter(data);
 	vert_dist = d_check_vert_inter(data);
@@ -200,8 +199,10 @@ int	down_cast(t_data *data, int start, double beta_angle)
 		data->ray.is_vert = 1;
 	}
 	ray = fabs((double)ray * cos(beta_angle * (M_PI / 180.0)));
-	actual_height = ceil((WALL_HEIGHT * DIST_TO_PROJ) / ray);
-	draw_line(data, start, (W_HEIGHT / 2) - (actual_height / 2), fabs((W_HEIGHT
-				/ 2) - (actual_height / 2)) + actual_height, actual_height);
+	cond.ac_h = ceil((WALL_HEIGHT * DIST_TO_PROJ) / ray);
+	cond.x_start = start;
+	cond.y_start = (W_HEIGHT / 2) - (cond.ac_h / 2);
+	cond.y_end = fabs((W_HEIGHT / 2) - (cond.ac_h / 2)) + cond.ac_h;
+	draw_line(data, cond);
 	return (0);
 }
