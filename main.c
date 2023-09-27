@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 05:33:53 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/27 07:41:18 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "includes/cub.h"
-
 
 int	main(int ac, char *av[])
 {
 	int		map_fd;
 	t_data	data;
 
+	// atexit(check_);
 	if (check_extension(ac, av))
 		return (fatal("Invalid arguments"), 1);
 	map_fd = open(av[1], O_RDONLY);
@@ -34,10 +34,10 @@ int	main(int ac, char *av[])
 		return (fatal("MLX failed"), free_element_(&data), 1);
 	init_angles_moves(&data);
 	if (init_textures(&data, 64))
-		return (fatal("Textures failed"), free_element_(&data), 1);
+		return (fatal("Textures failed"), free_element_mlx(&data), 1);
 	if (init_colors(&data))
-		return (fatal("Colors failed"), free_element_walls(&data), 1);
+		return (fatal("Colors failed"), free_all(&data), 1);
 	if (mlx_things(&data))
-		return (fatal("MLX failed"), free_element_walls(&data), 1);
+		return (fatal("MLX failed"), free_all(&data), 1);
 	return (free_all(&data), 0);
 }

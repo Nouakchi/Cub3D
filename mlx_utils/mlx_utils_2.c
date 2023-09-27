@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 04:37:43 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 06:03:39 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/27 07:43:08 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,11 @@ int	init_my_mlx(t_data *data)
 	if (!data->mlx_win)
 		return (1);
 	return (0);
+}
+
+void	free_element_mlx(t_data *data)
+{
+	free_element_(data);
+	if (mlx_destroy_window(data->mlx_ptr, data->mlx_win) == -1)
+		fatal("MLX failed");
 }

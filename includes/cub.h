@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 05:47:39 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/27 07:43:00 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ typedef struct s_data
 	int				mouse_app;
 }					t_data;
 
-int	render			(void *args);
+int					render(void *args);
 void				mini_map(t_data *data);
 int					mouse_hook(t_data *data);
 void				update_data(t_data *data);
@@ -220,5 +220,7 @@ int					mlx_things(t_data *data);
 int					ft_strlen_width(char **map);
 int					ft_strlen_height(char **map);
 void				draw_line(t_data *data, t_cond c);
+void				free_element_mlx(t_data *data);
+
 
 #endif
