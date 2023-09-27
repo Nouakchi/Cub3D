@@ -1,8 +1,27 @@
+onouakch
+
+- remove cursor from mandatory part {DONE}
+- (A) , (D) buttons to move right and left {DONE}
+- makefile of libft  {DONE}
+- fix wall colison between cubes {DONE}
 - ADD AWDS (view) start {DONE}
 - floor and s9af {DONE}
 - textures north and south and east and west {DONE}
 - backwall collision {DONE}
 - 270 and 90 degree rotation {DONE}
 - ESC button {DONE}
+- MiniMap {DONE}
+
+---------------
+
+bel-idr
+- protections {DONE}
+- handle SEGV when the map is cut to 2 pieces {DONE}
+- read textures from config file {DONE}
+- free colors {DONE}
+- free when error {DONE}
+- free when exit {DONE}
+- destroy img_wall and image when exit or error {DONE ++}
+- button X {DONE}
+
 - Norme raycasting mostly done still drawline and separate funtions on files {TODO}
-- protections {TODO}

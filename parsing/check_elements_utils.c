@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_elements_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:32:16 by onouakch          #+#    #+#             */
-/*   Updated: 2023/08/21 15:11:42 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:55:51 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int	parse_rgb(char *rgb_str, t_rgb *rgb)
 	if (count_commas(rgb_str) != 2)
 		return (0);
 	args = ft_split(rgb_str, ',');
+	if (!args) // ADD BY BILAL : IF THAT FAILS, SO NO EXIST THE 0, 1, 2 INDEXES
+		return (0);
 	if (!args[0] || !args[1] || !args[2])
 		return (free_map(args), 0);
 	i = 3;
@@ -80,6 +82,8 @@ char	*remove_newline(char *line)
 
 	tmp = line;
 	line = ft_substr(line, 0, ft_strlen(line) - 1);
+	if (!line) // ADD BY BILAL
+		return (NULL);
 	return (free(tmp), line);
 }
 
@@ -90,5 +94,7 @@ int	read_line(int map, char **line)
 	if (!*line)
 		return (0);
 	*line = remove_newline(*line);
+	if (!*line) // ADD BY BILAL
+		return (0);
 	return (1);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+         #
+#    By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/11 07:53:41 by bel-idri          #+#    #+#              #
-#    Updated: 2022/10/30 15:16:18 by bel-idri         ###   ########.fr        #
+#    Updated: 2023/09/25 10:08:44 by onouakch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,10 +57,9 @@ SRCSB = ft_lstadd_back.c \
 	ft_lstnew.c \
 	ft_lstsize.c \
 
-
-OBJS = $(SRCS:.c=.o)
+BINDIR = ../bin/libft/
+OBJS = $(SRCS:%.c=$(BINDIR)%.o)
 OBJSB = $(SRCSB:.c=.o)
-
 
 CC = cc
 
@@ -70,7 +69,10 @@ RM = rm -f
 
 AR = ar -rcs
 
-all: $(NAME)
+all: $(BINDIR) $(NAME)
+
+$(BINDIR):
+	mkdir -p $@
 
 $(NAME): $(OBJS)
 	$(AR) $(NAME) $(OBJS)
@@ -78,8 +80,8 @@ $(NAME): $(OBJS)
 bonus: all $(OBJSB)
 	$(AR) $(NAME) $(OBJSB)
 
-%.o: %.c libft.h
-	$(CC) $(CFLAGS) -c $<
+$(BINDIR)%.o: %.c libft.h
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(OBJS) $(OBJSB)

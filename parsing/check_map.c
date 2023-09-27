@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 08:51:04 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/09/21 00:37:53 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/26 21:47:28 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ void	trim_end(char *m)
 	}
 }
 
-void    join_ones(t_data *data) //
+void	join_ones(t_data *data)
 {
-    int    i;
-    int    j;
-    int    max;
+	int	i;
+	int	j;
+	int	max;
 
-    i = -1;
-	while(data->map_data.map[++i])
+	i = -1;
+	while (data->map_data.map[++i])
 	{
 		j = -1;
 		while (data->map_data.map[i][++j])
@@ -41,57 +41,43 @@ void    join_ones(t_data *data) //
 		}
 	}
 	i = -1;
-    max = ft_strlen_width(data->map_data.map);
-    while (data->map_data.map[++i])
-    {
-        j = ft_strlen(data->map_data.map[i]);
-        while (j < max)
-        {
-            data->map_data.map[i][j] = '1';
-            j++;
-        }
-    }
+	max = ft_strlen_width(data->map_data.map);
+	while (data->map_data.map[++i])
+	{
+		j = ft_strlen(data->map_data.map[i]);
+		while (j < max)
+		{
+			data->map_data.map[i][j] = '1';
+			j++;
+		}
+	}
 }
 
-int    check_map_pars(int map_fd, t_data *data)
+int	check_map_pars(int map_fd, t_data *data)
 {
-    char    *init_map;
+	char	*init_map;
 
-    init_map = get_init_map(map_fd);
-    if (!init_map)
-        return (fatal("Malloc failed"), 1);
-    init_map = ft_strtrim(init_map, "\n");
-    if (!init_map)
-        return (1);
-    trim_end(init_map);
-    if (check_init_map(init_map))
-        return (free(init_map), 1);
-    data->map_data.map = ft_split(init_map, '\n');
-    if (join_nulls(data))
-        return (fatal("Malloc failed"), 1);
-    free(init_map);
-    if (!data->map_data.map)
-        return (1);
-    if (check_map(data->map_data.map))
-        return (1);
-
-    join_ones(data);
-
-    // int len = ft_strlen_width(data->map_data.map);
-    // int i = -1;
-    // while (++i <= len + 1)
-    //     printf("-");
-    // printf("\n");
-    // i = -1;
-    // while (data->map_data.map[++i])
-    //     printf("|%s|\n", data->map_data.map[i]);
-    // i = -1;
-    // while (++i <= len + 1)
-    //     printf("-");
-    // printf("\n");
-
-
-    return (0);
+	init_map = get_init_map(map_fd);
+	if (!init_map)
+		return (1);
+	init_map = ft_strtrim(init_map, "\n");
+	if (!init_map)
+		return (1);
+	trim_end(init_map);
+	if (check_init_map(init_map))
+		return (free(init_map), 1);
+	data->map_data.map = ft_split(init_map, '\n');
+	free(init_map);
+	if (!data->map_data.map)
+		return (1);
+	if (join_nulls(data))
+		return (1);
+	if (!data->map_data.map)
+		return (1);
+	if (check_map(data->map_data.map))
+		return (1);
+	join_ones(data);
+	return (0);
 }
 
 int	check_chars(char *map)
@@ -126,7 +112,7 @@ int	check_walls(char **map)
 		j = -1;
 		while (map[i][++j])
 		{
-			if (i == 0 || i == ft_strlen_height(map) - 1 || j == 0
+			if (i == 0 || i == ft_strlen_height(map) - 1 || j == 0 \
 				|| j == (int)ft_strlen(map[i]) - 1)
 			{
 				if (map[i][j] != ' ' && map[i][j] != '1')
