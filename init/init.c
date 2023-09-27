@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 05:32:35 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 07:49:41 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/27 10:47:40 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	init_angles_moves(t_data *data)
 		data->ray.angle = 300;
 	else
 		data->ray.angle = 30;
-	data->player.view_angle = data->ray.angle - 30;
+	data->player.view_angle = data->ray.angle - 31;
 	data->moves.move_r = 0;
 	data->moves.move_l = 0;
 	data->moves.move_f = 0;

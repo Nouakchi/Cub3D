@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 09:05:45 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/27 10:45:46 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,15 @@
 # define ROTATE_L 123
 # define DOWN_KEY 1
 # define QUIT_KEY 53
+
+typedef struct draw_l
+{
+	int				i;
+	unsigned int	color;
+	float			total;
+	int				start_index;
+	int				in;
+}					t_draw_l;
 
 typedef struct s_mini_map
 {
