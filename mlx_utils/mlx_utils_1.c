@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 04:34:18 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 04:37:13 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/27 07:51:30 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/cub.h"
+#include "../includes/cub.h"
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
@@ -42,4 +42,3 @@ void	destroy_image_4(t_data *data)
 	destroy_image_3(data);
 	mlx_destroy_image(data->mlx_ptr, data->img_west.img);
 }
-

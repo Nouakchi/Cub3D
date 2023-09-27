@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_elements.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:06:15 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 05:25:14 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/27 07:52:17 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	parse_textures(char *identifier, char *path_rgb, t_data *data)
 	int		path_fd;
 
 	path_fd = open(path_rgb, O_RDONLY);
-	if (path_fd == -1) // ADD BY BILAL
+	if (path_fd == -1)
 		return (0);
 	close(path_fd);
 	if (!ft_strcmp(identifier, "NO")
@@ -56,7 +56,8 @@ static int	parse_textures(char *identifier, char *path_rgb, t_data *data)
 	return (1);
 }
 
-static int	parse_element(char *identifier, char *path_rgb, t_data *data, int *all_in)
+static int	parse_element(char *identifier, char *path_rgb, t_data *data, \
+	int *all_in)
 {
 	if (ft_strlen(identifier) == 1)
 	{

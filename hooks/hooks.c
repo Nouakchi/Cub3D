@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 04:52:37 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 05:15:34 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/27 07:45:06 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,3 @@ int	moves_release(int keycode, void *args)
 		data->moves.rotate_l = 0;
 	return (0);
 }
-

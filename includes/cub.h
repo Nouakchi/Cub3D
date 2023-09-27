@@ -6,12 +6,12 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 07:43:00 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/27 07:48:59 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _CUB_H_
-# define _CUB_H_
+#ifndef CUB_H
+# define CUB_H
 
 # include "../get_next_line/get_next_line.h"
 # include "../libft/libft.h"
@@ -37,7 +37,6 @@
 # define ROTATE_L 123
 # define DOWN_KEY 1
 # define QUIT_KEY 53
-
 
 typedef struct s_mini_map
 {
@@ -144,9 +143,9 @@ typedef struct s_moves
 
 typedef struct s_mouse
 {
-    int x;
-    int y;
-}   t_mouse;
+	int				x;
+	int				y;
+}					t_mouse;
 
 typedef struct s_data
 {
@@ -182,9 +181,9 @@ void				fatal(char *mssg);
 void				free_element_(t_data *data);
 void				free_element(t_data *data, int map_fd);
 void				free_element_walls(t_data *data);
-void 				free_all(t_data *data);
-int 				free_all_success(t_data *data);
-void				free_all_fatal(char *msg ,t_data *data);
+void				free_all(t_data *data);
+int					free_all_success(t_data *data);
+void				free_all_fatal(char *msg, t_data *data);
 void				free_map(char **map);
 void				my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void				destroy_image_1(t_data *data);
@@ -215,12 +214,11 @@ int					check_exit(t_data *data, double *pos_x, double *pos_y);
 void				data_map_init(t_data *data);
 void				init_player_map(t_data *data);
 void				init_angles_moves(t_data *data);
-int 				free_all_success(t_data *data);
+int					free_all_success(t_data *data);
 int					mlx_things(t_data *data);
 int					ft_strlen_width(char **map);
 int					ft_strlen_height(char **map);
 void				draw_line(t_data *data, t_cond c);
 void				free_element_mlx(t_data *data);
-
 
 #endif

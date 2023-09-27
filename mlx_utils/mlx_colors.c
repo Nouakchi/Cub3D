@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_colors.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 04:40:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 05:18:12 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/27 07:50:30 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/cub.h"
+#include "../includes/cub.h"
 
 static t_rgbt	calculate_color(t_img *img, int i, int j)
 {

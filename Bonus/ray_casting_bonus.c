@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 20:31:37 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/09/27 05:12:58 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/27 07:44:31 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,3 @@ int	render(void *args)
 		free_all_fatal("Rycasting: mlx_destroy_image() failed", data);
 	return (0);
 }
-
-

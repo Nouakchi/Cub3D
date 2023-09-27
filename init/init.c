@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 05:32:35 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 05:33:57 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/27 07:49:41 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/cub.h"
+#include "../includes/cub.h"
 
 void	data_map_init(t_data *data)
 {
@@ -74,7 +74,7 @@ void	init_angles_moves(t_data *data)
 	data->moves.move_b = 0;
 }
 
-int free_all_success(t_data *data)
+int	free_all_success(t_data *data)
 {
 	free_all(data);
 	exit(0);

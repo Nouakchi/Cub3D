@@ -6,11 +6,11 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 04:37:43 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 07:43:08 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/27 07:51:35 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/cub.h"
+#include "../includes/cub.h"
 
 static int	error_img(t_data *data)
 {

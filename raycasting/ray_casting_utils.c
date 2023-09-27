@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 04:51:25 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 05:04:06 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/27 07:52:57 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,3 @@ int	check_exit(t_data *data, double *pos_x, double *pos_y)
 			return (1);
 	return (0);
 }
-

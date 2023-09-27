@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   up_cast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:37:41 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 05:31:19 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/27 07:53:09 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,12 +111,10 @@ int	up_cast(t_data *data, int start, double beta_angle)
 	get_correct_ray(data, &ray);
 	check_0_degrees(data, &ray);
 	ray = fabs((double)ray * cos(beta_angle * (M_PI / 180.0)));
-
 	cond.ac_h = ceil((WALL_HEIGHT * DIST_TO_PROJ) / ray);
 	cond.x_start = start;
 	cond.y_start = (W_HEIGHT / 2) - (cond.ac_h / 2);
 	cond.y_end = fabs((W_HEIGHT / 2) - (cond.ac_h / 2)) + cond.ac_h;
 	draw_line(data, cond);
-	
 	return (0);
 }

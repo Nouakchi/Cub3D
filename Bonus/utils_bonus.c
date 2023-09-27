@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 04:59:16 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 05:13:46 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/27 07:44:37 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-int	mouse_visibility(t_data *data) // ADD BY BILAL
+int	mouse_visibility(t_data *data)
 {
 	data->mouse_app = 0;
 	if (mlx_mouse_hide() == -1)

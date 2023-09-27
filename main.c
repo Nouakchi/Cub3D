@@ -6,11 +6,11 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 07:41:18 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/27 07:53:42 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "includes/cub.h"
+#include "includes/cub.h"
 
 int	main(int ac, char *av[])
 {
