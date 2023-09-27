@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 04:34:18 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 07:51:30 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/27 08:47:03 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,14 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	destroy_image_1(t_data *data)
+void	destroy_images(t_data *data)
 {
-	mlx_destroy_image(data->mlx_ptr, data->img_north.img);
-}
-
-void	destroy_image_2(t_data *data)
-{
-	destroy_image_1(data);
-	mlx_destroy_image(data->mlx_ptr, data->img_south.img);
-}
-
-void	destroy_image_3(t_data *data)
-{
-	destroy_image_2(data);
-	mlx_destroy_image(data->mlx_ptr, data->img_east.img);
-}
-
-void	destroy_image_4(t_data *data)
-{
-	destroy_image_3(data);
-	mlx_destroy_image(data->mlx_ptr, data->img_west.img);
+	if (data->img_north.img)
+		mlx_destroy_image(data->mlx_ptr, data->img_north.img);
+	if (data->img_south.img)
+		mlx_destroy_image(data->mlx_ptr, data->img_south.img);
+	if (data->img_east.img)
+		mlx_destroy_image(data->mlx_ptr, data->img_east.img);
+	if (data->img_west.img)
+		mlx_destroy_image(data->mlx_ptr, data->img_west.img);
 }

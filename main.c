@@ -6,18 +6,23 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:05:03 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 07:53:42 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/27 08:49:43 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub.h"
+
+void check_()
+{
+	system("leaks cub3D");
+}
 
 int	main(int ac, char *av[])
 {
 	int		map_fd;
 	t_data	data;
 
-	// atexit(check_);
+	atexit(check_);
 	if (check_extension(ac, av))
 		return (fatal("Invalid arguments"), 1);
 	map_fd = open(av[1], O_RDONLY);

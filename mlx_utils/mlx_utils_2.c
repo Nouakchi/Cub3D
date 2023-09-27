@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 04:37:43 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 07:51:35 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/27 08:49:55 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,26 @@
 static int	error_img(t_data *data)
 {
 	if (!data->img_north.img)
-		return (1);
+		return (destroy_images(data), 1);
 	if (!data->img_south.img)
-		return (destroy_image_1(data), 1);
+		return (destroy_images(data), 1);
 	if (!data->img_east.img)
-		return (destroy_image_2(data), 1);
+		return (destroy_images(data), 1);
 	if (!data->img_west.img)
-		return (destroy_image_3(data), 1);
+		return (destroy_images(data), 1);
 	return (0);
 }
 
 static int	error_addr(t_data *data)
 {
 	if (!data->img_north.addr)
-		return (destroy_image_4(data), 1);
+		return (destroy_images(data), 1);
 	if (!data->img_south.addr)
-		return (destroy_image_4(data), 1);
+		return (destroy_images(data), 1);
 	if (!data->img_east.addr)
-		return (destroy_image_4(data), 1);
+		return (destroy_images(data), 1);
 	if (!data->img_west.addr)
-		return (destroy_image_4(data), 1);
+		return (destroy_images(data), 1);
 	return (0);
 }
 
@@ -83,4 +83,5 @@ void	free_element_mlx(t_data *data)
 	free_element_(data);
 	if (mlx_destroy_window(data->mlx_ptr, data->mlx_win) == -1)
 		fatal("MLX failed");
+	exit(1);
 }

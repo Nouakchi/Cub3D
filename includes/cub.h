@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 07:48:59 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/27 08:48:28 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,10 +186,7 @@ int					free_all_success(t_data *data);
 void				free_all_fatal(char *msg, t_data *data);
 void				free_map(char **map);
 void				my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void				destroy_image_1(t_data *data);
-void				destroy_image_2(t_data *data);
-void				destroy_image_3(t_data *data);
-void				destroy_image_4(t_data *data);
+void				destroy_images(t_data *data);
 int					init_textures(t_data *data, int size);
 int					init_my_mlx(t_data *data);
 int					parse_rgb(char *rgb_str, t_rgb *rgb);
