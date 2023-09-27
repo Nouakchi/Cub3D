@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 02:35:15 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/27 05:47:39 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,12 @@ typedef struct s_moves
 	int				rotate_r;
 }					t_moves;
 
+typedef struct s_mouse
+{
+    int x;
+    int y;
+}   t_mouse;
+
 typedef struct s_data
 {
 	t_map			map_data;
@@ -161,44 +167,58 @@ typedef struct s_data
 	int				mouse_app;
 }					t_data;
 
+int	render			(void *args);
+void				mini_map(t_data *data);
+int					mouse_hook(t_data *data);
+void				update_data(t_data *data);
 int					mouse_visibility(t_data *data);
-void				free_element_map(t_data *data);
-int					check_element(int map, t_data *data);
-void				fatal(char *mssg);
-void				ft_error(char *msg, char *free_str1, char *free_str2);
-char				*get_init_map(int fd);
-void				free_map(char **map);
-char				*ft_strjoin_free(char *s1, char *s2);
-int					check_map(char **map);
-int					check_init_map(char *map);
-int					check_chars(char *map);
-int					check_walls(char **map);
-int					ft_strlen_height(char **map);
-int					ft_strlen_width(char **map);
-int					check_walls_utils(char **map, int i, int j);
-int					check_chars_utils(char map);
-int					check_newline(char *map);
-int					check_map_pars(int map_fd, t_data *data);
-int					is_numeric(char *str);
-int					count_commas(char *str);
-int					parse_rgb(char *rgb_str, t_rgb *rgb);
-char				*remove_newline(char *line);
-int					read_line(int map, char **line);
-int					parse_element(char *identifier, char *path_rgb,
-						t_data *data, int *all_in);
-int					go_to_mlx(t_data *data);
-void				trim_map(t_data *data);
-int					join_nulls(t_data *data);
-int					down_cast(t_data *data, int start, double beta_angle);
-int					up_cast(t_data *data, int start, double beta_angle);
-void				draw_line(t_data *data, t_cond c);
-int					render(void *data);
 int					moves_press(int keycode, void *args);
 int					moves_release(int keycode, void *args);
+void				rotate_right(t_data *data);
+void				rotate_left(t_data *data);
+int					init_colors(t_data *data);
+void				free_color(unsigned int **color);
+void				fatal(char *mssg);
+void				free_element_(t_data *data);
+void				free_element(t_data *data, int map_fd);
+void				free_element_walls(t_data *data);
+void 				free_all(t_data *data);
+int 				free_all_success(t_data *data);
+void				free_all_fatal(char *msg ,t_data *data);
+void				free_map(char **map);
 void				my_mlx_pixel_put(t_img *img, int x, int y, int color);
-
-void	free_all_fatal(char *msg ,t_data *data);
-void free_all(t_data *data);
-int free_all_success(t_data *data);
+void				destroy_image_1(t_data *data);
+void				destroy_image_2(t_data *data);
+void				destroy_image_3(t_data *data);
+void				destroy_image_4(t_data *data);
+int					init_textures(t_data *data, int size);
+int					init_my_mlx(t_data *data);
+int					parse_rgb(char *rgb_str, t_rgb *rgb);
+int					read_line(int map, char **line);
+int					check_element(int map, t_data *data);
+int					check_walls_utils(char **map, int i, int j);
+int					check_init_map(char *map);
+int					check_map(char **map);
+int					check_map_pars(int map_fd, t_data *data);
+int					check_chars(char *map);
+int					check_walls(char **map);
+char				*get_init_map(int fd);
+int					check_newline(char *map);
+int					check_map_is_valid(int map_fd, t_data *data);
+void				trim_map(t_data *data);
+int					join_nulls(t_data *data);
+int					check_extension(int ac, char *av[]);
+int					down_cast(t_data *data, int start, double beta_angle);
+int					up_cast(t_data *data, int start, double beta_angle);
+void				check_0_degrees(t_data *data, double *ray);
+int					check_exit(t_data *data, double *pos_x, double *pos_y);
+void				data_map_init(t_data *data);
+void				init_player_map(t_data *data);
+void				init_angles_moves(t_data *data);
+int 				free_all_success(t_data *data);
+int					mlx_things(t_data *data);
+int					ft_strlen_width(char **map);
+int					ft_strlen_height(char **map);
+void				draw_line(t_data *data, t_cond c);
 
 #endif

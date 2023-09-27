@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bilal_tirm_map.c                                   :+:      :+:    :+:   */
+/*   tirm_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 09:28:29 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/09/26 18:51:02 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/27 05:28:57 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-int	start_spaces(char **map)
+static int	start_spaces(char **map)
 {
 	int	i;
 	int	j;
@@ -37,7 +37,7 @@ int	start_spaces(char **map)
 	return (min);
 }
 
-void	end_spaces(t_data *data)
+static void	end_spaces(t_data *data)
 {
 	int	i;
 	int	j;
@@ -97,6 +97,25 @@ int	join_nulls(t_data *data)
 		free(data->map_data.map[i]);
 		data->map_data.map[i] = str;
 		i++;
+	}
+	return (0);
+}
+
+int	check_extension(int ac, char *av[])
+{
+	int	index;
+
+	index = 0;
+	if (ac != 2)
+		return (fatal("Wrong number of arguments"), 1);
+	if (ft_strlen(av[1]) < 5)
+		return (fatal("Wrong file extension"), 1);
+	else
+	{
+		index = ft_strlen(av[1]) - 1;
+		if (av[1][index] != 'b' || av[1][index - 1] != 'u' || av[1][index
+			- 2] != 'c' || av[1][index - 3] != '.')
+			return (fatal("Wrong file extension"), 1);
 	}
 	return (0);
 }

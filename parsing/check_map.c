@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bilal_check_map.c                                  :+:      :+:    :+:   */
+/*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 08:51:04 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/09/26 21:47:28 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/27 05:26:32 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-void	trim_end(char *m)
+static void	trim_end(char *m)
 {
 	int	i;
 
@@ -24,7 +24,7 @@ void	trim_end(char *m)
 	}
 }
 
-void	join_ones(t_data *data)
+static void	join_ones(t_data *data)
 {
 	int	i;
 	int	j;
@@ -124,19 +124,6 @@ int	check_walls(char **map)
 					return (1);
 			}
 		}
-	}
-	return (0);
-}
-
-int	check_newline(char *map)
-{
-	int	i;
-
-	i = -1;
-	while (map[++i])
-	{
-		if (map[i] == '\n' && map[i + 1] == '\n')
-			return (1);
 	}
 	return (0);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_elements_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:32:16 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/26 16:55:51 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/27 05:23:55 by onouakch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-int	is_numeric(char *str)
+static int	is_numeric(char *str)
 {
 	int		check_space;
 	int		i;
@@ -39,7 +39,7 @@ int	is_numeric(char *str)
 	return (1);
 }
 
-int	count_commas(char *str)
+static int	count_commas(char *str)
 {
 	int	i;
 	int	count;

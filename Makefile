@@ -10,31 +10,54 @@ INCLUDES	=	includes/cub.h \
 				mlx/mlx.h
 
 SRCS		=	main.c \
-				raycasting/raycasting.c \
-				raycasting/cast.c \
-				raycasting/final_raycasting.c \
-				parsing/check_map_elements.c \
+				hooks/hooks.c \
+				hooks/mouvements.c \
+				hooks/rotations.c \
+				init/init.c \
+				Mandatory/ray_casting.c \
+				mlx_utils/mlx_colors.c \
+				mlx_utils/mlx_memory.c \
+				mlx_utils/mlx_utils_1.c \
+				mlx_utils/mlx_utils_2.c \
+				mlx_utils/mlx_init.c \
 				parsing/check_elements_utils.c \
+				parsing/check_map_elements.c \
 				parsing/check_map_utils.c \
 				parsing/check_map.c \
 				parsing/init_map.c \
 				parsing/tirm_map.c \
-				get_next_line/get_next_line.c \
+				raycasting/down_cast.c \
+				raycasting/draw_line.c \
+				raycasting/ray_casting_utils.c \
+				raycasting/up_cast.c \
 				get_next_line/get_next_line_utils.c \
+				get_next_line/get_next_line.c \
 
 SRCS_B		=	main.c \
-				raycasting/raycasting.c \
-				raycasting/cast_bonus.c \
-				raycasting/final_raycasting.c \
-				parsing/check_map_elements.c \
+				hooks/hooks.c \
+				hooks/mouvements.c \
+				hooks/rotations.c \
+				init/init.c \
+				Bonus/ray_casting_bonus.c \
+				Bonus/utils_bonus.c \
+				Bonus/mlx_init_bonus.c \
+				mlx_utils/mlx_colors.c \
+				mlx_utils/mlx_memory.c \
+				mlx_utils/mlx_utils_1.c \
+				mlx_utils/mlx_utils_2.c \
 				parsing/check_elements_utils.c \
+				parsing/check_map_elements.c \
 				parsing/check_map_utils.c \
 				parsing/check_map.c \
 				parsing/init_map.c \
 				parsing/tirm_map.c \
-				get_next_line/get_next_line.c \
+				raycasting/down_cast.c \
+				raycasting/draw_line.c \
+				raycasting/ray_casting_utils.c \
+				raycasting/up_cast.c \
 				get_next_line/get_next_line_utils.c \
-
+				get_next_line/get_next_line.c \
+				
 LIBC_SRCS	=	ft_atoi.c \
 				ft_bzero.c \
 				ft_calloc.c \
@@ -70,7 +93,7 @@ LIBC_SRCS	=	ft_atoi.c \
 				ft_tolower.c \
 				ft_toupper.c \
 
-BIN_FOLDERS = 	bin/ bin/raycasting/ bin/parsing/ bin/get_next_line bin/libft
+BIN_FOLDERS = 	bin/ bin/raycasting/ bin/parsing/ bin/get_next_line bin/libft bin/Bonus bin/hooks bin/init bin/Mandatory bin/mlx_utils
 BINDIR		=	bin/
 LIB			=	libft/libft.a mlx/libmlx.a
 OBJS		=	$(SRCS:%.c=$(BINDIR)%.o)
