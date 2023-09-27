@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 10:32:02 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/26 21:52:47 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/27 01:54:12 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	draw_line(t_data *data, int x_start, int y_start, int y_end,
 	}
 	total = 0;
 	if (actual_height > W_HEIGHT)
-		total = (((float)actual_height - W_HEIGHT) / 2.0) * (WALL_HEIGHT
-			/ (float)actual_height);
+		total = (((float)actual_height - W_HEIGHT) / 2.0) * \
+			(WALL_HEIGHT / (float)actual_height);
 	in = (int)total;
 	if (y_end >= W_HEIGHT)
 		y_end = W_HEIGHT - 1;
@@ -57,16 +57,20 @@ void	draw_line(t_data *data, int x_start, int y_start, int y_end,
 			if (!data->ray.is_vert)
 			{
 				if (data->ray.angle <= 180 && data->ray.angle > 0)
-					color = data->map_data.map_elements.colors_north[in][start_index];
+					color = data->map_data.map_elements.colors_north \
+						[in][start_index];
 				else
-					color = data->map_data.map_elements.colors_south[in][start_index];
+					color = data->map_data.map_elements.colors_south \
+						[in][start_index];
 			}
 			else
 			{
 				if (data->ray.angle >= 90 && data->ray.angle <= 270)
-					color = data->map_data.map_elements.colors_west[in][start_index];
+					color = data->map_data.map_elements.colors_west \
+						[in][start_index];
 				else
-					color = data->map_data.map_elements.colors_east[in][start_index];
+					color = data->map_data.map_elements.colors_east \
+						[in][start_index];
 			}
 		}
 		if (actual_height == 0)
@@ -88,12 +92,13 @@ void	get_first_horz_inter(t_data *data, int *i, int *j)
 {
 	double	chart;
 
-	data->ray.x_step = fabs(WALL_HEIGHT / tan(data->ray.angle * (M_PI
-				/ 180.0)));
+	data->ray.x_step = fabs(WALL_HEIGHT / tan(data->ray.angle \
+		* (M_PI / 180.0)));
 	data->ray.y_step = WALL_HEIGHT;
-	data->ray.y_h_inter = ((int)floor((int)data->player.y_pos >> (int)WALL_SHIFT) << (int)WALL_SHIFT)
+	data->ray.y_h_inter = ((int)floor((int)data->player.y_pos \
+		>> (int)WALL_SHIFT) << (int)WALL_SHIFT)
 		+ data->ray.y_step;
-	chart = fabs(fabs(data->player.y_pos - data->ray.y_h_inter)
+	chart = fabs(fabs(data->player.y_pos - data->ray.y_h_inter) \
 		/ tan(data->ray.angle * (M_PI / 180.0)));
 	data->ray.x_h_inter = data->player.x_pos - chart;
 	if (data->ray.angle < 90 || data->ray.angle >= 270)
@@ -133,16 +138,17 @@ void	get_first_vert_inter(t_data *data, int *i, int *j)
 	double	tmp;
 
 	data->ray.x_step = WALL_HEIGHT;
-	data->ray.y_step = fabs(WALL_HEIGHT * tan(data->ray.angle * (M_PI
-				/ 180.0)));
+	data->ray.y_step = fabs(WALL_HEIGHT * \
+		tan(data->ray.angle * (M_PI / 180.0)));
 	tmp = 0;
 	if ((data->ray.angle < 90 || data->ray.angle >= 270))
 		tmp = WALL_HEIGHT;
-	data->ray.x_v_inter = ((int)floor((int)data->player.x_pos >> (int)WALL_SHIFT) << (int)WALL_SHIFT)
+	data->ray.x_v_inter = ((int)floor((int)data->player.x_pos \
+		>> (int)WALL_SHIFT) << (int)WALL_SHIFT)
 		+ tmp;
-	data->ray.y_v_inter = fabs(data->player.y_pos
-		+ fabs(fabs(data->ray.x_v_inter - data->player.x_pos)
-			* tan(data->ray.angle * (M_PI / 180.0))));
+	data->ray.y_v_inter = fabs(data->player.y_pos \
+		+ fabs(fabs(data->ray.x_v_inter - data->player.x_pos) \
+		* tan(data->ray.angle * (M_PI / 180.0))));
 	*i = (int)data->ray.y_v_inter >> (int)WALL_SHIFT;
 	*j = (int)(data->ray.x_v_inter + 1) >> (int)WALL_SHIFT;
 	if (data->ray.angle > 180 && data->ray.angle <= 270)

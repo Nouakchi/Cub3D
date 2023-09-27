@@ -15,10 +15,10 @@ SRCS		=	main.c \
 				raycasting/final_raycasting.c \
 				parsing/check_map_elements.c \
 				parsing/check_elements_utils.c \
-				parsing/bilal_check_map_utils.c \
-				parsing/bilal_check_map.c \
-				parsing/bilal_init_map.c \
-				parsing/bilal_tirm_map.c \
+				parsing/check_map_utils.c \
+				parsing/check_map.c \
+				parsing/init_map.c \
+				parsing/tirm_map.c \
 				get_next_line/get_next_line.c \
 				get_next_line/get_next_line_utils.c \
 
@@ -28,10 +28,10 @@ SRCS_B		=	main.c \
 				raycasting/final_raycasting.c \
 				parsing/check_map_elements.c \
 				parsing/check_elements_utils.c \
-				parsing/bilal_check_map_utils.c \
-				parsing/bilal_check_map.c \
-				parsing/bilal_init_map.c \
-				parsing/bilal_tirm_map.c \
+				parsing/check_map_utils.c \
+				parsing/check_map.c \
+				parsing/init_map.c \
+				parsing/tirm_map.c \
 				get_next_line/get_next_line.c \
 				get_next_line/get_next_line_utils.c \
 

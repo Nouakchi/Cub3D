@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 09:55:46 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/09/25 10:12:28 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/27 01:18:58 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	ft_isspace(const char *str, size_t i)
 	return (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || \
 			str[i] == '\v' || str[i] == '\f' || str[i] == '\r');
 }
-   
+
 int	my_atio(const char *str, int i, int sign)
 {
 	size_t	res;
