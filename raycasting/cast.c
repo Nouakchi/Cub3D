@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 20:31:37 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/09/27 04:14:25 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/27 04:32:09 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,7 +241,7 @@ int	moves_release(int keycode, void *args)
 	return (0);
 }
 
-int	mouse_visibility(t_data *data) // ADD BY BILAL
+int	mouse_visibility(t_data *data)
 {
 	(void)data;
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:32:16 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/26 16:55:51 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/27 04:32:01 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	parse_rgb(char *rgb_str, t_rgb *rgb)
 	if (count_commas(rgb_str) != 2)
 		return (0);
 	args = ft_split(rgb_str, ',');
-	if (!args) // ADD BY BILAL : IF THAT FAILS, SO NO EXIST THE 0, 1, 2 INDEXES
+	if (!args)
 		return (0);
 	if (!args[0] || !args[1] || !args[2])
 		return (free_map(args), 0);
@@ -82,7 +82,7 @@ char	*remove_newline(char *line)
 
 	tmp = line;
 	line = ft_substr(line, 0, ft_strlen(line) - 1);
-	if (!line) // ADD BY BILAL
+	if (!line)
 		return (NULL);
 	return (free(tmp), line);
 }
@@ -94,7 +94,7 @@ int	read_line(int map, char **line)
 	if (!*line)
 		return (0);
 	*line = remove_newline(*line);
-	if (!*line) // ADD BY BILAL
+	if (!*line)
 		return (0);
 	return (1);
 }
