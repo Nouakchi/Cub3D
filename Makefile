@@ -57,7 +57,7 @@ SRCS_B		=	main.c \
 				raycasting/up_cast.c \
 				get_next_line/get_next_line_utils.c \
 				get_next_line/get_next_line.c \
-				
+
 LIBC_SRCS	=	ft_atoi.c \
 				ft_bzero.c \
 				ft_calloc.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tirm_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onouakch <onouakch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 09:28:29 by bel-idri          #+#    #+#             */
-/*   Updated: 2023/09/27 05:28:57 by onouakch         ###   ########.fr       */
+/*   Updated: 2023/09/27 09:02:43 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,7 @@ int	check_extension(int ac, char *av[])
 			- 2] != 'c' || av[1][index - 3] != '.')
 			return (fatal("Wrong file extension"), 1);
 	}
+	if (W_HEIGHT != 512.0 || W_WIDTH != 1024.0)
+		return (fatal("Wrong resolution"), 1);
 	return (0);
 }

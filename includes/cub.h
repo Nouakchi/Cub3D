@@ -6,7 +6,7 @@
 /*   By: bel-idri <bel-idri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 23:12:48 by onouakch          #+#    #+#             */
-/*   Updated: 2023/09/27 08:48:28 by bel-idri         ###   ########.fr       */
+/*   Updated: 2023/09/27 09:05:45 by bel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@
 # define W_HEIGHT 512.0
 # define SPEED 4.0
 # define ROTATION 35.0
-# define WALL_SHIFT log2(64.0)
-# define DIFF_RAYS FOV / W_WIDTH
-# define DIST_TO_PROJ (W_WIDTH / 2) / tan((FOV / 2) * (M_PI / 180.0))
+# define WALL_SHIFT 6 // log2(64.0)
+# define DIFF_RAYS 0.05859375 //FOV / W_WIDTH
+# define DIST_TO_PROJ 886.810013475 \
+	// (W_WIDTH / 2) / tan((FOV / 2) * (M_PI / 180.0))
 # define RIGHT_KEY 2
 # define LEFT_KEY 0
 # define UP_KEY 13
